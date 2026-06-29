@@ -43,10 +43,10 @@ const AboutUsPage = async () => {
             <BrandsSection {...pageData.brands_section} />
             <EngineeringApproach {...pageData.engineering_approach} />
             <FeaturedProjectsSection {...pageData.featured_projects_section} />
-            <ExpertiseAndCapabilitySection />
-            <CertificationsSection />
-            <TeamSection />
-            <FooterCTASection />
+            <ExpertiseAndCapabilitySection {...pageData.expertise_section} />
+            <CertificationsSection {...pageData.certification_section} />
+            <TeamSection {...pageData.team_section} />
+            <FooterCTASection {...pageData.footer_cta_section} />
         </main>
     );
 };
