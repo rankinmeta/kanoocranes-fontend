@@ -10,7 +10,7 @@ type EngineeringApproachProps = {
     description: string;
     details: {
         id: number;
-        title: string;
+        label: string;
         description: string;
         icon: MediaProps | null;
     }[];
@@ -55,7 +55,7 @@ const EngineeringApproach = ({
                     {details?.length > 0 &&
                         details.map((detail, i) => (
                             <FeatureCard
-                                title={detail.title}
+                                label={detail.label}
                                 description={detail.description}
                                 icon={detail.icon}
                                 key={detail.id}
@@ -72,17 +72,17 @@ const EngineeringApproach = ({
 export default EngineeringApproach;
 
 function FeatureCard({
-    title,
+    label,
     description,
         icon,
     index,
 }: {
-    title: string;
+    label: string;
     description: string;
     index: number;
     icon: MediaProps | null;
 }) {
-    if(!title || !description) return null;
+    if(!label || !description) return null;
 
     return (
         <div
@@ -102,7 +102,7 @@ function FeatureCard({
             />}
 
             <div className="space-y-2">
-                <h6 className="text-xl font-manrope font-medium">{title}</h6>
+                <h6 className="text-xl font-manrope font-medium">{label}</h6>
                 <p className="text-sm font-light">{description}</p>
             </div>
         </div>
