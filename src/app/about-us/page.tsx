@@ -14,7 +14,7 @@ import { notFound } from "next/navigation";
 
 let aboutUsPageDataPromise: ReturnType<typeof getAboutUsPage> | null = null;
 
-function getHomePageOnce() {
+function getAboutUsPageOnce() {
     if (!aboutUsPageDataPromise) {
         aboutUsPageDataPromise = getAboutUsPage();
     }
@@ -22,7 +22,7 @@ function getHomePageOnce() {
 }
 
 async function loader() {
-    const pageData = await getHomePageOnce();
+    const pageData = await getAboutUsPageOnce();
     if (!pageData || !pageData.data) notFound();
     return {
         pageData: pageData.data,

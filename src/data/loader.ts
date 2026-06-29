@@ -1,6 +1,6 @@
 import { fetchAPI } from "@/lib/fetch-api";
 import { getStrapiURL } from "@/lib/get-strapi-url";
-import { aboutUsPageQuery, globalSettingQuery, homePageQuery } from "./queries";
+import { aboutUsPageQuery, contactUsPageQuery, globalSettingQuery, homePageQuery } from "./queries";
 
 const BASE_URL = getStrapiURL();
 
@@ -37,6 +37,19 @@ export async function getAboutUsPage() {
         authToken: process.env.STRAPI_API_TOKEN,
         next: {
             tags: ["about-us-page"], // 👈 KEY POINT
+        },
+    });
+}
+
+export async function getContactUsPage() {
+    const path = "/api/contact-us-page";
+    const url = new URL(path, BASE_URL);
+    url.search = contactUsPageQuery;
+    return fetchAPI(url.href, {
+        method: "GET",
+        authToken: process.env.STRAPI_API_TOKEN,
+        next: {
+            tags: ["contact-us-page"], // 👈 KEY POINT
         },
     });
 }

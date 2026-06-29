@@ -3,8 +3,30 @@ import HeroSection from "@/components/pages/contact-us/hero-section";
 import Section2 from "@/components/pages/contact-us/section2";
 import FooterCTASection from "@/components/pages/home/footer-cta-section";
 import { LogoMarquee } from "@/components/pages/home/logo-marquee";
+import { getContactUsPage } from "@/data/loader";
+import { notFound } from "next/navigation";
 
-const ContactUsPage = () => {
+let contactUsPageDataPromise: ReturnType<typeof getContactUsPage> | null = null;
+
+function getContactUsPageOnce() {
+    if (!contactUsPageDataPromise) {
+        contactUsPageDataPromise = getContactUsPage();
+    }
+    return contactUsPageDataPromise;
+}
+
+async function loader() {
+    const pageData = await getContactUsPageOnce();
+    console.log(pageData);
+    if (!pageData || !pageData.data) notFound();
+    return {
+        pageData: pageData.data,
+    };
+}
+
+const ContactUsPage = async () => {
+    const { pageData } = await loader();
+
     return (
         <main>
             <HeroSection
@@ -52,7 +74,7 @@ const ContactUsPage = () => {
                     ]
                 }
             } />
-            <FooterCTASection hide />
+            <FooterCTASection hide {...pageData.footer_cta_section} />
         </main>
     );
 };

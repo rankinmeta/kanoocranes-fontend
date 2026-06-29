@@ -283,3 +283,25 @@ export const aboutUsPageQuery = qs.stringify({
         }
     }
 });
+
+export const contactUsPageQuery = qs.stringify({
+    populate: {
+        hero: true,
+        contact_details: true,
+        form_section: {
+            populate: {
+                headquater_image: {
+                    fields: ["url", "alternativeText"],
+                },
+                link: true,
+            }
+        },
+        partners_section: {
+            populate: {
+                logo: {
+                    fields: ["url", "alternativeText"],
+                },
+            }
+        }
+    }
+});
