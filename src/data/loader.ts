@@ -1,6 +1,6 @@
 import { fetchAPI } from "@/lib/fetch-api";
 import { getStrapiURL } from "@/lib/get-strapi-url";
-import { aboutUsPageQuery, contactUsPageQuery, globalSettingQuery, homePageQuery } from "./queries";
+import { aboutUsPageQuery, contactUsPageQuery, engSolutionsPageQuery, globalSettingQuery, homePageQuery } from "./queries";
 
 const BASE_URL = getStrapiURL();
 
@@ -50,6 +50,19 @@ export async function getContactUsPage() {
         authToken: process.env.STRAPI_API_TOKEN,
         next: {
             tags: ["contact-us-page"], // 👈 KEY POINT
+        },
+    });
+}
+
+export async function getEngSolutionsPage() {
+    const path = "/api/eng-solutions-page";
+    const url = new URL(path, BASE_URL);
+    url.search = engSolutionsPageQuery;
+    return fetchAPI(url.href, {
+        method: "GET",
+        authToken: process.env.STRAPI_API_TOKEN,
+        next: {
+            tags: ["eng-solutions-page"], // 👈 KEY POINT
         },
     });
 }

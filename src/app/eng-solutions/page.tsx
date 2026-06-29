@@ -12,8 +12,30 @@ import TestimonialSection from "@/components/pages/home/testimonial-section";
 import Section2Eng from "@/components/pages/rental-hub/section2";
 import BuyingGuideSection from "@/components/pages/sales-hub/buying-guide-section";
 import EngineeringSupportSection from "@/components/pages/sales-hub/engineering-support-section";
+import { getEngSolutionsPage } from "@/data/loader";
+import { notFound } from "next/navigation";
 
-const EngSolutionsPage = () => {
+let engSolutionsPageDataPromise: ReturnType<typeof getEngSolutionsPage> | null = null;
+
+function getEngSolutionsPageOnce() {
+    if (!engSolutionsPageDataPromise) {
+        engSolutionsPageDataPromise = getEngSolutionsPage();
+    }
+    return engSolutionsPageDataPromise;
+}
+
+async function loader() {
+    const pageData = await getEngSolutionsPageOnce();
+    console.log(pageData);
+    if (!pageData || !pageData.data) notFound();
+    return {
+        pageData: pageData.data,
+    };
+}
+
+const EngSolutionsPage = async () => {
+  const { pageData } = await loader();
+
   return (
     <main>
         <HeroSection
@@ -38,14 +60,14 @@ const EngSolutionsPage = () => {
         <CardsSection />
         <Section2Eng />
         <BuyingGuideSection />
-        <FeaturedProjectsSection />
+        <FeaturedProjectsSection {...pageData.featured_projects_section} />
         <GallerySection/>
         <TestimonialSection />
         <EngineeringSupportSection />
         <StickyCardsOneSideSection className="bg-secondary text-white" cardStyles="bg-[#041D54] [&_p]:text-[#A4A7AE]" />
         <ExpertsSection theme="light" />
         <ResourcesSection />
-        <FooterCTASection />
+        <FooterCTASection {...pageData.footer_cta_section} />
     </main>
   )
 }

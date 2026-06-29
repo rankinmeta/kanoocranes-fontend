@@ -305,3 +305,7 @@ export const contactUsPageQuery = qs.stringify({
         }
     }
 });
+
+export const engSolutionsPageQuery = qs.stringify({
+    populate: {}
+});
