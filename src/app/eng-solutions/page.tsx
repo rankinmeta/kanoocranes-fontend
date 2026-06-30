@@ -39,33 +39,23 @@ const EngSolutionsPage = async () => {
   return (
     <main>
         <HeroSection
-            title="Engineered lifting solutions for complex projects"
-            description="Kanoo Cranes delivers comprehensive lifting engineering services that go beyond equipment supply. From lift planning and crane positioning to foundation design and installation support, our engineering team helps ensure safe, efficient, and successful project execution."
-            button1={{
-                id: 1,
-                label: "Request Consultation",
-                href: "/",
-                isExternal: false,
-            }}
-            button2={{
-                id: 2,
-                label: "Talk to an Expert",
-                href: "/",
-                isExternal: false,
-            }}
+            title={pageData.hero.title}
+            description={pageData.hero.description}
+            button1={pageData.hero.button1}
+            button2={pageData.hero.button2}
             className="max-w-2xl"
         />
-        <Section2 />
-        <EngineeringServicesSection />
-        <CardsSection />
-        <Section2Eng />
-        <BuyingGuideSection />
+        <Section2 {...pageData.crane_engineering_section} />
+        <EngineeringServicesSection {...pageData.engineering_services} />
+        <CardsSection sticky_cards={pageData.sticky_cards} />
+        <Section2Eng {...pageData.engineering_advantage} />
+        <BuyingGuideSection {...pageData.how_we_work} />
         <FeaturedProjectsSection {...pageData.featured_projects_section} />
-        <GallerySection/>
-        <TestimonialSection />
-        <EngineeringSupportSection />
-        <StickyCardsOneSideSection className="bg-secondary text-white" cardStyles="bg-[#041D54] [&_p]:text-[#A4A7AE]" />
-        <ExpertsSection theme="light" />
+        <GallerySection {...pageData.gallery_section} />
+        <TestimonialSection {...pageData.testimonial_section} />
+        <EngineeringSupportSection {...pageData.integrated_solution_section} />
+        <StickyCardsOneSideSection className="bg-secondary text-white" cardStyles="bg-[#041D54] [&_p]:text-[#A4A7AE]" {...pageData.industry_application} />
+        <ExpertsSection theme="light" {...pageData.experts_section} />
         <ResourcesSection />
         <FooterCTASection {...pageData.footer_cta_section} />
     </main>

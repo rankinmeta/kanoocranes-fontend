@@ -117,3 +117,56 @@ export type BrandSectionProps = {
         logo: MediaProps;
     }[];
 }
+
+export type SimpleSectionProps = {
+    id: number;
+    tag_title: TagTitleProps;
+    description: string;
+    image: MediaProps;
+}
+
+export type SectionWithGridProps = {
+    id: number;
+    tag_title: TagTitleProps;
+    description: string;
+    cards: {
+        id: number;
+        icon: MediaProps;
+        label: string;
+        description: string;
+    }[];
+}
+
+export type BuyingGuideSectionProps = {
+    id: number;
+    tag_title: TagTitleProps;
+    details: {
+        id: number;
+        label: string;
+        description: string;
+        icon: MediaProps;
+    }[];
+}
+
+export type EngineeringSupportSectionProps = {
+    id: number;
+    tag_title: TagTitleProps;
+    description: string;
+    details: {
+        id: number;
+        label: string;
+    }[];
+    image: MediaProps;
+}
+
+export type SectionWithStickyCardsProps = {
+    id: number;
+    tag_title: TagTitleProps;
+    description: string;
+    cards: {
+        id: number;
+        icon: MediaProps;
+        label: string;
+        description: string;
+    }[];
+}
