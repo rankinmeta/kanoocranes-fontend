@@ -2,8 +2,17 @@ import HighlightedTitle from "@/components/common/highlight-title"
 import { StrapiImage } from "@/components/common/strapi-image"
 import Tag from "@/components/common/tag"
 import { extractHighlightText } from "@/lib/utils"
+import { MediaProps, TagTitleProps } from "@/type"
 
-const BrandHighlightSection = () => {
+type BrandHighlightProps = {
+    tag_title: TagTitleProps;
+    logo: MediaProps;
+    description: string;
+}
+
+const BrandHighlightSection = ({description,logo,tag_title}: BrandHighlightProps) => {
+    if(!tag_title || !description || !logo) return null;
+
   return (
     <section className="relative bg-secondary text-white">
         {/* Circles */}
@@ -31,22 +40,22 @@ const BrandHighlightSection = () => {
 
         <div className="container container-padding-x py-10 md:py-20 flex flex-col items-center justify-center">
             <StrapiImage 
-                src="http://localhost:3000/local/jaso.png"
-                alt="brand"
+                src={logo.url}
+                alt={logo.alternativeText || ""}
                 width={400}
                 height={400}
                 className="size-[80%] md:size-auto md:w-[400px]"
             />
 
             <div className="mt-8 md:mt-14 space-y-2.5 flex flex-col md:items-center justify-center md:text-center max-w-4xl">
-                <Tag className="bg-white">Brand highlight</Tag>
+                <Tag className="bg-white">{tag_title.tag}</Tag>
                 <HighlightedTitle
-                    title="Powered by JASO engineering"
+                    title={tag_title.title}
                     highlights={extractHighlightText(
-                        "Powered by JASO engineering"
+                        tag_title.title
                     )}
                 />
-                <p className="text-[#A4A7AE]">JASO is one of the world's leading tower crane manufacturers, trusted on major construction projects across more than 70 countries. Known for innovation, reliability, and engineering excellence, JASO cranes are designed to deliver outstanding performance in demanding construction environments while supporting safe and efficient project execution.</p>
+                <p className="text-[#A4A7AE]">{description}</p>
             </div>
         </div>
     </section>

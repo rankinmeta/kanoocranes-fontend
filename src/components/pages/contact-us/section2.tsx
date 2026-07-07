@@ -6,43 +6,53 @@ import Whatsapp from "@/components/icons/whatsapp";
 import { extractHighlightText } from "@/lib/utils";
 import { type ReactNode } from "react";
 
-const Section2 = () => {
+type Section2Props = {
+    id: number;
+    title: string;
+    description: string;
+    phone: string;
+    email: string;
+    whatsapp: string;
+    address: string;
+}
+
+const Section2 = ({address,description,email,phone,whatsapp,title}: Section2Props) => {
+
     return (
         <section className="container container-padding-x py-10 md:py-20 grid md:grid-cols-5 gap-8 md:gap-5">
             <div className="md:max-w-sm space-y-3 md:col-span-2">
                 <HighlightedTitle
-                    title="Reach us <b>your way</b>"
+                    title={title}
                     highlights={extractHighlightText(
-                        "Reach us <b>your way</b>"
+                        title
                     )}
                     className="font-manrope"
                 />
                 <p className="text-[#414651]">
-                    Choose the most convenient way to connect with our team for
-                    immediate assistance.
+                    {description}
                 </p>
             </div>
             <div className="grid lg:grid-cols-2 gap-3 md:col-span-3">
-                <Card
+                {phone && <Card
                     label="Phone Number"
-                    value="+971 543 789 3245"
+                    value={phone}
                     icon={<Phone />}
-                />
-                <Card
+                />}
+                {email && <Card
                     label="Email Address"
-                    value="support@kanoocranes.com"
+                    value={email}
                     icon={<Mail />}
-                />
-                <Card
+                />}
+                {whatsapp && <Card
                     label="WhatsApp"
-                    value="+971 432 786 1234"
+                    value={whatsapp}
                     icon={<Whatsapp />}
-                />
-                <Card
+                />}
+                {address && <Card
                     label="Address"
-                    value="Hamriya Free Zone, UAE"
+                    value={address}
                     icon={<PinDrop />}
-                />
+                />}
             </div>
         </section>
     );

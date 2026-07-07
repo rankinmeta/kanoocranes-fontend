@@ -54,8 +54,8 @@ export function TestimonialCarousel({
           </CarouselItem>
         ))}
       </CarouselContent>
-      <CarouselPrevious size="icon-lg" className="hidden lg:block" />
-      <CarouselNext size="icon-lg" className="hidden lg:block" />
+      <CarouselPrevious size="icon-lg" className="hidden lg:flex" />
+      <CarouselNext size="icon-lg" className="hidden lg:flex" />
     </Carousel>
   );
 }

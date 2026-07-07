@@ -23,7 +23,7 @@ export function extractHighlightText(text: string) {
 
 export function returnMetadata(data: { seo: SeoMetadata }) {
     return {
-        title: data.seo?.metaTitle || "Kozhikode Star Restaurant",
+        title: data.seo?.metaTitle || "Kanoo Cranes",
         description: data.seo?.metaDescription || "",
         keywords: data.seo?.metaKeywords || "",
         robots: data.seo?.metaRobots || "",
@@ -31,7 +31,7 @@ export function returnMetadata(data: { seo: SeoMetadata }) {
             canonical: data.seo?.canonicalUrl || "",
         },
         openGraph: {
-            title: data.seo?.openGraph?.ogTitle || "Kozhikode Star Restaurant",
+            title: data.seo?.openGraph?.ogTitle || "Kanoo Cranes",
             description: data.seo?.openGraph?.ogDescription || "",
             url: data.seo?.openGraph?.ogUrl || "",
             type: data.seo?.openGraph?.ogType || "website",

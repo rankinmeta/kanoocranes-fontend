@@ -1,12 +1,82 @@
+"use client";
+
 import Link from "next/link";
 import { Button } from "../ui/button";
 import { Input } from "../ui/input";
 import { StrapiImage } from "../common/strapi-image";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "../ui/accordion";
+import { usePathname } from "next/navigation";
+import { cn } from "@/lib/utils";
+import { MediaProps } from "@/type";
 
-const Footer = () => {
+type FooterProps = {
+    socials: {
+        id: number;
+        icon: MediaProps;
+        link: string;
+        isExternal: boolean;
+    }[];
+    quick_links: {
+        title: string;
+        link: {
+            id: number;
+            label: string;
+            isExternal: boolean;
+            href: string;
+        }[];
+    },
+    our_services: {
+        title: string;
+        link: {
+            id: number;
+            label: string;
+            isExternal: boolean;
+            href: string;
+        }[];
+    },
+    industries: {
+        title: string;
+        link: {
+            id: number;
+            label: string;
+            isExternal: boolean;
+            href: string;
+        }[];
+    },
+    contact_us: {
+        phone: {
+            id: number;
+            label: string;
+            isExternal: boolean;
+            href: string;
+        },
+        email: {
+            id: number;
+            label: string;
+            isExternal: boolean;
+            href: string;
+        },
+        address: {
+            id: number;
+            label: string;
+            isExternal: boolean;
+            href: string;
+        }
+    }
+}
+
+const Footer = ({
+    contact_us,
+    industries,
+    our_services,
+    quick_links,
+    socials
+}: FooterProps) => {
+    const pathname = usePathname();
+  const padding = pathname.includes("/models");
+
     return (
-        <footer className="grid lg:grid-cols-3">
+        <footer className={cn("grid lg:grid-cols-3", padding && "md:mb-18")}>
             <div className="bg-primary m-4 lg:m-0 rounded-xl lg:rounded-none flex justify-center md:justify-start lg:justify-end">
                 <div className="text-white rounded-xl lg:rounded-none space-y-1 pt-10 lg:pt-20 pb-10 ps-4 lg:ps-0 pe-4 lg:pe-6 bg-primary max-w-md">
                     <h6 className="text-3xl font-manrope">
@@ -29,7 +99,20 @@ const Footer = () => {
                     <div className="pt-10">
                         <span>Follow us on</span>
                         <ul className="flex gap-2 mt-3">
-                            <Link href={"/"}>
+                            {socials?.map((social) => (
+                                <li key={social.id} className="bg-white rounded-full size-12 flex items-center justify-center">
+                                    <Link href={social.link} target={social.isExternal ? "_blank" : "_self"}>
+                                        <StrapiImage
+                                            src={social.icon.url}
+                                            alt={social.icon.alternativeText || "Logo"}
+                                            width={50}
+                                            height={50}
+                                            className="w-7 h-5"
+                                        />
+                                    </Link>
+                                </li>
+                            ))}
+                            {/* <Link href={"/"}>
                                 <li className="bg-white rounded-full size-12 flex items-center justify-center">
                                     <StrapiImage
                                         src="http://localhost:3000/local/yt.png"
@@ -39,7 +122,7 @@ const Footer = () => {
                                         className="w-7 h-5"
                                     />
                                 </li>
-                            </Link>
+                            </Link> */}
                         </ul>
                     </div>
                 </div>
@@ -50,30 +133,39 @@ const Footer = () => {
                 <div className="hidden lg:grid grid-cols-4 gap-1">
                     <dl className="shrink-0 space-y-2 [&>dd]:text-sm">
                         <dt className="font-manrope font-medium mb-3">
-                            Quick links
+                            {quick_links?.title}
                         </dt>
-                        <dd>Home</dd>
-                        <dd>About us</dd>
-                        <dd>Contact us</dd>
-                        <dd>Careers</dd>
+                        {quick_links?.link.map((link) => (
+                            <dd key={link.id}>
+                                <Link href={link.href} target={link.isExternal ? "_blank" : "_self"}>
+                                    {link.label}
+                                </Link>
+                            </dd>
+                        ))}
                     </dl>
                     <dl className="shrink-0 space-y-2 [&>dd]:text-sm">
                         <dt className="font-manrope font-medium mb-3">
-                            Our services
+                            {our_services?.title}
                         </dt>
-                        <dd>Crane rental</dd>
-                        <dd>Heavy Lifting Solutions</dd>
-                        <dd>Lift Planning & Engineering</dd>
-                        <dd>Maintenance & support</dd>
+                        {our_services?.link.map((link) => (
+                            <dd key={link.id}>
+                                <Link href={link.href} target={link.isExternal ? "_blank" : "_self"}>
+                                    {link.label}
+                                </Link>
+                            </dd>
+                        ))}
                     </dl>
                     <dl className="shrink-0 space-y-2 [&>dd]:text-sm">
                         <dt className="font-manrope font-medium mb-3">
-                            Industries
+                            {industries?.title}
                         </dt>
-                        <dd>Oil & Gas</dd>
-                        <dd>Construction</dd>
-                        <dd>Energy & Utilities</dd>
-                        <dd>Infrastructure</dd>
+                        {industries?.link.map((link) => (
+                            <dd key={link.id}>
+                                <Link href={link.href} target={link.isExternal ? "_blank" : "_self"}>
+                                    {link.label}
+                                </Link>
+                            </dd>
+                        ))}
                     </dl>
 
                     <dl className="shrink-0 space-y-2">
@@ -82,18 +174,26 @@ const Footer = () => {
                         </dt>
                         <dl className="mb-2 text-sm">
                             <dt>Phone</dt>
-                            <dd className="font-medium">+971 50 482 7612</dd>
+                            <dd className="font-medium">
+                                <Link href={contact_us?.phone.href} target={contact_us?.phone.isExternal ? "_blank" : "_self"}>
+                                    {contact_us?.phone.label}
+                                </Link>
+                            </dd>
                         </dl>
                         <dl className="mb-2 text-sm">
                             <dt>Email</dt>
                             <dd className="font-medium">
-                                support@kanoocranes.com
+                                <Link href={contact_us?.email.href} target={contact_us?.email.isExternal ? "_blank" : "_self"}>    
+                                    {contact_us?.email.label}
+                                </Link>
                             </dd>
                         </dl>
                         <dl className="mb-2 text-sm">
                             <dt>Address</dt>
                             <dd className="max-w-xs font-medium">
-                                Hamriya Free Zone, UAE
+                                <Link href={contact_us?.address.href} target={contact_us?.address.isExternal ? "_blank" : "_self"}>        
+                                    {contact_us?.address.label}
+                                </Link>
                             </dd>
                         </dl>
                     </dl>
@@ -104,46 +204,49 @@ const Footer = () => {
                 <Accordion type="single" className="border-none">
                         <AccordionItem value="quick-links">
                             <AccordionTrigger hideBullet iconColor="text-black!" className="px-0">
-                                Quick Links
+                                {quick_links?.title}
                             </AccordionTrigger>
                             <AccordionContent className="h-fit! pt-3">
                                 <ul className="-ms-3 space-y-3 text-base">
-                                    <li><Link href={"/"}>Home</Link></li>
-                                    <li><Link href={"/about-us"}>About us</Link></li>
-                                    <li><Link href={"/contact-us"}>Contact us</Link></li>
-                                    <li><Link href={"/rental-hub"}>Rent cranes</Link></li>
-                                    <li><Link href={"/sales-hub"}>Buy cranes</Link></li>
-                                    <li><Link href={"/resource-hub"}>Resource hub</Link></li>
+                                    {quick_links?.link.map((link) => (
+                                        <li key={link.id}>
+                                            <Link href={link.href} target={link.isExternal ? "_blank" : "_self"}>
+                                                {link.label}
+                                            </Link>
+                                        </li>
+                                    ))}
                                 </ul>
                             </AccordionContent>
                         </AccordionItem>
                         <AccordionItem value="service">
                             <AccordionTrigger hideBullet iconColor="text-black!" className="px-0">
-                                Our Services
+                                {our_services?.title}
                             </AccordionTrigger>
                             <AccordionContent className="h-fit! pt-3">
                                 <ul className="-ms-3 space-y-3 text-base">
-                                    <li><Link href={"/"}>Home</Link></li>
-                                    <li><Link href={"/about-us"}>About us</Link></li>
-                                    <li><Link href={"/contact-us"}>Contact us</Link></li>
-                                    <li><Link href={"/rental-hub"}>Rent cranes</Link></li>
-                                    <li><Link href={"/sales-hub"}>Buy cranes</Link></li>
-                                    <li><Link href={"/resource-hub"}>Resource hub</Link></li>
+                                    {our_services?.link.map((link) => (
+                                        <li key={link.id}>
+                                            <Link href={link.href} target={link.isExternal ? "_blank" : "_self"}>
+                                                {link.label}
+                                            </Link>
+                                        </li>
+                                    ))}
                                 </ul>
                             </AccordionContent>
                         </AccordionItem>
                         <AccordionItem value="industries">
                             <AccordionTrigger hideBullet iconColor="text-black!" className="px-0">
-                                Industries
+                                {industries?.title}
                             </AccordionTrigger>
                             <AccordionContent className="h-fit! pt-3">
                                 <ul className="-ms-3 space-y-3 text-base">
-                                    <li><Link href={"/"}>Home</Link></li>
-                                    <li><Link href={"/about-us"}>About us</Link></li>
-                                    <li><Link href={"/contact-us"}>Contact us</Link></li>
-                                    <li><Link href={"/rental-hub"}>Rent cranes</Link></li>
-                                    <li><Link href={"/sales-hub"}>Buy cranes</Link></li>
-                                    <li><Link href={"/resource-hub"}>Resource hub</Link></li>
+                                    {industries?.link.map((link) => (
+                                        <li key={link.id}>
+                                            <Link href={link.href} target={link.isExternal ? "_blank" : "_self"}>
+                                                {link.label}
+                                            </Link>
+                                        </li>
+                                    ))}
                                 </ul>
                             </AccordionContent>
                         </AccordionItem>
@@ -155,18 +258,26 @@ const Footer = () => {
                         </dt>
                         <dl className="mb-3">
                             <dt>Phone</dt>
-                            <dd className="font-medium">+971 50 482 7612</dd>
+                            <dd className="font-medium">
+                                <Link href={contact_us?.phone.href} target={contact_us?.phone.isExternal ? "_blank" : "_self"}>    
+                                    {contact_us?.phone.label}
+                                </Link>
+                            </dd>
                         </dl>
                         <dl className="mb-3">
                             <dt>Email</dt>
                             <dd className="font-medium">
-                                support@kanoocranes.com
+                                <Link href={contact_us?.email.href} target={contact_us?.email.isExternal ? "_blank" : "_self"}>                
+                                    {contact_us?.email.label}    
+                                </Link>
                             </dd>
                         </dl>
                         <dl className="mb-3">
                             <dt>Address</dt>
                             <dd className="max-w-xs font-medium">
-                                Hamriya Free Zone, UAE
+                                <Link href={contact_us?.address.href} target={contact_us?.address.isExternal ? "_blank" : "_self"}>        
+                                    {contact_us?.address.label}
+                                </Link>
                             </dd>
                         </dl>
                     </dl>

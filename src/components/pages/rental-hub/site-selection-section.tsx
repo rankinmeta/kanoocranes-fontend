@@ -3,8 +3,11 @@ import Tag from "@/components/common/tag";
 import { extractHighlightText } from "@/lib/utils";
 import DetailsSection from "./details-section";
 import DetailsSectionSM from "./details-section-sm";
+import type { SiteSelectionSectionProps } from "@/type";
 
-const SiteSelectionSection = () => {
+const SiteSelectionSection = ({description,site_selection_details,tag_title}: SiteSelectionSectionProps) => {
+    if(!description || !tag_title || !site_selection_details) return null;
+
     return (
         <section className="relative bg-[#F5F5F5] py-10 md:py-16 lg:py-20">
             {/* Circles */}
@@ -21,22 +24,20 @@ const SiteSelectionSection = () => {
 
             <div className="container container-padding-x">
                 <div className="space-y-2.5">
-                    <Tag>Site selection</Tag>
+                    <Tag>{tag_title.tag}</Tag>
                     <HighlightedTitle
-                        title="Choose equipment <b>by application</b>"
+                        title={tag_title.title}
                         highlights={extractHighlightText(
-                            "Choose equipment <b>by application</b>"
+                            tag_title.title
                         )}
                     />
                     <p className="text-[#414651] text-sm max-w-lg">
-                        From installation to long-term maintenance, our
-                        engineering team provides the expertise and technical
-                        guidance needed to maximize
+                        {description}
                     </p>
                 </div>
 
-                <DetailsSection />
-                <DetailsSectionSM />
+                <DetailsSection details={site_selection_details} />
+                <DetailsSectionSM details={site_selection_details} />
             </div>
         </section>
     );

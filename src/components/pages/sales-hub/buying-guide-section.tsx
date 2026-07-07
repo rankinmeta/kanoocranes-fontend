@@ -52,9 +52,9 @@ function Card({
         0{index + 1}
       </span>
       <div className="flex-[30%]">
-        <h4 className="text-lg font-manrope max-w-60 leading-5">{label}</h4>
+        <h4 className="text-xl font-manrope max-w-60 leading-5">{label}</h4>
       </div>
-      <p className="flex-1/2 text-sm">{description}</p>
+      <p className="flex-1/2 max-w-sm">{description}</p>
     </div>
   );
 }

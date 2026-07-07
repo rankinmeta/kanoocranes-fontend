@@ -170,3 +170,58 @@ export type SectionWithStickyCardsProps = {
         description: string;
     }[];
 }
+
+export type ResourceCardProps = {
+    id: number;
+    documentId: string;
+    image: MediaProps;
+    title: string;
+    slug: string;
+    date: string;
+    resource_type: {
+        id: number;
+        type: string;
+        slug: string;
+    };
+}
+
+export type OwnershipBenefitsWithPointsSectionProps = {
+    id: number;
+    tag_title: TagTitleProps;
+    description: string;
+    points: {
+        id: number;
+        label: string;
+    }[];
+    image: MediaProps | null;
+}
+
+export type SiteSelectionSectionProps = {
+    id: number;
+    tag_title: TagTitleProps;
+    description: string;
+    site_selection_details: {
+        id: number;
+        title: string;
+        description: string;
+        image: MediaProps;
+    }[];
+}
+
+export type CraneTypeProps = {
+    id: number;
+    type: string;
+    slug: string;
+}
+
+export type ProjectTypeProps = {
+    id: number;
+    type: string;
+    slug: string;
+}
+
+export type ManufacturerProps = {
+    id: number;
+    name: string;
+    slug: string;
+}

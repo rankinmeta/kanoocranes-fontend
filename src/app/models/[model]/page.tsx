@@ -1,7 +1,6 @@
 import Section2 from "@/components/pages/sales-hub/section2";
 import { ProductGallery } from "../../../components/pages/model/product-gallery";
 import { ProductInfo } from "../../../components/pages/model/product-info";
-import { type Product } from "../../../components/pages/model/type";
 import ProcurementSection from "@/components/pages/model/procurement-section";
 import Section2Rental from "@/components/pages/rental-hub/section2";
 import DownloadsSection from "@/components/pages/model/downloads-section";
@@ -21,76 +20,56 @@ import {
 } from "@/components/ui/breadcrumb";
 import { Home } from "lucide-react";
 import StickyCardsOneSideSection from "@/components/pages/eng-solutions/sticky-cards-one-side-section";
+import { notFound } from "next/navigation";
+import { getModelPage } from "@/data/loader";
+import StickyCTA from "@/components/layout/sticky-cta";
+import { type Metadata } from "next";
+import { returnMetadata } from "@/lib/utils";
 
-export const crane: Product = {
-    id: "jaso-j560",
+export async function generateStaticParams() {
+    return [];
+  }
 
-    name: "JASO J560",
-    category: "Flat-top Tower Crane",
+let modelPageDataPromise: ReturnType<typeof getModelPage> | null = null;
+let modelCache: string | null = null;
 
-    description:
-        "A high-capacity tower crane engineered for large-scale construction projects requiring exceptional reach, lifting performance and operational efficiency.",
+function getModelPageOnce(model: string) {
+  if (!modelPageDataPromise || modelCache !== model) {
+    modelPageDataPromise = getModelPage(model);
+    modelCache = model;
+  }
+  return modelPageDataPromise;
+}
 
-    stats: {
-        capacity: "32 Ton",
-        radius: "65m",
-        height: "80m+",
-    },
+async function loader(model: string) {
+  const pageData = await getModelPageOnce(model);
+  if (!pageData || !pageData.data) notFound();
+  return {
+    pageData: pageData.data,
+  };
+}
 
-    highlights: [
-        {
-            label: "Maximum Capacity",
-            value: "32 Ton",
-        },
-        {
-            label: "Maximum Radius",
-            value: "80m",
-        },
-        {
-            label: "Hook Height",
-            value: "85m+",
-        },
-        {
-            label: "Configuration",
-            value: "Flat-Top",
-        },
-    ],
+export async function generateMetadata({
+    params,
+  }: {
+    params: Promise<{ model: string }>;
+  }): Promise<Metadata> {
+    const { model } = await params;
+    const { data } = await getModelPageOnce(model);
+  
+    return returnMetadata(data);
+  }
 
-    images: [
-        "/local/crane1.png",
-        "/local/crane2.png",
-        "/local/crane3.png",
-        "/local/unit1.webp",
-    ],
+const ModalPage = async ({
+    params,
+  }: {
+    params: Promise<{ model: string }>;
+  }) => {
+    const { model } = await params;
+  if (!model) return notFound();
 
-    overview:
-        "The JASO J560 is a high-performance flat-top tower crane designed for demanding construction environments.",
+    const { pageData } = await loader(model as string);
 
-    specifications: [
-        {
-            label: "Manufacturer",
-            value: "JASO",
-        },
-        {
-            label: "Maximum Capacity",
-            value: "32 Ton",
-        },
-        {
-            label: "Maximum Hook Height",
-            value: "85m+",
-        },
-        {
-            label: "Jib Configuration",
-            value: "Flat-Top",
-        },
-        {
-            label: "Application",
-            value: "High-Rise Construction",
-        },
-    ],
-};
-
-const ModalPage = () => {
     return (
         <main>
             <section className="container container-padding-x pb-10 md:pb-20">
@@ -116,31 +95,41 @@ const ModalPage = () => {
                         <BreadcrumbSeparator className="text-[#A4A7AE]" />
                         <BreadcrumbItem>
                             <BreadcrumbPage className="text-secondary">
-                                Breadcrumb
+                                {pageData.model_name}
                             </BreadcrumbPage>
                         </BreadcrumbItem>
                     </BreadcrumbList>
                 </Breadcrumb>
                 <div className="grid gap-6 lg:gap-12 lg:grid-cols-2">
-                    <ProductGallery images={crane.images} />
+                    <ProductGallery images={pageData.main_section.images} />
 
                     <ProductInfo
-                        product={crane}
-                        specifications={crane.specifications}
+                        title={pageData.main_section.title}
+                        short_description={pageData.main_section.short_description}
+                        crane_capacity={pageData.main_section.crane_capacity}
+                        max_working_radius={pageData.main_section.max_working_radius}
+                        max_lifting_height={pageData.main_section.max_lifting_height}
+                        hook_height={pageData.main_section.hook_height}
+                        crane_configuration={pageData.main_section.crane_configuration}
+                        manufacturer={pageData.main_section.manufacturer}
+                        model_specifications={pageData.main_section.model_specifications}
+                        overview={pageData.main_section.overview}
                     />
                 </div>
             </section>
-            <Section2 title="Why Choose the <b>JASO J560?</b>" description="" />
-            <ProcurementSection />
-            <StickyCardsOneSideSection />
-            <Section2Rental className="bg-white" />
-            <DownloadsSection />
+            <Section2 details={pageData.why_buy_from_kc_section.cards} {...pageData.why_buy_from_kc_section} />
+            <ProcurementSection {...pageData.procurement_section} />
+            <StickyCardsOneSideSection {...pageData.technical_application} />
+            <Section2Rental className="bg-white" {...pageData.safety_and_compliance} />
+            <DownloadsSection {...pageData.downloads_section} />
             <RelatedModels />
-            <SiteSelectionSection />
+            <SiteSelectionSection {...pageData.applications_section} />
             <ProjectsSection />
-            <GallerySection />
-            <TestimonialSection />
-            <FooterCTASection />
+            <GallerySection {...pageData.gallery_section} />
+            <TestimonialSection {...pageData.testimonial_section} />
+            <FooterCTASection {...pageData.footer_cta_section} />
+
+            <StickyCTA title={pageData.main_section.title} />
         </main>
     );
 };

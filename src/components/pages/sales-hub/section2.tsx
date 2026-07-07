@@ -4,27 +4,30 @@ import Automation from "@/components/icons/automation";
 import Payments from "@/components/icons/payments";
 import Verified from "@/components/icons/verified";
 import { extractHighlightText } from "@/lib/utils";
-import { ReactNode } from "react";
+import type { TagTitleProps } from "@/type";
+import type { ReactNode } from "react";
 
-const Section2 = ({
-    title = "Built for long-term <b>performance</b>",
-    description = `Investing in crane ownership provides greater operational
-                    control, improved equipment availability, and long-term
-                    value for your business. Kanoo Cranes offers premium lifting
-                    equipment from globally trusted manufacturers, supported by
-                    expert consultation and after-sales service.`,
-}: {
-    title?: string;
-    description?: string;
-}) => {
+type Section2Props = {
+    tag_title: TagTitleProps;
+    description: string;
+    details: {
+        id: number;
+        label: string;
+        description: string;
+    }[];
+}
+
+const Section2 = ({description, details, tag_title}: Section2Props) => {
+    if(!tag_title || !details) return null;
+
     return (
         <section className="bg-[#F5F5F5]">
             <div className="container container-padding-x py-10 md:py-16 lg:py-20 grid md:grid-cols-4 gap-3">
                 <div className="space-y-2 md:col-span-2">
-                    <Tag>Why buy from kanoo cranes</Tag>
+                    <Tag>{tag_title.tag}</Tag>
                     <HighlightedTitle
-                        title={title}
-                        highlights={extractHighlightText(title)}
+                        title={tag_title.title}
+                        highlights={extractHighlightText(tag_title.title)}
                         className="max-w-md"
                     />
                 </div>
@@ -32,28 +35,26 @@ const Section2 = ({
 
                 {/* Cards */}
                 <div className="flex md:grid grid-cols-2 lg:grid-cols-4 md:col-span-4 gap-3 mt-5 md:mt-10 overflow-x-scroll scrollbar-none">
-                    <Card
-                        title="Premium crane portfolio"
-                        description="Choose from tower cranes, mobile cranes, spider cranes, and
-                specialized lifting equipment designed for diverse project
-                requirements."
+                    {details[0] && <Card
+                        title={details[0].label}
+                        description={details[0].description}
                         icon={<Automation />}
-                    />
-                    <Card
-                        title="Long-term return on Investment"
-                        description="Reduce recurring rental costs while building valuable business assets that support future growth and operational flexibility."
+                    />}
+                    {details[1] && <Card
+                        title={details[1].label}
+                        description={details[1].description}
                         icon={<Payments />}
-                    />
-                    <Card
-                        title="Trusted global brands"
-                        description="Access industry-leading equipment from renowned manufacturers including JASO, Maeda, Grove, and other trusted partners."
+                    />}
+                    {details[2] && <Card
+                        title={details[2].label}
+                        description={details[2].description}
                         icon={<Verified />}
-                    />
-                    <Card
-                        title="Engineering & technical support"
-                        description="Benefit from expert guidance, installation assistance, maintenance planning, and ongoing technical support throughout the equipment lifecycle."
+                    />}
+                    {details[3] && <Card
+                        title={details[3].label}
+                        description={details[3].description}
                         icon={<Automation />}
-                    />
+                    />}
                 </div>
             </div>
         </section>

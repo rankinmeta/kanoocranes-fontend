@@ -60,11 +60,11 @@ const MenuSheet = () => {
             </Link>
           </li>
 
-          <li>
+          {/* <li>
             <Link href="/rental" onClick={() => setOpen(false)}>
               Rental
             </Link>
-          </li>
+          </li> */}
 
           <li>
             <Link href="/resource-hub" onClick={() => setOpen(false)}>

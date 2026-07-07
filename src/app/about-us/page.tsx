@@ -10,6 +10,8 @@ import AboutUsSection from "@/components/pages/home/about-us-section";
 import FeaturedProjectsSection from "@/components/pages/home/featured-projects-section";
 import FooterCTASection from "@/components/pages/home/footer-cta-section";
 import { getAboutUsPage } from "@/data/loader";
+import { returnMetadata } from "@/lib/utils";
+import { type Metadata } from "next";
 import { notFound } from "next/navigation";
 
 let aboutUsPageDataPromise: ReturnType<typeof getAboutUsPage> | null = null;
@@ -27,6 +29,12 @@ async function loader() {
     return {
         pageData: pageData.data,
     };
+}
+
+export async function generateMetadata(): Promise<Metadata> {
+    const { data } = await getAboutUsPageOnce();
+
+    return returnMetadata(data);
 }
 
 const AboutUsPage = async () => {

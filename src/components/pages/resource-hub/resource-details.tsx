@@ -11,6 +11,8 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import Link from "next/link";
+import { LinkProps } from "@/type";
 
 // Slugify heading text to use as an id
 function slugify(text: string): string {
@@ -44,151 +46,26 @@ function extractHeadings(
     .filter(Boolean) as { id: string; label: string; level: number }[];
 }
 
-// Sample content — replace with your Strapi API response
-const content: BlocksContent = [
-  {
-    type: "heading",
-    level: 1,
-    children: [
-      {
-        type: "text",
-        text: "Understanding crane selection for modern projects",
-      },
-    ],
-  },
-  {
-    type: "paragraph",
-    children: [
-      {
-        type: "text",
-        text: "Selecting the right crane is a critical step in ensuring the success of any lifting operation. From high-rise construction and infrastructure development to industrial maintenance and heavy equipment installation, every project has unique requirements that demand careful consideration.",
-      },
-    ],
-  },
-  {
-    type: "paragraph",
-    children: [
-      {
-        type: "text",
-        text: "Site conditions also play a significant role in crane selection. Factors such as ground stability, available working space, access routes, surrounding structures, and environmental conditions must be carefully evaluated before any lifting operation begins.",
-      },
-    ],
-  },
-  {
-    type: "heading",
-    level: 1,
-    children: [{ type: "text", text: "Key factors to consider" }],
-  },
-  {
-    type: "paragraph",
-    children: [
-      {
-        type: "text",
-        text: "The crane must be capable of lifting the required load safely while maintaining stability throughout the operation. Consider maximum load weight, load dimensions, center of gravity, and dynamic loading conditions.",
-      },
-    ],
-  },
-  {
-    type: "list",
-    format: "unordered",
-    children: [
-      {
-        type: "list-item",
-        children: [{ type: "text", text: "Maximum load weight" }],
-      },
-      {
-        type: "list-item",
-        children: [{ type: "text", text: "Load dimensions" }],
-      },
-      {
-        type: "list-item",
-        children: [{ type: "text", text: "Center of gravity" }],
-      },
-      {
-        type: "list-item",
-        children: [{ type: "text", text: "Dynamic loading conditions" }],
-      },
-    ],
-  },
-  {
-    type: "heading",
-    level: 1,
-    children: [
-      {
-        type: "text",
-        text: "Test Heading",
-      },
-    ],
-  },
-  {
-    type: "paragraph",
-    children: [
-      {
-        type: "text",
-        text: "Comprehensive lift planning is not merely a regulatory formality — it is a cornerstone of operational excellence. By mapping out every phase of a lift in advance, project managers can anticipate conflicts and allocate resources precisely.",
-      },
-    ],
-  },
-  {
-    type: "heading",
-    level: 1,
-    children: [{ type: "text", text: "Why proper planning matters" }],
-  },
-  {
-    type: "paragraph",
-    children: [
-      {
-        type: "text",
-        text: "Comprehensive lift planning is not merely a regulatory formality — it is a cornerstone of operational excellence. By mapping out every phase of a lift in advance, project managers can anticipate conflicts and allocate resources precisely.",
-      },
-    ],
-  },
-  {
-    type: "heading",
-    level: 1,
-    children: [{ type: "text", text: "Working radius" }],
-  },
-  {
-    type: "paragraph",
-    children: [
-      {
-        type: "text",
-        text: "The working radius — the horizontal distance from the crane's center of rotation to the load's center of gravity — directly impacts the crane's permissible lift capacity. As the radius increases, the allowable load decreases.",
-      },
-    ],
-  },
-  {
-    type: "heading",
-    level: 1,
-    children: [{ type: "text", text: "Site conditions" }],
-  },
-  {
-    type: "paragraph",
-    children: [
-      {
-        type: "text",
-        text: "Ground bearing capacity is perhaps the most overlooked variable in crane deployment. Soft or unstable ground can compromise the structural integrity of outrigger pads, leading to uncontrolled settlement.",
-      },
-    ],
-  },
-  {
-    type: "heading",
-    level: 1,
-    children: [{ type: "text", text: "Conclusion" }],
-  },
-  {
-    type: "paragraph",
-    children: [
-      {
-        type: "text",
-        text: "Crane selection is a multi-disciplinary process that combines engineering judgment, site intelligence, and regulatory compliance. By engaging qualified lift planners early, project teams can execute even the most complex lifting operations with confidence.",
-      },
-    ],
-  },
-];
+type ResourceDetailsProps = {
+  resource_content: BlocksContent;
+  banner_title: string;
+  banner_description: string;
+  banner_button: LinkProps;
+  card_banner_title: string;
+  card_banner_description: string;
+  card_banner_button: LinkProps;
+};
 
-const ResourceDetails = () => {
-  const headings = extractHeadings(content);
+const ResourceDetails = ({
+  resource_content,
+  banner_button,
+  banner_description,
+  banner_title,
+  card_banner_button,
+  card_banner_description,
+  card_banner_title,
+}: ResourceDetailsProps) => {
+  const headings = extractHeadings(resource_content);
   const sectionRefs = useRef<{ [key: string]: HTMLElement | null }>({});
   const [activeSection, setActiveSection] = useState(headings[0]?.id || "");
   const observer = useRef<IntersectionObserver | null>(null);
@@ -232,19 +109,19 @@ const ResourceDetails = () => {
   const scrollToSection = (id: string) => {
     const element = sectionRefs.current[id];
     if (element) {
-        const offset = 100; // height of your fixed header
+      const offset = 100; // height of your fixed header
 
-        const top =
-          element.getBoundingClientRect().top +
-          window.pageYOffset -
-          offset;
-    
-        window.scrollTo({
-          top,
-          behavior: "smooth",
-        });
+      const top =
+        element.getBoundingClientRect().top + window.pageYOffset - offset;
+
+      window.scrollTo({
+        top,
+        behavior: "smooth",
+      });
     }
   };
+
+  if(!resource_content || !banner_button || !card_banner_button) return null;
 
   return (
     <>
@@ -306,22 +183,25 @@ const ResourceDetails = () => {
 
           {/* CENTER — BlocksRenderer renders the content */}
           <div>
-            <ResourceContent content={content} sectionRefs={sectionRefs} />
+            <ResourceContent
+              content={resource_content}
+              sectionRefs={sectionRefs}
+            />
             <div className="bg-secondary mt-10 text-white p-6 rounded-md flex flex-col md:flex-row justify-between md:items-center">
               <div className="flex flex-col md:flex-row md:items-center gap-6">
                 <Book />
                 <div className="space-y-2 max-w-2xl">
-                  <h3 className="text-2xl font-manrope">
-                    Access our complete resource library
-                  </h3>
-                  <p className="text-sm">
-                    Unlock exclusive resources including CAD drawings, detailed
-                    load charts..
-                  </p>
+                  <h3 className="text-2xl font-manrope">{banner_title}</h3>
+                  <p className="text-sm">{banner_description}</p>
                 </div>
               </div>
 
-              <Button className="w-fit mt-4 md:mt-0">Unlock Resources</Button>
+              <Link
+                href={banner_button.href}
+                target={banner_button.isExternal ? "_blank" : "_self"}
+              >
+                <Button className="w-fit mt-4 md:mt-0">{banner_button.label}</Button>
+              </Link>
             </div>
           </div>
 
@@ -342,14 +222,18 @@ const ResourceDetails = () => {
                 </div>
 
                 <div className="relative z-10 space-y-2">
-                  <h3 className="font-manrope text-xl">Let's talk business</h3>
+                  <h3 className="font-manrope text-xl">{card_banner_title}</h3>
                   <p className="text-xs leading-relaxed">
-                    Talk to our experts for tailored crane solutions, quick
-                    quotes, and reliable support for your project requirements.
+                    {card_banner_description}
                   </p>
-                  <Button className="bg-white text-primary mt-3 hover:bg-primary hover:text-white">
-                    Contact us
-                  </Button>
+                  <Link
+                    href={card_banner_button.href}
+                    target={card_banner_button.isExternal ? "_blank" : "_self"}
+                  >
+                    <Button className="bg-white text-primary mt-3 hover:bg-primary hover:text-white">
+                      {card_banner_button.label}
+                    </Button>
+                  </Link>
                 </div>
               </div>
             </div>

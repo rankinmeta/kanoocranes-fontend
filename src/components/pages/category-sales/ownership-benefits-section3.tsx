@@ -2,8 +2,21 @@ import HighlightedTitle from "@/components/common/highlight-title";
 import { StrapiImage } from "@/components/common/strapi-image";
 import Tag from "@/components/common/tag";
 import { extractHighlightText } from "@/lib/utils";
+import { MediaProps, TagTitleProps } from "@/type";
 
-const OwnershipBenefitsSection3 = () => {
+type Props = {
+  tag_title: TagTitleProps;
+  description: string;
+  image: MediaProps;
+};
+
+const OwnershipBenefitsSection3 = ({
+  description,
+  image,
+  tag_title,
+}: Props) => {
+  if (!tag_title || !description || !image) return null;
+
   return (
     <section className="relative bg-secondary text-white">
       {/* Circles */}
@@ -17,8 +30,8 @@ const OwnershipBenefitsSection3 = () => {
 
       <div className="relative z-10 container container-padding-x py-10 md:py-20 grid md:grid-cols-5 gap-5 items-center">
         <StrapiImage
-          src="http://localhost:3000/local/unit3.webp"
-          alt="worker"
+          src={image.url}
+          alt={image.alternativeText || ""}
           width={400}
           height={400}
           className="hidden md:block aspect-[1/0.7] col-span-2 rounded-md object-cover"
@@ -26,31 +39,22 @@ const OwnershipBenefitsSection3 = () => {
 
         <div className="md:col-span-3">
           <div className="space-y-2.5">
-            <Tag className="bg-white">Ownership benefits</Tag>
+            <Tag className="bg-white">{tag_title.tag}</Tag>
             <HighlightedTitle
-              title="The Long-term value of tower crane ownership"
-              highlights={extractHighlightText(
-                "The Long-term value of tower crane ownership",
-              )}
+              title={tag_title.title}
+              highlights={extractHighlightText(tag_title.title)}
               className="max-w-lg"
             />
 
             <StrapiImage
-              src="http://localhost:3000/local/unit3.webp"
-              alt="worker"
+              src={image.url}
+              alt={image.alternativeText || ""}
               width={400}
               height={400}
               className="aspect-[1/0.7] md:hidden my-5 rounded-md object-cover"
             />
 
-            <p className="max-w-xl">
-              Owning a tower crane offers significant operational and financial
-              benefits. Businesses gain greater control over project schedules,
-              reduce long-term rental costs, and build valuable equipment
-              assets. Combined with proper maintenance and engineering support,
-              tower crane ownership can improve productivity while delivering
-              strong long-term return on investment.
-            </p>
+            <p className="max-w-xl">{description}</p>
           </div>
         </div>
       </div>

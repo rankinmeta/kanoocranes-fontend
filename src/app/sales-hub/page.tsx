@@ -13,43 +13,56 @@ import EngineeringSupportSection from "@/components/pages/sales-hub/engineering-
 import OwnershipBenefitsSection from "@/components/pages/sales-hub/ownership-benefits-section";
 import SalesCategorySection from "@/components/pages/sales-hub/sales-category-section";
 import Section2 from "@/components/pages/sales-hub/section2";
+import { getSalesHubPage } from "@/data/loader";
+import { returnMetadata } from "@/lib/utils";
+import { type Metadata } from "next";
+import { notFound } from "next/navigation";
 
-const SalesHubPage = () => {
-    return (
-        <main>
-            <HeroSection
-                title="Cranes for sale for construction & industrial projects"
-                description="Own high-performance lifting equipment from globally trusted manufacturers, backed by expertise, technical support, and long-term operational value."
-                button1={{
-                    id: 1,
-                    label: "View Cranes",
-                    href: "/",
-                    isExternal: false,
-                }}
-                button2={{
-                    id: 2,
-                    label: "Request a Quote",
-                    href: "/",
-                    isExternal: false,
-                }}
-                className="max-w-2xl"
-            />
-            <Section2 />
-            <SalesCategorySection />
-            <BrandsSection />
-            <FeaturedModelsSection />
-            <OwnershipBenefitsSection />
-            <EngineeringSupportSection />
-            <BuyingGuideSection />
-            <OurIndustriesSection />
-            <GallerySection />
-            <TestimonialSection />
-            <ExpertsSection />
-            <AboutUsSection />
-            <ResourcesSection />
-            <FooterCTASection />
-        </main>
-    );
+let salesHubPageDataPromise: ReturnType<typeof getSalesHubPage> | null = null;
+
+function getSalesHubPageOnce() {
+  if (!salesHubPageDataPromise) {
+    salesHubPageDataPromise = getSalesHubPage();
+  }
+  return salesHubPageDataPromise;
+}
+
+async function loader() {
+  const pageData = await getSalesHubPageOnce();
+  if (!pageData || !pageData.data) notFound();
+  return {
+    pageData: pageData.data,
+  };
+}
+
+export async function generateMetadata(): Promise<Metadata> {
+  const { data } = await getSalesHubPageOnce();
+
+  return returnMetadata(data);
+}
+
+const SalesHubPage = async () => {
+  const { pageData } = await loader();
+
+  return (
+    <main>
+      <HeroSection {...pageData.hero} className="max-w-2xl" />
+      <Section2 {...pageData.why_buy_from_us_section} />
+      <SalesCategorySection {...pageData.sales_category_section} />
+      <BrandsSection {...pageData.brands_section} />
+      <FeaturedModelsSection {...pageData.featured_models_section} />
+      <OwnershipBenefitsSection {...pageData.ownership_benefits} />
+      <EngineeringSupportSection {...pageData.engineering_support_section} />
+      <BuyingGuideSection {...pageData.buying_guide_section} />
+      <OurIndustriesSection {...pageData.industries_section} />
+      <GallerySection {...pageData.gallery_section} />
+      <TestimonialSection {...pageData.testimonial_section} />
+      <ExpertsSection {...pageData.experts_section} />
+      <AboutUsSection {...pageData.investment_section} />
+      <ResourcesSection {...pageData.related_resources} />
+      <FooterCTASection {...pageData.footer_cta_section} />
+    </main>
+  );
 };
 
 export default SalesHubPage;

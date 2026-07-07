@@ -13,6 +13,8 @@ import Section2Eng from "@/components/pages/rental-hub/section2";
 import BuyingGuideSection from "@/components/pages/sales-hub/buying-guide-section";
 import EngineeringSupportSection from "@/components/pages/sales-hub/engineering-support-section";
 import { getEngSolutionsPage } from "@/data/loader";
+import { returnMetadata } from "@/lib/utils";
+import { type Metadata } from "next";
 import { notFound } from "next/navigation";
 
 let engSolutionsPageDataPromise: ReturnType<typeof getEngSolutionsPage> | null = null;
@@ -26,11 +28,16 @@ function getEngSolutionsPageOnce() {
 
 async function loader() {
     const pageData = await getEngSolutionsPageOnce();
-    console.log(pageData);
     if (!pageData || !pageData.data) notFound();
     return {
         pageData: pageData.data,
     };
+}
+
+export async function generateMetadata(): Promise<Metadata> {
+    const { data } = await getEngSolutionsPageOnce();
+
+    return returnMetadata(data);
 }
 
 const EngSolutionsPage = async () => {
@@ -50,13 +57,13 @@ const EngSolutionsPage = async () => {
         <CardsSection sticky_cards={pageData.sticky_cards} />
         <Section2Eng {...pageData.engineering_advantage} />
         <BuyingGuideSection {...pageData.how_we_work} />
-        <FeaturedProjectsSection {...pageData.featured_projects_section} />
+        <FeaturedProjectsSection {...pageData.featured_projects} />
         <GallerySection {...pageData.gallery_section} />
         <TestimonialSection {...pageData.testimonial_section} />
-        <EngineeringSupportSection {...pageData.integrated_solution_section} />
+        <EngineeringSupportSection {...pageData.integrated_solution_section} className="bg-white" cardStyles="bg-[#f5f5f5]" />
         <StickyCardsOneSideSection className="bg-secondary text-white" cardStyles="bg-[#041D54] [&_p]:text-[#A4A7AE]" {...pageData.industry_application} />
         <ExpertsSection theme="light" {...pageData.experts_section} />
-        <ResourcesSection />
+        <ResourcesSection {...pageData.related_resources} />
         <FooterCTASection {...pageData.footer_cta_section} />
     </main>
   )

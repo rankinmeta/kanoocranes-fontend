@@ -1,14 +1,14 @@
 "use client";
 
-import Image from "next/image";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { useState } from "react";
 import { StrapiImage } from "@/components/common/strapi-image";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import { type MediaProps } from "@/type";
 
 interface Props {
-    images: string[];
+    images: MediaProps[];
 }
 
 export function ProductGallery({ images }: Props) {
@@ -22,12 +22,14 @@ export function ProductGallery({ images }: Props) {
         setActive((prev) => (prev === 0 ? images.length - 1 : prev - 1));
     };
 
+    if (images?.length === 0) return null;
+
     return (
         <div className="lg:sticky top-24 w-full flex flex-col aspect-square">
             <div className="relative bg-[#f5f5f5] flex-1 rounded-sm overflow-hidden">
                 <StrapiImage
-                    src={`http://localhost:3000${images[active]}`}
-                    alt=""
+                    src={images[active].url}
+                    alt={images[active].alternativeText || ""}
                     width={700}
                     height={500}
                     className="size-full object-contain"
@@ -59,12 +61,12 @@ export function ProductGallery({ images }: Props) {
                                 ? "border-primary"
                                 : "border-transparent"
                         )}
-                        key={image}
+                        key={image.id}
                         onClick={() => setActive(index)}
                     >
                         <StrapiImage
-                            src={`http://localhost:3000${image}`}
-                            alt=""
+                            src={image.url}
+                            alt={image.alternativeText || ""}
                             width={100}
                             height={80}
                             className="size-full object-cover"

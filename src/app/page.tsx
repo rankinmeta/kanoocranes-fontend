@@ -12,30 +12,23 @@ import OurSolutionsSection from "@/components/pages/home/our-solutions-section";
 import ResourcesSection from "@/components/pages/home/resources-section";
 import TestimonialSection from "@/components/pages/home/testimonial-section";
 import { getHomePage } from "@/data/loader";
+import { returnMetadata } from "@/lib/utils";
+import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 
-let homePageDataPromise: ReturnType<typeof getHomePage> | null = null;
-
-function getHomePageOnce() {
-    if (!homePageDataPromise) {
-        homePageDataPromise = getHomePage();
-    }
-    return homePageDataPromise;
-}
-
 async function loader() {
-    const pageData = await getHomePageOnce();
+    const pageData = await getHomePage();
     if (!pageData || !pageData.data) notFound();
     return {
         pageData: pageData.data,
     };
 }
 
-// export async function generateMetadata(): Promise<Metadata> {
-//     const { data } = await getHomePageOnce();
+export async function generateMetadata(): Promise<Metadata> {
+    const { data } = await getHomePage();
 
-//     return returnMetadata(data);
-// }
+    return returnMetadata(data);
+}
 
 export default async function Home() {
     const { pageData } = await loader();
@@ -48,16 +41,16 @@ export default async function Home() {
                 {...pageData.engineering_solution_section}
             />
             {/* <CraneSelectorSection /> */}
-            <OurSolutionsSection />
-            <FeaturedProjectsSection />
-            <GallerySection />
-            <FeaturedModelsSection />
-            <ExpertsSection />
-            <OurIndustriesSection />
-            <TestimonialSection />
-            <AboutUsSection />
-            <ResourcesSection />
-            <FooterCTASection />
+            <OurSolutionsSection {...pageData.our_solutions_section} />
+            <FeaturedProjectsSection {...pageData.featured_projects_section} />
+            <GallerySection {...pageData.gallery_section} />
+            <FeaturedModelsSection {...pageData.featured_models_section} />
+            <ExpertsSection {...pageData.experts_section} />
+            <OurIndustriesSection {...pageData.industries_section} />
+            <TestimonialSection  {...pageData.testimonial_section} />
+            <AboutUsSection {...pageData.about_section} />
+            <ResourcesSection {...pageData.related_resources} />
+            <FooterCTASection {...pageData.footer_cta_section} />
         </main>
     );
 }

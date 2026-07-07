@@ -6,8 +6,10 @@ import {
     CarouselPrevious,
 } from "@/components/ui/carousel";
 import ResourceCard from "../pages/resource-hub/resource-card";
+import { ResourceCardProps } from "@/type";
 
-export function ResourcesCarousel() {
+export function ResourcesCarousel({resources}: {resources: ResourceCardProps[]}) {
+    if(!resources) return null;
     return (
         <Carousel
             opts={{
@@ -17,9 +19,9 @@ export function ResourcesCarousel() {
             className="w-full mt-7"
         >
             <CarouselContent>
-                {Array.from({ length: 4 }).map((_, index) => (
-                    <CarouselItem key={index} className="basis-1/1 md:basis-1/3">
-                        <ResourceCard />
+                {resources.map((res) => (
+                    <CarouselItem key={res.id} className="basis-1/1 md:basis-1/3">
+                        <ResourceCard resource={res} />
                     </CarouselItem>
                 ))}
             </CarouselContent>

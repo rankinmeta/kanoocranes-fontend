@@ -61,7 +61,7 @@ const GallerySection = ({ images, tag_title }: GallerySectionProps) => {
               </div>
             )}
             {images[2] && (
-              <div className="rounded-md overflow-hidden">
+              <div className="rounded-md overflow-hidden size-full">
                 <ImageZoom className="relative size-full">
                   <StrapiImage
                     src={images[2].url}
@@ -73,7 +73,7 @@ const GallerySection = ({ images, tag_title }: GallerySectionProps) => {
               </div>
             )}
             {images[3] && (
-              <div className="rounded-md overflow-hidden">
+              <div className="rounded-md overflow-hidden size-full">
                 <ImageZoom className="relative size-full">
                   <StrapiImage
                     src={images[3].url}
@@ -85,7 +85,7 @@ const GallerySection = ({ images, tag_title }: GallerySectionProps) => {
               </div>
             )}
             {images[4] && (
-              <div className="rounded-md overflow-hidden col-span-2 aspect-video">
+              <div className="rounded-md overflow-hidden size-full aspect-video">
                 <ImageZoom className="relative size-full">
                   <StrapiImage
                     src={images[4].url}

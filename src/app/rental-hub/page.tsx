@@ -12,40 +12,59 @@ import Section2 from "@/components/pages/rental-hub/section2";
 import SiteSelectionSection from "@/components/pages/rental-hub/site-selection-section";
 import EngineeringSupportSection from "@/components/pages/sales-hub/engineering-support-section";
 import SalesCategorySection from "@/components/pages/sales-hub/sales-category-section";
+import { getRentalHubPage } from "@/data/loader";
+import { returnMetadata } from "@/lib/utils";
+import { type Metadata } from "next";
+import { notFound } from "next/navigation";
 
-const RentalHubPage = () => {
+let rentalHubPageDataPromise: ReturnType<typeof getRentalHubPage> | null = null;
+
+function getRentalHubPageOnce() {
+  if (!rentalHubPageDataPromise) {
+    rentalHubPageDataPromise = getRentalHubPage();
+  }
+  return rentalHubPageDataPromise;
+}
+
+async function loader() {
+  const pageData = await getRentalHubPageOnce();
+  if (!pageData || !pageData.data) notFound();
+  return {
+    pageData: pageData.data,
+  };
+}
+
+export async function generateMetadata(): Promise<Metadata> {
+  const { data } = await getRentalHubPageOnce();
+
+  return returnMetadata(data);
+}
+
+const RentalHubPage = async () => {
+    const { pageData } = await loader();
+
     return (
         <main>
             <HeroSection
-                title="Crane rental solutions for every project"
-                description="Reliable crane rental services backed by expert engineering support, modern equipment, and responsive service across construction, infrastructure, and industrial sectors."
-                button1={{
-                    id: 1,
-                    label: "Find your crane",
-                    href: "/",
-                    isExternal: false,
-                }}
-                button2={{
-                    id: 2,
-                    label: "Request a Quote",
-                    href: "/",
-                    isExternal: false,
-                }}
+                {...pageData.hero}
                 className="max-w-2xl"
             />
-            <Section2 />
-            <SalesCategorySection />
-            <SiteSelectionSection />
-            <FeaturedModelsSection />
-            <AccordionSection />
-            <EngineeringSupportSection />
-            <FeaturedProjectsSection />
-            <GallerySection />
-            <TestimonialSection />
-            <ExpertsSection />
-            <ResourcesSection />
-            <AboutUsSection />
-            <FooterCTASection />
+            <Section2
+                cards={pageData.why_rent_from_us_section.details}
+                {...pageData.why_rent_from_us_section}
+            />
+            <SalesCategorySection {...pageData.sales_category_section} />
+            <SiteSelectionSection {...pageData.site_selection_section} />
+            <FeaturedModelsSection {...pageData.featured_models_section} />
+            <AccordionSection {...pageData.rental_benefit_section} />
+            <EngineeringSupportSection {...pageData.engineering_support_section} />
+            <FeaturedProjectsSection {...pageData.featured_projects_section} />
+            <GallerySection {...pageData.gallery_section} />
+            <TestimonialSection {...pageData.testimonial_section} />
+            <ExpertsSection {...pageData.experts_section} />
+            <ResourcesSection {...pageData.related_resources} />
+            <AboutUsSection {...pageData.industry_expertise_section} />
+            <FooterCTASection {...pageData.footer_cta_section} />
         </main>
     );
 };

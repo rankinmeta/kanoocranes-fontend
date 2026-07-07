@@ -9,8 +9,30 @@ import {
     BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
 import { cn } from "@/lib/utils";
+import type { MediaProps } from "@/type";
 
-const ResourceHubHero = () => {
+type ResourceHubHeroProps = {
+    title: string;
+    description: string;
+    resource_type: {
+        id: number;
+        type: string;
+        slug: string;
+    };
+    reading_time: string;
+    resource_category: string;
+    image: MediaProps;
+};
+
+const ResourceHubHero = ({
+    description,
+    resource_type,
+    reading_time,
+    resource_category,
+    image,
+    title
+}: ResourceHubHeroProps) => {
+    if (!description || !resource_type || !image || !title) return null;
     return (
         <section className="bg-secondary relative z-60 -mt-26">
             <div className="container container-padding-x pt-28 pb-10 md:pb-24 flex flex-col-reverse md:flex-row justify-between items-center">
@@ -18,14 +40,10 @@ const ResourceHubHero = () => {
                     <BreadcrumbSection className="hidden md:block" />
 
                     <h1 className="text-3xl md:text-5xl font-manrope mt-6 md:mt-0">
-                        How to choose the right crane for your project
+                        {title}
                     </h1>
                     <p className="text-sm max-w-xl">
-                        Selecting the right crane is critical to ensuring safe,
-                        efficient, and cost-effective lifting operations.
-                        Understanding project requirements, site conditions, and
-                        load specifications can help identify the most suitable
-                        crane solution.
+                        {description}
                     </p>
 
                     <div className="mt-6 md:mt-12">
@@ -36,7 +54,7 @@ const ResourceHubHero = () => {
                                     <span>Resource Type</span>
                                 </div>
                                 <span className="text-sm text-[#A4A7AE]">
-                                    Guide
+                                    {resource_type.type}
                                 </span>
                             </li>
                             <li className="border-b md:border-b-0 md:border-r border-[#717680] md:mr-4 md:pr-4 py-4 md:py-0 w-full md:w-auto flex gap-1 md:flex-col justify-between items-center md:items-start">
@@ -45,7 +63,7 @@ const ResourceHubHero = () => {
                                     <span>Reading Time</span>
                                 </div>
                                 <span className="text-sm text-[#A4A7AE]">
-                                    5 Minutes
+                                    {reading_time}
                                 </span>
                             </li>
                             <li className="w-full md:w-auto flex gap-1 md:flex-col py-4 md:py-0 justify-between items-center md:items-start">
@@ -54,7 +72,7 @@ const ResourceHubHero = () => {
                                     <span>Category</span>
                                 </div>
                                 <span className="text-sm text-[#A4A7AE]">
-                                    Crane Selection
+                                    {resource_category}
                                 </span>
                             </li>
                         </ul>
@@ -62,8 +80,8 @@ const ResourceHubHero = () => {
                 </div>
 
                 <StrapiImage
-                    src="http://localhost:3000/local/construction.webp"
-                    alt="Construction"
+                    src={image.url}
+                    alt={image.alternativeText || ""}
                     width={400}
                     height={350}
                     className="rounded-md"

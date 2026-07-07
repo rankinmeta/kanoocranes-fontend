@@ -5,7 +5,7 @@ import Handshake from "@/components/icons/handshake";
 import Support from "@/components/icons/support";
 import Towing from "@/components/icons/towing";
 import Wire from "@/components/icons/wire";
-import { extractHighlightText } from "@/lib/utils";
+import { cn, extractHighlightText } from "@/lib/utils";
 import { type EngineeringSupportSectionProps } from "@/type";
 import { type ReactNode } from "react";
 
@@ -14,11 +14,13 @@ const EngineeringSupportSection = ({
   details,
   image,
   tag_title,
-}: EngineeringSupportSectionProps) => {
+  className,
+  cardStyles,
+}: EngineeringSupportSectionProps & { className?: string, cardStyles?: string }) => {
   if (!description || !details || !image || !tag_title) return null;
 
   return (
-    <section className="bg-[#F5F5F5]">
+    <section className={cn("bg-[#F5F5F5]", className)}>
       <div className="container container-padding-x py-10 md:py-16 lg:py-20 grid md:grid-cols-2 gap-5">
         <div className="flex flex-col space-y-3">
           <Tag>{tag_title.tag}</Tag>
@@ -38,10 +40,10 @@ const EngineeringSupportSection = ({
           />
 
           <div className="grid md:grid-cols-2 gap-3 mt-5 md:mt-10">
-            <Card icon={<Handshake />} title={details[0]?.label} />
-            <Card icon={<Towing />} title={details[1]?.label} />
-            <Card icon={<Wire />} title={details[2]?.label} />
-            <Card icon={<Support />} title={details[3]?.label} />
+            <Card cardStyles={cardStyles} icon={<Handshake />} title={details[0]?.label} />
+            <Card cardStyles={cardStyles} icon={<Towing />} title={details[1]?.label} />
+            <Card cardStyles={cardStyles} icon={<Wire />} title={details[2]?.label} />
+            <Card cardStyles={cardStyles} icon={<Support />} title={details[3]?.label} />
           </div>
         </div>
 
@@ -59,9 +61,9 @@ const EngineeringSupportSection = ({
 
 export default EngineeringSupportSection;
 
-function Card({ icon, title }: { icon: ReactNode; title: string }) {
+function Card({ icon, title, cardStyles }: { icon: ReactNode; title: string, cardStyles?: string }) {
   return (
-    <div className="flex md:flex-col gap-3 md:gap-2 bg-white rounded-md p-5">
+    <div className={cn("flex md:flex-col gap-3 md:gap-2 bg-white rounded-md p-5", cardStyles)}>
       {icon}
       <h5 className="font-manrope font-medium">{title}</h5>
     </div>
