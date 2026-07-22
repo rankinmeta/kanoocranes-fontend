@@ -73,7 +73,7 @@ const FeaturedProjectsSection = ({
 						}}
 					>
 						{projects.map((d, i) => (
-							<div className="w-full shrink-0 bg-red-500 md:pr-4" key={i}>
+							<div className="w-full shrink-0 md:pr-4" key={i}>
 								<Card active={d} />
 							</div>
 						))}
