@@ -17,17 +17,8 @@ import { returnMetadata } from "@/lib/utils";
 import { type Metadata } from "next";
 import { notFound } from "next/navigation";
 
-let rentalHubPageDataPromise: ReturnType<typeof getRentalHubPage> | null = null;
-
-function getRentalHubPageOnce() {
-  if (!rentalHubPageDataPromise) {
-    rentalHubPageDataPromise = getRentalHubPage();
-  }
-  return rentalHubPageDataPromise;
-}
-
 async function loader() {
-  const pageData = await getRentalHubPageOnce();
+  const pageData = await getRentalHubPage();
   if (!pageData || !pageData.data) notFound();
   return {
     pageData: pageData.data,
@@ -35,7 +26,7 @@ async function loader() {
 }
 
 export async function generateMetadata(): Promise<Metadata> {
-  const { data } = await getRentalHubPageOnce();
+  const { data } = await getRentalHubPage();
 
   return returnMetadata(data);
 }

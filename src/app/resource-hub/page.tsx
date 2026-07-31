@@ -6,19 +6,9 @@ import { returnMetadata } from "@/lib/utils";
 import { type Metadata } from "next";
 import { notFound } from "next/navigation";
 
-let resourceHubPageDataPromise: ReturnType<typeof getResourceHubPage> | null =
-  null;
-
-function getResourceHubPageOnce() {
-  if (!resourceHubPageDataPromise) {
-    resourceHubPageDataPromise = getResourceHubPage();
-  }
-  return resourceHubPageDataPromise;
-}
-
 async function loader() {
   const [pageData, resources, resourceTypes] = await Promise.all([
-    getResourceHubPageOnce(),
+    getResourceHubPage(),
     getAllResources(),
     getResourceTypes()
   ]);
@@ -31,7 +21,7 @@ async function loader() {
 }
 
 export async function generateMetadata(): Promise<Metadata> {
-  const { data } = await getResourceHubPageOnce();
+  const { data } = await getResourceHubPage();
 
   return returnMetadata(data);
 }

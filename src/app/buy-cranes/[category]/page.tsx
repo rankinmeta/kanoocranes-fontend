@@ -27,21 +27,10 @@ export async function generateStaticParams() {
   return [];
 }
 
-let csPageDataPromise: ReturnType<typeof getCSPage> | null = null;
-let categoryCache: string | null = null;
-
-function getCSPageOnce(category: string) {
-  if (!csPageDataPromise || categoryCache !== category) {
-    csPageDataPromise = getCSPage(category);
-    categoryCache = category;
-  }
-  return csPageDataPromise;
-}
-
 async function loader(category: string) {
   const [pageData, craneTypes, projectTypes, manufacturers] = await Promise.all(
     [
-      getCSPageOnce(category),
+      getCSPage(category),
       getCraneTypes(),
       getProjectTypes(),
       getManufacturers(),
@@ -62,7 +51,7 @@ export async function generateMetadata({
   params: Promise<{ category: string }>;
 }): Promise<Metadata> {
   const { category } = await params;
-  const { data } = await getCSPageOnce(category);
+  const { data } = await getCSPage(category);
 
   return returnMetadata(data);
 }

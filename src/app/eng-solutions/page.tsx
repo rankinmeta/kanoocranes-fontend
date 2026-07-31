@@ -17,17 +17,8 @@ import { returnMetadata } from "@/lib/utils";
 import { type Metadata } from "next";
 import { notFound } from "next/navigation";
 
-let engSolutionsPageDataPromise: ReturnType<typeof getEngSolutionsPage> | null = null;
-
-function getEngSolutionsPageOnce() {
-    if (!engSolutionsPageDataPromise) {
-        engSolutionsPageDataPromise = getEngSolutionsPage();
-    }
-    return engSolutionsPageDataPromise;
-}
-
 async function loader() {
-    const pageData = await getEngSolutionsPageOnce();
+    const pageData = await getEngSolutionsPage();
     if (!pageData || !pageData.data) notFound();
     return {
         pageData: pageData.data,
@@ -35,7 +26,7 @@ async function loader() {
 }
 
 export async function generateMetadata(): Promise<Metadata> {
-    const { data } = await getEngSolutionsPageOnce();
+    const { data } = await getEngSolutionsPage();
 
     return returnMetadata(data);
 }

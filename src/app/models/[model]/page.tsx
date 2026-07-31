@@ -28,21 +28,10 @@ import { returnMetadata } from "@/lib/utils";
 
 export async function generateStaticParams() {
     return [];
-  }
-
-let modelPageDataPromise: ReturnType<typeof getModelPage> | null = null;
-let modelCache: string | null = null;
-
-function getModelPageOnce(model: string) {
-  if (!modelPageDataPromise || modelCache !== model) {
-    modelPageDataPromise = getModelPage(model);
-    modelCache = model;
-  }
-  return modelPageDataPromise;
 }
 
 async function loader(model: string) {
-  const pageData = await getModelPageOnce(model);
+  const pageData = await getModelPage(model);
   if (!pageData || !pageData.data) notFound();
   return {
     pageData: pageData.data,
@@ -55,7 +44,7 @@ export async function generateMetadata({
     params: Promise<{ model: string }>;
   }): Promise<Metadata> {
     const { model } = await params;
-    const { data } = await getModelPageOnce(model);
+    const { data } = await getModelPage(model);
   
     return returnMetadata(data);
   }

@@ -26,7 +26,6 @@ export function returnMetadata(data: { seo: SeoMetadata }) {
         title: data.seo?.metaTitle || "Kanoo Cranes",
         description: data.seo?.metaDescription || "",
         keywords: data.seo?.metaKeywords || "",
-        robots: data.seo?.metaRobots || "",
         alternates: {
             canonical: data.seo?.canonicalUrl || "",
         },
@@ -42,6 +41,11 @@ export function returnMetadata(data: { seo: SeoMetadata }) {
         },
         other: {
             "color-scheme": "light",
+        },
+        // robots: data.seo?.metaRobots || "",
+        robots: {
+            index: false,
+            follow: false, // Set to false if you also want "nofollow"
         },
     };
 }

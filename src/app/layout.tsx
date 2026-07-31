@@ -19,6 +19,10 @@ const manrope = Manrope({
 export const metadata: Metadata = {
   title: "Kanoocranes Tower crane rental company in the UAE and the middle east",
   description: "Kanoocranes Tower crane rental company in the UAE and the middle east. We are the provide of Tower cranes in the middle east region.",
+  robots: {
+    index: false,
+    follow: false
+  },
 };
 
 async function loader() {

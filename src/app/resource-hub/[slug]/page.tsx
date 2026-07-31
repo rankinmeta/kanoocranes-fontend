@@ -11,21 +11,8 @@ export async function generateStaticParams() {
   return [];
 }
 
-let resourceHubDetailsPageDataPromise: ReturnType<
-  typeof getResourceHubDetailsPage
-> | null = null;
-let slugCache: string | null = null;
-
-function getResourceHubDetailsPageOnce(slug: string) {
-  if (!resourceHubDetailsPageDataPromise || slugCache !== slug) {
-    resourceHubDetailsPageDataPromise = getResourceHubDetailsPage(slug);
-    slugCache = slug;
-  }
-  return resourceHubDetailsPageDataPromise;
-}
-
 async function loader(slug: string) {
-  const pageData = await getResourceHubDetailsPageOnce(slug);
+  const pageData = await getResourceHubDetailsPage(slug);
   if (!pageData || !pageData.data) notFound();
   return {
     pageData: pageData.data,
@@ -38,7 +25,7 @@ export async function generateMetadata({
   params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
   const { slug } = await params;
-  const { data } = await getResourceHubDetailsPageOnce(slug);
+  const { data } = await getResourceHubDetailsPage(slug);
 
   return returnMetadata(data);
 }

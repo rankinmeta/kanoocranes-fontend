@@ -38,7 +38,7 @@ export async function POST(request: NextRequest) {
 	if (Object.keys(StaticModelMap).includes(body.model)) {
 		// Revalidate the specific blog path
 		const path = StaticModelMap[body.model as keyof typeof StaticModelMap];
-		revalidatePath("/" + path);
+		revalidatePath(path);
 		console.log("Revalidated " + path);
 	} else if (Object.keys(DynamicModelMap).includes(body.model)) {
 		// Revalidate the specific path
@@ -47,7 +47,7 @@ export async function POST(request: NextRequest) {
 			body.entry.slug;
 
 		if (body.entry.slug) {
-			revalidatePath("/" + path);
+			revalidatePath(path);
 		}
 
 		revalidateTag("sitemap", "max"); // Revalidate sitemap after every resource/model/category update or creation

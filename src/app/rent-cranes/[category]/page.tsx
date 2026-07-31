@@ -24,23 +24,12 @@ import { notFound } from "next/navigation";
 
 export async function generateStaticParams() {
 	return [];
-  }
-
-let rsPageDataPromise: ReturnType<typeof getRSPage> | null = null;
-let categoryCache: string | null = null;
-
-function getRSPageOnce(category: string) {
-	if (!rsPageDataPromise || categoryCache !== category) {
-		rsPageDataPromise = getRSPage(category);
-		categoryCache = category;
-	}
-	return rsPageDataPromise;
 }
 
 async function loader(category: string) {
 	const [pageData, craneTypes, projectTypes, manufacturers] =
 		await Promise.all([
-			getRSPageOnce(category),
+			getRSPage(category),
 			getCraneTypes(),
 			getProjectTypes(),
 			getManufacturers(),
@@ -60,7 +49,7 @@ export async function generateMetadata({
 	params: Promise<{ category: string }>;
   }): Promise<Metadata> {
 	const { category } = await params;
-	const { data } = await getRSPageOnce(category);
+	const { data } = await getRSPage(category);
   
 	return returnMetadata(data);
   }

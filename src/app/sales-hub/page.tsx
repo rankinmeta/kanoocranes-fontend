@@ -18,17 +18,8 @@ import { returnMetadata } from "@/lib/utils";
 import { type Metadata } from "next";
 import { notFound } from "next/navigation";
 
-let salesHubPageDataPromise: ReturnType<typeof getSalesHubPage> | null = null;
-
-function getSalesHubPageOnce() {
-  if (!salesHubPageDataPromise) {
-    salesHubPageDataPromise = getSalesHubPage();
-  }
-  return salesHubPageDataPromise;
-}
-
 async function loader() {
-  const pageData = await getSalesHubPageOnce();
+  const pageData = await getSalesHubPage();
   if (!pageData || !pageData.data) notFound();
   return {
     pageData: pageData.data,
@@ -36,7 +27,7 @@ async function loader() {
 }
 
 export async function generateMetadata(): Promise<Metadata> {
-  const { data } = await getSalesHubPageOnce();
+  const { data } = await getSalesHubPage();
 
   return returnMetadata(data);
 }
