@@ -5,6 +5,7 @@ import FeaturedModelsSection from "@/components/pages/home/featured-models-secti
 import FeaturedProjectsSection from "@/components/pages/home/featured-projects-section";
 import FooterCTASection from "@/components/pages/home/footer-cta-section";
 import GallerySection from "@/components/pages/home/gallery-section";
+import RecommendedCraneSection from "@/components/pages/home/recommended-crane-section";
 import ResourcesSection from "@/components/pages/home/resources-section";
 import TestimonialSection from "@/components/pages/home/testimonial-section";
 import AccordionSection from "@/components/pages/rental-hub/accordion-section";
@@ -32,32 +33,32 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 const RentalHubPage = async () => {
-    const { pageData } = await loader();
+  const { pageData } = await loader();
 
-    return (
-        <main>
-            <HeroSection
-                {...pageData.hero}
-                className="max-w-2xl"
-            />
-            <Section2
-                cards={pageData.why_rent_from_us_section.details}
-                {...pageData.why_rent_from_us_section}
-            />
-            <SalesCategorySection {...pageData.sales_category_section} />
-            <SiteSelectionSection {...pageData.site_selection_section} />
-            <FeaturedModelsSection {...pageData.featured_models_section} />
-            <AccordionSection {...pageData.rental_benefit_section} />
-            <EngineeringSupportSection {...pageData.engineering_support_section} />
-            <FeaturedProjectsSection {...pageData.featured_projects_section} />
-            <GallerySection {...pageData.gallery_section} />
-            <TestimonialSection {...pageData.testimonial_section} />
-            <ExpertsSection {...pageData.experts_section} />
-            <ResourcesSection {...pageData.related_resources} />
-            <AboutUsSection {...pageData.industry_expertise_section} />
-            <FooterCTASection {...pageData.footer_cta_section} />
-        </main>
-    );
+  return (
+    <main>
+      <HeroSection {...pageData.hero} className="max-w-2xl" />
+      <section className="container container-padding-x py-10 md:py-20 lg:py-20">
+        <RecommendedCraneSection {...pageData.recommended_cranes} />
+      </section>
+      <Section2
+        cards={pageData.why_rent_from_us_section.details}
+        {...pageData.why_rent_from_us_section}
+      />
+      <SalesCategorySection {...pageData.sales_category_section} />
+      <SiteSelectionSection {...pageData.site_selection_section} />
+      <FeaturedModelsSection {...pageData.featured_models_section} />
+      <AccordionSection {...pageData.rental_benefit_section} />
+      <EngineeringSupportSection {...pageData.engineering_support_section} />
+      <FeaturedProjectsSection {...pageData.featured_projects_section} />
+      <GallerySection {...pageData.gallery_section} />
+      <TestimonialSection {...pageData.testimonial_section} />
+      <ExpertsSection {...pageData.experts_section} />
+      <ResourcesSection {...pageData.related_resources} />
+      <AboutUsSection {...pageData.industry_expertise_section} />
+      <FooterCTASection {...pageData.footer_cta_section} />
+    </main>
+  );
 };
 
 export default RentalHubPage;

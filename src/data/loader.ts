@@ -147,10 +147,30 @@ export async function getModelPage(model: string) {
 	});
 }
 
+export async function getAllBuyCranes() {
+	const path = `/api/category-sales`;
+	const url = new URL(path, BASE_URL);
+	url.search = getAll;
+	return fetchAPI(url.href, {
+		method: "GET",
+		authToken: process.env.STRAPI_API_TOKEN,
+	});
+}
+
 export async function getCSPage(category: string) {
 	const path = `/api/category-sales/${category}`;
 	const url = new URL(path, BASE_URL);
 	url.search = categorySalesPageQuery;
+	return fetchAPI(url.href, {
+		method: "GET",
+		authToken: process.env.STRAPI_API_TOKEN,
+	});
+}
+
+export async function getAllRentCranes() {
+	const path = `/api/category-rentals`;
+	const url = new URL(path, BASE_URL);
+	url.search = getAll;
 	return fetchAPI(url.href, {
 		method: "GET",
 		authToken: process.env.STRAPI_API_TOKEN,

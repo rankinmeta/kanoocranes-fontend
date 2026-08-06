@@ -111,9 +111,9 @@ const ModalPage = async ({
             <StickyCardsOneSideSection {...pageData.technical_application} />
             <Section2Rental className="bg-white" {...pageData.safety_and_compliance} />
             <DownloadsSection {...pageData.downloads_section} />
-            <RelatedModels />
+            <RelatedModels {...pageData.related_model_section} />
             <SiteSelectionSection {...pageData.applications_section} />
-            <ProjectsSection />
+            <ProjectsSection {...pageData.projects_section} />
             <GallerySection {...pageData.gallery_section} />
             <TestimonialSection {...pageData.testimonial_section} />
             <FooterCTASection {...pageData.footer_cta_section} />

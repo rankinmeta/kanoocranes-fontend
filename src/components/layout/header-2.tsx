@@ -1,19 +1,33 @@
+"use client"
+
 import Link from "next/link";
 import { StrapiImage } from "../common/strapi-image";
 import { ChevronRight } from "lucide-react";
 import { Button } from "../ui/button";
-import { ReactNode } from "react";
+import { type ReactNode, useState } from "react";
 import { cn } from "@/lib/utils";
 import MenuSheet from "../sheets/menu-sheet";
 import type { MediaProps } from "@/type";
+
+type SubItem = {
+  id: number;
+  documentId: string;
+  category: string;
+  slug: string;
+};
 
 type HeaderProps = {
   id: number;
   logo_color: MediaProps;
   button: string;
+  rentCranes: SubItem[];
+  buyCranes: SubItem[];
 };
 
-const Header2 = ({ button, logo_color }: HeaderProps) => {
+const Header2 = ({ button, logo_color, buyCranes, rentCranes }: HeaderProps) => {
+  const [buyOpen, setBuyOpen] = useState(false);
+  const [rentOpen, setRentOpen] = useState(false);
+
   return (
     <header
       className="sticky bg-white top-0 left-0 right-0 z-50"
@@ -37,11 +51,51 @@ const Header2 = ({ button, logo_color }: HeaderProps) => {
           <li className="flex-1">
             <GlassLink href="/eng-solutions">Solutions</GlassLink>
           </li>
-          <li className="flex-1">
-            <GlassLink href="/rental-hub">Rent cranes</GlassLink>
+          <li
+            onMouseEnter={() => setRentOpen(true)}
+            onMouseLeave={() => setRentOpen(false)}
+            className="relative group"
+          >
+            <div className="flex items-center gap-1 cursor-pointer">
+              <GlassLink href="/rental-hub">Rent cranes</GlassLink>
+            </div>
+
+            {rentOpen && (
+              <div className="absolute left-0 top-full z-50 w-48 bg-white shadow-lg rounded-md p-1">
+                {rentCranes?.map((rentCrane) => (
+                  <Link
+                    href={"/rent-cranes/" + rentCrane.slug}
+                    key={rentCrane.documentId}
+                    className="block px-2 py-1.5 hover:bg-gray-100 rounded text-black text-xs"
+                  >
+                    {rentCrane.category}
+                  </Link>
+                ))}
+              </div>
+            )}
           </li>
-          <li className="flex-1">
-            <GlassLink href="/sales-hub">Buy cranes</GlassLink>
+          <li
+            onMouseEnter={() => setBuyOpen(true)}
+            onMouseLeave={() => setBuyOpen(false)}
+            className="relative group"
+          >
+            <div className="flex items-center gap-1 cursor-pointer">
+              <GlassLink href="/sales-hub">Buy cranes</GlassLink>
+            </div>
+
+            {buyOpen && (
+              <div className="absolute left-0 top-full z-50 w-48 bg-white shadow-lg rounded-md p-1">
+                {buyCranes?.map((buyCrane) => (
+                  <Link
+                    href={"/sales-hub/" + buyCrane.slug}
+                    key={buyCrane.documentId}
+                    className="block px-2 py-1.5 hover:bg-gray-100 rounded text-black text-xs"
+                  >
+                    {buyCrane.category}
+                  </Link>
+                ))}
+              </div>
+            )}
           </li>
           {/* <li className="flex-1">
             <GlassLink href="/rental">Rental</GlassLink>

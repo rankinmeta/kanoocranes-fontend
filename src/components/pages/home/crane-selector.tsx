@@ -56,7 +56,7 @@ const CraneSelector = () => {
                 </div>
             </div>
 
-            <RecommendedCraneSection />
+            {/* <RecommendedCraneSection /> */}
         </>
     );
 };

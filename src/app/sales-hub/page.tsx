@@ -6,6 +6,7 @@ import FeaturedModelsSection from "@/components/pages/home/featured-models-secti
 import FooterCTASection from "@/components/pages/home/footer-cta-section";
 import GallerySection from "@/components/pages/home/gallery-section";
 import OurIndustriesSection from "@/components/pages/home/our-industries-section";
+import RecommendedCraneSection from "@/components/pages/home/recommended-crane-section";
 import ResourcesSection from "@/components/pages/home/resources-section";
 import TestimonialSection from "@/components/pages/home/testimonial-section";
 import BuyingGuideSection from "@/components/pages/sales-hub/buying-guide-section";
@@ -38,6 +39,9 @@ const SalesHubPage = async () => {
   return (
     <main>
       <HeroSection {...pageData.hero} className="max-w-2xl" />
+      <section className="container container-padding-x py-10 md:py-20 lg:py-20">
+        <RecommendedCraneSection {...pageData.recommended_cranes} />
+      </section>
       <Section2 {...pageData.why_buy_from_us_section} />
       <SalesCategorySection {...pageData.sales_category_section} />
       <BrandsSection {...pageData.brands_section} />

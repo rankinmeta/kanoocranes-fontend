@@ -671,6 +671,28 @@ export const salesHubPageQuery = qs.stringify({
 				button2: true,
 			},
 		},
+		recommended_cranes: {
+			populate: {
+				models: {
+					populate: {
+						crane_type: {
+							fields: ["type", "slug"],
+						},
+						main_section: {
+							fields: [
+								"model_short_name",
+								"best_for"
+							],
+							populate: {
+								images: {
+									fields: ["url", "alternativeText"],
+								},
+							},
+						},
+					},
+				}
+			}
+		},
 		why_buy_from_us_section: {
 			populate: {
 				tag_title: true,
@@ -838,6 +860,28 @@ export const rentalHubPageQuery = qs.stringify({
 				button1: true,
 				button2: true,
 			},
+		},
+		recommended_cranes: {
+			populate: {
+				models: {
+					populate: {
+						crane_type: {
+							fields: ["type", "slug"],
+						},
+						main_section: {
+							fields: [
+								"model_short_name",
+								"best_for"
+							],
+							populate: {
+								images: {
+									fields: ["url", "alternativeText"],
+								},
+							},
+						},
+					},
+				}
+			}
 		},
 		why_rent_from_us_section: {
 			populate: {
@@ -1057,6 +1101,24 @@ export const modelPageQuery = qs.stringify({
 		related_model_section: {
 			populate: {
 				tag_title: true,
+				models: {
+					populate: {
+						main_section: {
+							fields: [
+								"model_short_name",
+								"crane_capacity",
+								"max_working_radius",
+								"max_lifting_height",
+								"listingType",
+							],
+							populate: {
+								images: {
+									fields: ["url", "alternativeText"],
+								},
+							},
+						},
+					},
+				},
 			},
 		},
 		applications_section: {

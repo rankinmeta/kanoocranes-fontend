@@ -14,7 +14,7 @@ export function buildCraneQuery(filters: FilterState) {
 			pagination: {
 				pageSize: 100,
 			},
-			fields: ["model_name", "slug"],
+			fields: ["model_name", "model_slug"],
 			populate: {
 				main_section: {
 					fields: [

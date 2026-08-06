@@ -17,7 +17,7 @@ const nextConfig: NextConfig = {
                 hostname: "admin.kanoocranes.com"
             }
         ],
-        // dangerouslyAllowLocalIP: true,
+        dangerouslyAllowLocalIP: true,
     },
 };
 
