@@ -15,8 +15,9 @@ const StaticModelMap = {
 
 const DynamicModelMap = {
 	model: "/models/",
-	"category-rental": "/rent-cranes/[category]",
-	"category-sale": "/buy-cranes/[category]",
+	"category-rental": "/rent-cranes/",
+	"category-sale": "/buy-cranes/",
+	resource: "/resources/",
 };
 
 export async function POST(request: NextRequest) {
@@ -43,15 +44,15 @@ export async function POST(request: NextRequest) {
 	} else if (Object.keys(DynamicModelMap).includes(body.model)) {
 		// Revalidate the specific path
 		const path =
-			DynamicModelMap[body.model as keyof typeof DynamicModelMap] +
-			body.entry.slug;
+			DynamicModelMap[body.model as keyof typeof DynamicModelMap] + (body.entry.slug ?? body.entry.model_slug ?? body.entry.category ?? "");
 
-		if (body.entry.slug) {
+		if (body.entry.slug || body.entry.model_slug || body.entry.category) {
 			revalidatePath(path);
+			revalidateTag("sitemap", "max"); // Revalidate sitemap after every resource/model/category update or creation
+			console.log("Revalidated " + path);
+		} else {
+			console.log("Not Revalidated any path");
 		}
-
-		revalidateTag("sitemap", "max"); // Revalidate sitemap after every resource/model/category update or creation
-		console.log("Revalidated " + path);
 	} else if (
 		body.model === "global" ||
 		body.model === "manufacturer" ||

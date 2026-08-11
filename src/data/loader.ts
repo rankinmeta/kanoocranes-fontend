@@ -143,7 +143,7 @@ export async function getModelPage(model: string) {
 	url.search = modelPageQuery;
 	return fetchAPI(url.href, {
 		method: "GET",
-		authToken: process.env.STRAPI_API_TOKEN,
+		authToken: process.env.STRAPI_API_TOKEN
 	});
 }
 

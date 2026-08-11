@@ -87,7 +87,7 @@ const Header2 = ({ button, logo_color, buyCranes, rentCranes }: HeaderProps) => 
               <div className="absolute left-0 top-full z-50 w-48 bg-white shadow-lg rounded-md p-1">
                 {buyCranes?.map((buyCrane) => (
                   <Link
-                    href={"/sales-hub/" + buyCrane.slug}
+                    href={"/buy-cranes/" + buyCrane.slug}
                     key={buyCrane.documentId}
                     className="block px-2 py-1.5 hover:bg-gray-100 rounded text-black text-xs"
                   >
@@ -109,7 +109,9 @@ const Header2 = ({ button, logo_color, buyCranes, rentCranes }: HeaderProps) => 
                 Contact Us
               </Button>
             </Link>
-            <Button className="px-4 py-2 text-xs h-fit">{button}</Button>
+            <Link href="/contact-us">
+              <Button className="px-4 py-2 text-xs h-fit">{button}</Button>
+            </Link>
           </li>
         </ul>
 

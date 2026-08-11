@@ -1,7 +1,11 @@
+"use client";
+
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { LinkProps } from "@/type";
 import Link from "next/link";
+import gsap from "gsap";
+import { ScrollToPlugin } from "gsap/ScrollToPlugin";
 
 type HeroSectionProps = {
     title: string;
@@ -11,6 +15,8 @@ type HeroSectionProps = {
     button2?: LinkProps;
     className?: string;
 };
+
+gsap.registerPlugin(ScrollToPlugin);
 
 const HeroSection = ({
     title,
@@ -28,22 +34,26 @@ const HeroSection = ({
 
                     {(button1 || button2) && (<div className="flex flex-col md:flex-row gap-3 mt-10 md:mt-6">
                         {button1 && (
-                            <Link
-                                href={button1.href}
-                                target={button1.isExternal ? "_blank" : "_self"}
-                            >
-                                <Button className="w-full md:w-auto">{button1.label}</Button>
-                            </Link>
+                            // <Link
+                            //     href={button1.href}
+                            //     target={button1.isExternal ? "_blank" : "_self"}
+                            // >
+                                <Button onClick={() => {
+                                    gsap.to(window, { duration: 1, scrollTo: "#form" });
+                                }} className="w-full md:w-auto">{button1.label}</Button>
+                            // </Link>
                         )}
                         {button2 && (
-                            <Link
-                                href={button2.href}
-                                target={button2.isExternal ? "_blank" : "_self"}
-                            >
-                                <Button className="bg-white text-primary hover:text-white w-full md:w-auto">
+                            // <Link
+                            //     href={button2.href}
+                            //     target={button2.isExternal ? "_blank" : "_self"}
+                            // >
+                                <Button onClick={() => {
+                                    gsap.to(window, { duration: 1, scrollTo: "#form" });
+                                }} className="bg-white text-primary hover:text-white w-full md:w-auto">
                                     {button2.label}
                                 </Button>
-                            </Link>
+                            // </Link>
                         )}
                     </div>)}
                 </div>

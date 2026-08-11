@@ -3,6 +3,7 @@ import { StrapiImage } from "@/components/common/strapi-image";
 import { extractHighlightText } from "@/lib/utils";
 import type { MediaProps } from "@/type";
 import Link from "next/link";
+import React from "react";
 
 type RecommendedCraneSectionProps = {
   title: string;
@@ -25,7 +26,7 @@ const RecommendedCraneSection = ({
   title,
   models,
 }: RecommendedCraneSectionProps) => {
-    if(!title || !models || models.length === 0) return null;
+  if (!title || !models || models.length === 0) return null;
   return (
     <div>
       <HighlightedTitle
@@ -34,9 +35,9 @@ const RecommendedCraneSection = ({
         className="md:text-3xl"
       />
 
-      <div className="grid grid-cols-4 gap-3">
+      <div className="flex w-full md:grid grid-cols-2 lg:grid-cols-4 gap-5 overflow-x-scroll scrollbar-none">
         {models.map((model) => (
-          <Card {...model} />
+          <Card {...model} key={model.id} />
         ))}
       </div>
     </div>
@@ -51,7 +52,7 @@ function Card({
   crane_type,
 }: RecommendedCraneSectionProps["models"][number]) {
   return (
-    <div className="mt-10">
+    <div className="mt-7 md:mt-10 shrink-0 w-[80%] md:w-auto">
       <Link href={`/models/${model_slug}`} target="_blank">
         <div className="bg-[#F5F5F5] rounded-md flex items-center justify-center p-5 overflow-hidden">
           <StrapiImage

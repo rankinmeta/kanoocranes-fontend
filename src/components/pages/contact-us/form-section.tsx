@@ -24,7 +24,7 @@ type FormSectionProps = {
 
 const FormSection = (props: FormSectionProps) => {
   return (
-    <section className="bg-[#F5F5F5]">
+    <section className="bg-[#F5F5F5]" id="form">
       <div className="container container-padding-x py-10 md:py-16 lg:py-20 grid md:grid-cols-2 lg:grid-cols-5 gap-5">
         <div className="max-w-104 space-y-3 lg:col-span-2">
           <HighlightedTitle
