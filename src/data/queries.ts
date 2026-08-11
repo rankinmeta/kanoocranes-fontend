@@ -1197,9 +1197,27 @@ export const categorySalesPageQuery = qs.stringify({
 				button2: true,
 			},
 		},
-		filter_section: {
+		cranes_section: {
 			populate: {
 				tag_title: true,
+				models: {
+					populate: {
+						main_section: {
+							fields: [
+								"model_short_name",
+								"crane_capacity",
+								"max_working_radius",
+								"max_lifting_height",
+								"listingType",
+							],
+							populate: {
+								images: {
+									fields: ["url", "alternativeText"],
+								},
+							},
+						},
+					},
+				},
 			},
 		},
 		info_section: {
@@ -1356,9 +1374,27 @@ export const categoryRentalPageQuery = qs.stringify({
 				button2: true,
 			},
 		},
-		filter_section: {
+		cranes_section: {
 			populate: {
 				tag_title: true,
+				models: {
+					populate: {
+						main_section: {
+							fields: [
+								"model_short_name",
+								"crane_capacity",
+								"max_working_radius",
+								"max_lifting_height",
+								"listingType",
+							],
+							populate: {
+								images: {
+									fields: ["url", "alternativeText"],
+								},
+							},
+						},
+					},
+				},
 			},
 		},
 		info_section: {
