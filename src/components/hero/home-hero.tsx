@@ -143,13 +143,9 @@ const HomeHero = ({ hero }: Readonly<{ hero: HomeHeroProps }>) => {
       </Carousel>
       <div className="absolute inset-0 flex flex-col lg:flex-row lg:items-end justify-end lg:justify-start gap-10 lg:gap-0 container container-padding-x py-14">
         <div className="max-w-xl space-y-3">
-          <h1 className="text-[42px] font-manrope leading-12">
-            Engineering crane solutions for industrial & rentals
-          </h1>
+          <h1 className="text-[42px] font-manrope leading-12">{hero.title}</h1>
           <p className="font-inter text-sm tracking-[-1%] leading-5">
-            Trusted by industries across the region, Kanoo Cranes delivers
-            high-performance lifting solutions backed by engineering expertise,
-            fast deployment, and reliable rental support.
+            {hero.description}
           </p>
 
           <div className="space-x-3 mt-8">
