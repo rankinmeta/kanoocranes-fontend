@@ -17,7 +17,7 @@ const DynamicModelMap = {
   model: "/models/",
   "category-rental": "/rent-cranes/",
   "category-sale": "/buy-cranes/",
-  resource: "/resources/",
+  resource: "/resource-hub/",
 };
 
 export async function POST(request: NextRequest) {
@@ -53,8 +53,8 @@ export async function POST(request: NextRequest) {
         revalidatePath("/models");
         console.log("Revalidated /models");
       } else if (body.model === "resource") {
-        revalidatePath("/resources");
-        console.log("Revalidated /resources");
+        revalidatePath("/resource-hub");
+        console.log("Revalidated /resource-hub");
       }
       revalidateTag("sitemap", "max"); // Revalidate sitemap after every resource/model/category update or creation
       console.log("Revalidated " + path);
