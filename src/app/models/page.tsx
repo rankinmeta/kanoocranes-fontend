@@ -52,7 +52,7 @@ function Card({
 
 	return (
 		<div className="w-[80%] md:w-auto shrink-0 mt-10 pb-1">
-			<div className="bg-[#F5F5F5] rounded-md flex items-center justify-center p-5 overflow-hidden">
+			<div className="bg-[#F5F5F5] aspect-[1/0.7] rounded-md flex items-center justify-center p-5 overflow-hidden">
 				{main_section.images[0] && (
 					<StrapiImage
 						src={main_section.images[0].url}
