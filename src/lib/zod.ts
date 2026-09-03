@@ -25,3 +25,7 @@ export const contactUsSchema = z.object({
     .max(32, "Crane requirement must be at most 32 characters."),
   message: z.string().max(1000, "Message must be at most 1000 characters."),
 });
+
+export const subscribeSchema = z.object({
+  email: z.email("Email is invalid."),
+});

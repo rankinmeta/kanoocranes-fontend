@@ -1,8 +1,6 @@
 "use client";
 
 import Link from "next/link";
-import { Button } from "../ui/button";
-import { Input } from "../ui/input";
 import { StrapiImage } from "../common/strapi-image";
 import {
   Accordion,
@@ -13,6 +11,7 @@ import {
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
 import { MediaProps } from "@/type";
+import SubscribeForm from "./subscribe-form";
 
 type FooterProps = {
   socials: {
@@ -89,15 +88,7 @@ const Footer = ({
             Get our latest offers and news straight in your inbox
           </p>
 
-          <div className="flex items-center gap-1 pt-5">
-            <Input
-              placeholder="Enter your email ID"
-              className="bg-white h-9.5 rounded-sm placeholder:text-sm border-none"
-            />
-            <Button className="bg-white text-primary hover:bg-white/90 hover:text-primary">
-              Subscribe
-            </Button>
-          </div>
+          <SubscribeForm />
 
           <div className="pt-10">
             <span>Follow us on</span>

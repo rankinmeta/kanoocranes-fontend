@@ -15,7 +15,7 @@ import HighlightedTitle from "@/components/common/highlight-title";
 import { extractHighlightText } from "@/lib/utils";
 import { useState } from "react";
 import { contactUsSchema } from "@/lib/zod";
-import { submitContactUsForm } from "@/data/loader";
+import { contactFormAction } from "@/actions/contact-form-action";
 
 const ContactForm = ({ defaultCrane = "" }: { defaultCrane?: string }) => {
   const [loading, setLoading] = useState(false);
@@ -36,7 +36,7 @@ const ContactForm = ({ defaultCrane = "" }: { defaultCrane?: string }) => {
     onSubmit: async ({ value }) => {
       try {
         setLoading(true);
-        const response = await submitContactUsForm(value);
+        const response = await contactFormAction(value);
         if (response.data) {
           toast.success("Message sent successfully!");
           form.reset();

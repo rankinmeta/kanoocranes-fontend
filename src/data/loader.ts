@@ -19,7 +19,7 @@ import {
   resourceTypesQuery,
   salesHubPageQuery,
 } from "./queries";
-import { contactUsSchema } from "@/lib/zod";
+import { contactUsSchema, subscribeSchema } from "@/lib/zod";
 import z from "zod";
 
 const BASE_URL = getStrapiURL();
@@ -257,18 +257,6 @@ export async function getAllCategoryRentals() {
   return fetchAPI(url.href, {
     method: "GET",
     authToken: process.env.STRAPI_API_TOKEN,
-  });
-}
-
-export async function submitContactUsForm(
-  data: z.infer<typeof contactUsSchema>,
-) {
-  const path = "/api/contact-forms";
-  const url = new URL(path, BASE_URL);
-  return fetchAPI(url.href, {
-    method: "POST",
-    authToken: process.env.NEXT_PUBLIC_STRAPI_FORM_TOKEN,
-    body: { data },
   });
 }
 
