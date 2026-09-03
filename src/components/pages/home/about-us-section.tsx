@@ -10,9 +10,9 @@ const AboutUsSection = ({
   tag_title,
   images,
   description,
-  button
+  button,
 }: AboutUsSectionProps) => {
-    if(!tag_title || !images || !description) return null;
+  if (!tag_title || !images || !description) return null;
 
   return (
     <section className="container container-padding-x py-10 md:py-16 lg:py-20 flex flex-col lg:flex-row justify-between items-center">

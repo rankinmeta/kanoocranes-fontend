@@ -17,40 +17,38 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 
 async function loader() {
-    const pageData = await getHomePage();
-    if (!pageData || !pageData.data) notFound();
-    return {
-        pageData: pageData.data,
-    };
+  const pageData = await getHomePage();
+  if (!pageData || !pageData.data) notFound();
+  return {
+    pageData: pageData.data,
+  };
 }
 
 export async function generateMetadata(): Promise<Metadata> {
-    const { data } = await getHomePage();
+  const { data } = await getHomePage();
 
-    return returnMetadata(data);
+  return returnMetadata(data);
 }
 
 export default async function Home() {
-    const { pageData } = await loader();
+  const { pageData } = await loader();
 
-    return (
-        <main>
-            <HomeHero hero={pageData.hero} />
-            <LogoMarquee partners_section={pageData.partners_section} />
-            <EngineeringSolutionsSection
-                {...pageData.engineering_solution_section}
-            />
-            {/* <CraneSelectorSection /> */}
-            <OurSolutionsSection {...pageData.our_solutions_section} />
-            <FeaturedProjectsSection {...pageData.featured_projects_section} />
-            <GallerySection {...pageData.gallery_section} />
-            <FeaturedModelsSection {...pageData.featured_models_section} />
-            <ExpertsSection {...pageData.experts_section} />
-            <OurIndustriesSection {...pageData.industries_section} />
-            <TestimonialSection  {...pageData.testimonial_section} />
-            <AboutUsSection {...pageData.about_section} />
-            <ResourcesSection {...pageData.related_resources} />
-            <FooterCTASection {...pageData.footer_cta_section} />
-        </main>
-    );
+  return (
+    <main>
+      <HomeHero hero={pageData.hero} />
+      <LogoMarquee partners_section={pageData.partners_section} />
+      <EngineeringSolutionsSection {...pageData.engineering_solution_section} />
+      {/* <CraneSelectorSection /> */}
+      <OurSolutionsSection {...pageData.our_solutions_section} />
+      <FeaturedProjectsSection {...pageData.featured_projects_section} />
+      <GallerySection {...pageData.gallery_section} />
+      <FeaturedModelsSection {...pageData.featured_models_section} />
+      <ExpertsSection {...pageData.experts_section} />
+      <OurIndustriesSection {...pageData.industries_section} />
+      <TestimonialSection {...pageData.testimonial_section} />
+      <AboutUsSection {...pageData.about_section} />
+      <ResourcesSection {...pageData.related_resources} />
+      <FooterCTASection {...pageData.footer_cta_section} />
+    </main>
+  );
 }

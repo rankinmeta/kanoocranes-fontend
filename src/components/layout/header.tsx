@@ -9,6 +9,7 @@ import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
 import MenuSheet from "../sheets/menu-sheet";
 import type { MediaProps } from "@/type";
+import { ContactDialog } from "../dialog/contact-dialog";
 
 type SubItem = {
   id: number;
@@ -30,7 +31,7 @@ const Header = ({ button, logo, rentCranes, buyCranes }: HeaderProps) => {
   const [buyOpen, setBuyOpen] = useState(false);
   const [rentOpen, setRentOpen] = useState(false);
 
-  const hide = pathname.includes("/models");
+  const hide = pathname.includes("/models") || pathname.includes("/gallery");
 
   return (
     <header
@@ -115,9 +116,9 @@ const Header = ({ button, logo, rentCranes, buyCranes }: HeaderProps) => {
                 Contact Us
               </Button>
             </Link>
-            <Link href="/contact-us">
+            <ContactDialog>
               <Button className="px-4 py-2 text-xs h-fit">{button}</Button>
-            </Link>
+            </ContactDialog>
           </li>
         </ul>
 

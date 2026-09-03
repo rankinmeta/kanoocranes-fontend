@@ -19,6 +19,7 @@ type ResourcesSectionProps = {
     type: string;
     slug: string;
   }[];
+  filter?: string;
 };
 
 const ResourcesSection = ({
@@ -27,8 +28,13 @@ const ResourcesSection = ({
   resources_list_title,
   resources,
   resourceTypes,
+  filter,
 }: ResourcesSectionProps) => {
-  const [selectedType, setSelectedType] = useState("all-resources");
+  const [selectedType, setSelectedType] = useState(
+    (resourceTypes.findIndex((r) => r.slug === filter) > 0
+      ? filter
+      : "all-resources") || "all-resources",
+  );
 
   const filteredResources =
     selectedType === "all-resources"

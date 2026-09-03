@@ -35,6 +35,7 @@ const ExpertsSection = ({
         "relative bg-secondary py-10 md:py-16 lg:py-20 text-white",
         theme === "light" && "bg-white text-black",
       )}
+      id="experts-section"
     >
       {/* Circles */}
       <div
@@ -106,7 +107,10 @@ function Card({
 
       <div className="text-xs space-y-1">
         <span className="flex gap-2 items-center">
-          <Phone size={16} className="shrink-0" /> {props.phone}
+          <Phone size={16} className="shrink-0" />
+          <Link href={`tel:${props.phone.replaceAll(" ", "")}`} target="_blank">
+            {props.phone}
+          </Link>
         </span>
         <span className="flex gap-2 items-center">
           <Mail size={16} className="shrink-0" />{" "}

@@ -5,7 +5,11 @@ import { Button } from "../ui/button";
 import { Field, FieldGroup } from "../ui/field";
 import { Label } from "../ui/label";
 import { Checkbox } from "../ui/checkbox";
-import type { CraneTypeProps, ManufacturerProps, ProjectTypeProps } from "@/type";
+import type {
+  CraneTypeProps,
+  ManufacturerProps,
+  ProjectTypeProps,
+} from "@/type";
 import { useState } from "react";
 import { useFilters } from "@/context/filter-context";
 
@@ -20,7 +24,14 @@ const FilterContent = ({
   project_types,
   manufacturers,
 }: FilterContentProps) => {
-  const { draftFilters, toggleFilter, selectAvailability, setSortBy, resetFilters, applyFilters } = useFilters();
+  const {
+    draftFilters,
+    toggleFilter,
+    selectAvailability,
+    setSortBy,
+    resetFilters,
+    applyFilters,
+  } = useFilters();
 
   return (
     <div>
@@ -98,9 +109,7 @@ const FilterContent = ({
               <Checkbox
                 id="10-20"
                 checked={draftFilters.liftingCapacity.includes("10-20")}
-                onCheckedChange={() =>
-                  toggleFilter("liftingCapacity", "10-20")
-                }
+                onCheckedChange={() => toggleFilter("liftingCapacity", "10-20")}
               />
               <Label
                 htmlFor="10-20"
@@ -113,9 +122,7 @@ const FilterContent = ({
               <Checkbox
                 id="20-30"
                 checked={draftFilters.liftingCapacity.includes("20-30")}
-                onCheckedChange={() =>
-                  toggleFilter("liftingCapacity", "20-30")
-                }
+                onCheckedChange={() => toggleFilter("liftingCapacity", "20-30")}
               />
               <Label
                 htmlFor="20-30"
@@ -128,9 +135,7 @@ const FilterContent = ({
               <Checkbox
                 id="30-40"
                 checked={draftFilters.liftingCapacity.includes("30-40")}
-                onCheckedChange={() =>
-                  toggleFilter("liftingCapacity", "30-40")
-                }
+                onCheckedChange={() => toggleFilter("liftingCapacity", "30-40")}
               />
               <Label
                 htmlFor="30-40"
@@ -207,9 +212,7 @@ const FilterContent = ({
               <Checkbox
                 id="90-plus"
                 checked={draftFilters.workingRadius.includes("90-plus")}
-                onCheckedChange={() =>
-                  toggleFilter("workingRadius", "90-plus")
-                }
+                onCheckedChange={() => toggleFilter("workingRadius", "90-plus")}
               />
               <Label
                 htmlFor="90-plus"
@@ -230,7 +233,9 @@ const FilterContent = ({
               <Field orientation="horizontal" key={project_type.id}>
                 <Checkbox
                   id={project_type.slug}
-                  checked={draftFilters.projectTypes.includes(project_type.slug)}
+                  checked={draftFilters.projectTypes.includes(
+                    project_type.slug,
+                  )}
                   onCheckedChange={() =>
                     toggleFilter("projectTypes", project_type.slug)
                   }
@@ -255,7 +260,9 @@ const FilterContent = ({
               <Field orientation="horizontal" key={manufacturer.id}>
                 <Checkbox
                   id={manufacturer.slug}
-                  checked={draftFilters.manufacturers.includes(manufacturer.slug)}
+                  checked={draftFilters.manufacturers.includes(
+                    manufacturer.slug,
+                  )}
                   onCheckedChange={() =>
                     toggleFilter("manufacturers", manufacturer.slug)
                   }

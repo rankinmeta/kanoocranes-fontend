@@ -71,6 +71,12 @@ const MenuSheet = () => {
               Resource hub
             </Link>
           </li>
+
+          <li>
+            <Link href="/contact-us" onClick={() => setOpen(false)}>
+              Contact us
+            </Link>
+          </li>
         </ul>
       </SheetContent>
     </Sheet>

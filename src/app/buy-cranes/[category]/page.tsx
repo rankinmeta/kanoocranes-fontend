@@ -11,6 +11,7 @@ import ResourcesSection from "@/components/pages/home/resources-section";
 import TestimonialSection from "@/components/pages/home/testimonial-section";
 import ProcurementSection from "@/components/pages/model/procurement-section";
 import SiteSelectionSection from "@/components/pages/rental-hub/site-selection-section";
+import { TableSection } from "@/components/pages/rental-hub/table";
 import BuyingGuideSection from "@/components/pages/sales-hub/buying-guide-section";
 import EngineeringSupportSection from "@/components/pages/sales-hub/engineering-support-section";
 import {
@@ -20,7 +21,7 @@ import {
   getProjectTypes,
 } from "@/data/loader";
 import { returnMetadata } from "@/lib/utils";
-import { Metadata } from "next";
+import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 
 export async function generateStaticParams() {
@@ -76,6 +77,7 @@ const CategorySalesPage = async ({
         project_types={projectTypes}
         manufacturers={manufacturers}
       />
+      <TableSection {...pageData.table_section} />
       <ProcurementSection {...pageData.info_section} />
       <OwnershipBenefitsSection2 {...pageData.benefits_section} />
       <BrandHighlightSection {...pageData.brand_highlight} />

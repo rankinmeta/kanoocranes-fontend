@@ -1,7 +1,11 @@
 import HeroSection from "@/components/pages/contact-us/hero-section";
 import FooterCTASection from "@/components/pages/home/footer-cta-section";
 import ResourcesSection from "@/components/pages/resource-hub/resources-section";
-import { getAllResources, getResourceHubPage, getResourceTypes } from "@/data/loader";
+import {
+  getAllResources,
+  getResourceHubPage,
+  getResourceTypes,
+} from "@/data/loader";
 import { returnMetadata } from "@/lib/utils";
 import { type Metadata } from "next";
 import { notFound } from "next/navigation";
@@ -10,13 +14,13 @@ async function loader() {
   const [pageData, resources, resourceTypes] = await Promise.all([
     getResourceHubPage(),
     getAllResources(),
-    getResourceTypes()
+    getResourceTypes(),
   ]);
   if (!pageData || !pageData.data) notFound();
   return {
     pageData: pageData.data,
     resources: resources?.data || [],
-    resourceTypes: resourceTypes?.data || []
+    resourceTypes: resourceTypes?.data || [],
   };
 }
 
@@ -26,8 +30,13 @@ export async function generateMetadata(): Promise<Metadata> {
   return returnMetadata(data);
 }
 
-const ResourceHubPage = async () => {
+const ResourceHubPage = async ({
+  searchParams,
+}: {
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
+}) => {
   const { pageData, resources, resourceTypes } = await loader();
+  const { filter } = await searchParams;
 
   return (
     <main>
@@ -38,6 +47,7 @@ const ResourceHubPage = async () => {
         resources_list_title={pageData.resources_list_title}
         resources={resources}
         resourceTypes={resourceTypes}
+        filter={filter as string}
       />
       <FooterCTASection {...pageData.footer_cta_section} />
     </main>

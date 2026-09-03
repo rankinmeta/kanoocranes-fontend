@@ -24,7 +24,7 @@ const ResourceCard = ({
   resource,
   className,
 }: ResourceCardProps & { className?: string }) => {
-  if(!resource) return null;
+  if (!resource) return null;
   return (
     <Link
       href={`/resource-hub/${resource.slug}`}

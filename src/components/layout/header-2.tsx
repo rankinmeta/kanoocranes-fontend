@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import Link from "next/link";
 import { StrapiImage } from "../common/strapi-image";
@@ -8,6 +8,7 @@ import { type ReactNode, useState } from "react";
 import { cn } from "@/lib/utils";
 import MenuSheet from "../sheets/menu-sheet";
 import type { MediaProps } from "@/type";
+import { ContactDialog } from "../dialog/contact-dialog";
 
 type SubItem = {
   id: number;
@@ -24,14 +25,17 @@ type HeaderProps = {
   buyCranes: SubItem[];
 };
 
-const Header2 = ({ button, logo_color, buyCranes, rentCranes }: HeaderProps) => {
+const Header2 = ({
+  button,
+  logo_color,
+  buyCranes,
+  rentCranes,
+}: HeaderProps) => {
   const [buyOpen, setBuyOpen] = useState(false);
   const [rentOpen, setRentOpen] = useState(false);
 
   return (
-    <header
-      className="sticky bg-white top-0 left-0 right-0 z-50"
-    >
+    <header className="sticky bg-white top-0 left-0 right-0 z-50">
       <div className="container container-padding-x flex justify-between items-center gap-10 w-full py-7">
         <Link href="/">
           {logo_color && (
@@ -109,9 +113,9 @@ const Header2 = ({ button, logo_color, buyCranes, rentCranes }: HeaderProps) => 
                 Contact Us
               </Button>
             </Link>
-            <Link href="/contact-us">
+            <ContactDialog>
               <Button className="px-4 py-2 text-xs h-fit">{button}</Button>
-            </Link>
+            </ContactDialog>
           </li>
         </ul>
 

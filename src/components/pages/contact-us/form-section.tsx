@@ -40,8 +40,18 @@ const FormSection = (props: FormSectionProps) => {
                 <div className="size-2 bg-primary" />
                 <span className="font-medium">Contact us</span>
               </div>
-              <span className="mr-3 text-[#414651]">{props.phone1}</span>
-              <span className="text-[#414651]">{props.phone2}</span>
+              <Link
+                href={`tel:${props.phone1.replaceAll(" ", "")}`}
+                target="_blank"
+              >
+                <span className="mr-3 text-[#414651]">{props.phone1}</span>
+              </Link>
+              <Link
+                href={`tel:${props.phone2.replaceAll(" ", "")}`}
+                target="_blank"
+              >
+                <span className="text-[#414651]">{props.phone2}</span>
+              </Link>
             </div>
             <hr className="my-4" />
             <div className="space-y-2">

@@ -9,6 +9,7 @@ import OurIndustriesSection from "@/components/pages/home/our-industries-section
 import RecommendedCraneSection from "@/components/pages/home/recommended-crane-section";
 import ResourcesSection from "@/components/pages/home/resources-section";
 import TestimonialSection from "@/components/pages/home/testimonial-section";
+import { TableSection } from "@/components/pages/rental-hub/table";
 import BuyingGuideSection from "@/components/pages/sales-hub/buying-guide-section";
 import EngineeringSupportSection from "@/components/pages/sales-hub/engineering-support-section";
 import OwnershipBenefitsSection from "@/components/pages/sales-hub/ownership-benefits-section";
@@ -43,6 +44,7 @@ const SalesHubPage = async () => {
         <RecommendedCraneSection {...pageData.recommended_cranes} />
       </section>
       <Section2 {...pageData.why_buy_from_us_section} />
+      <TableSection table_section={pageData.table_section} />
       <SalesCategorySection {...pageData.sales_category_section} />
       <BrandsSection {...pageData.brands_section} />
       <FeaturedModelsSection {...pageData.featured_models_section} />

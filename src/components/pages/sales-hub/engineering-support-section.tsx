@@ -16,7 +16,10 @@ const EngineeringSupportSection = ({
   tag_title,
   className,
   cardStyles,
-}: EngineeringSupportSectionProps & { className?: string, cardStyles?: string }) => {
+}: EngineeringSupportSectionProps & {
+  className?: string;
+  cardStyles?: string;
+}) => {
   if (!description || !details || !image || !tag_title) return null;
 
   return (
@@ -40,10 +43,26 @@ const EngineeringSupportSection = ({
           />
 
           <div className="grid md:grid-cols-2 gap-3 mt-5 md:mt-10">
-            <Card cardStyles={cardStyles} icon={<Handshake />} title={details[0]?.label} />
-            <Card cardStyles={cardStyles} icon={<Towing />} title={details[1]?.label} />
-            <Card cardStyles={cardStyles} icon={<Wire />} title={details[2]?.label} />
-            <Card cardStyles={cardStyles} icon={<Support />} title={details[3]?.label} />
+            <Card
+              cardStyles={cardStyles}
+              icon={<Handshake />}
+              title={details[0]?.label}
+            />
+            <Card
+              cardStyles={cardStyles}
+              icon={<Towing />}
+              title={details[1]?.label}
+            />
+            <Card
+              cardStyles={cardStyles}
+              icon={<Wire />}
+              title={details[2]?.label}
+            />
+            <Card
+              cardStyles={cardStyles}
+              icon={<Support />}
+              title={details[3]?.label}
+            />
           </div>
         </div>
 
@@ -61,9 +80,22 @@ const EngineeringSupportSection = ({
 
 export default EngineeringSupportSection;
 
-function Card({ icon, title, cardStyles }: { icon: ReactNode; title: string, cardStyles?: string }) {
+function Card({
+  icon,
+  title,
+  cardStyles,
+}: {
+  icon: ReactNode;
+  title: string;
+  cardStyles?: string;
+}) {
   return (
-    <div className={cn("flex md:flex-col gap-3 md:gap-2 bg-white rounded-md p-5", cardStyles)}>
+    <div
+      className={cn(
+        "flex md:flex-col gap-3 md:gap-2 bg-white rounded-md p-5",
+        cardStyles,
+      )}
+    >
       {icon}
       <h5 className="font-manrope font-medium">{title}</h5>
     </div>

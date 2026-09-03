@@ -5,7 +5,11 @@ import { extractHighlightText } from "@/lib/utils";
 import type { ResourceCardProps } from "@/type";
 import Link from "next/link";
 
-const RelatedResources = ({resources}: {resources: ResourceCardProps[]}) => {
+const RelatedResources = ({
+  resources,
+}: {
+  resources: ResourceCardProps[];
+}) => {
   return (
     <section className="bg-[#F5F5F5]">
       <div className="container container-padding-x py-10 md:py-20">

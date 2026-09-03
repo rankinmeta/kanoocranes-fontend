@@ -2,8 +2,10 @@ import HighlightedTitle from "@/components/common/highlight-title";
 import { StrapiImage } from "@/components/common/strapi-image";
 import Tag from "@/components/common/tag";
 import { ImageZoom } from "@/components/kibo-ui/image-zoom";
+import { Button } from "@/components/ui/button";
 import { extractHighlightText } from "@/lib/utils";
 import type { MediaProps, TagTitleProps } from "@/type";
+import Link from "next/link";
 
 type GallerySectionProps = {
   id: number;
@@ -26,12 +28,20 @@ const GallerySection = ({ images, tag_title }: GallerySectionProps) => {
       </div>
 
       <div className="container container-padding-x py-10 md:py-16 lg:py-20 text-white">
-        <div className="space-y-3">
-          <Tag className="bg-white">{tag_title.tag}</Tag>
-          <HighlightedTitle
-            title={tag_title.title}
-            highlights={extractHighlightText(tag_title.title)}
-          />
+        <div className="flex justify-between items-center">
+          <div className="space-y-3">
+            <Tag className="bg-white">{tag_title.tag}</Tag>
+            <HighlightedTitle
+              title={tag_title.title}
+              highlights={extractHighlightText(tag_title.title)}
+            />
+          </div>
+
+          <Link href="/gallery" className="relative z-10">
+            <Button className="bg-transparent border border-white text-white hover:bg-white/20">
+              See all
+            </Button>
+          </Link>
         </div>
 
         <div className="w-full overflow-x-scroll scrollbar-none">

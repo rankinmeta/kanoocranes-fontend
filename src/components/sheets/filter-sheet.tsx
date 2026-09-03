@@ -33,7 +33,9 @@ const FilterSheet = ({
             project_types={project_types}
             manufacturers={manufacturers}
           />
-          <Button className="mt-4" onClick={applyFilters}>Apply Filters</Button>
+          <Button className="mt-4" onClick={applyFilters}>
+            Apply Filters
+          </Button>
         </div>
       </SheetContent>
     </Sheet>

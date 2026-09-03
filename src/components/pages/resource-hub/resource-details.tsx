@@ -121,7 +121,7 @@ const ResourceDetails = ({
     }
   };
 
-  if(!resource_content || !banner_button || !card_banner_button) return null;
+  if (!resource_content || !banner_button || !card_banner_button) return null;
 
   return (
     <>
@@ -200,7 +200,9 @@ const ResourceDetails = ({
                 href={banner_button.href}
                 target={banner_button.isExternal ? "_blank" : "_self"}
               >
-                <Button className="w-fit mt-4 md:mt-0">{banner_button.label}</Button>
+                <Button className="w-fit mt-4 md:mt-0">
+                  {banner_button.label}
+                </Button>
               </Link>
             </div>
           </div>

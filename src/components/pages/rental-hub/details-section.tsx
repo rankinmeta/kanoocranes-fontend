@@ -56,7 +56,9 @@ export default function DetailsSection({
           <AnimatePresence mode="wait" custom={direction}>
             <motion.img
               key={activeItem.image.id}
-              src={process.env.NEXT_PUBLIC_STRAPI_API_URL + activeItem.image.url}
+              src={
+                process.env.NEXT_PUBLIC_STRAPI_API_URL + activeItem.image.url
+              }
               alt={activeItem.title}
               custom={direction}
               initial={{

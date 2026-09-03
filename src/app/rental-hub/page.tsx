@@ -11,6 +11,7 @@ import TestimonialSection from "@/components/pages/home/testimonial-section";
 import AccordionSection from "@/components/pages/rental-hub/accordion-section";
 import Section2 from "@/components/pages/rental-hub/section2";
 import SiteSelectionSection from "@/components/pages/rental-hub/site-selection-section";
+import { TableSection } from "@/components/pages/rental-hub/table";
 import EngineeringSupportSection from "@/components/pages/sales-hub/engineering-support-section";
 import SalesCategorySection from "@/components/pages/sales-hub/sales-category-section";
 import { getRentalHubPage } from "@/data/loader";
@@ -45,6 +46,7 @@ const RentalHubPage = async () => {
         cards={pageData.why_rent_from_us_section.details}
         {...pageData.why_rent_from_us_section}
       />
+      <TableSection table_section={pageData.table_section} />
       <SalesCategorySection {...pageData.sales_category_section} />
       <SiteSelectionSection {...pageData.site_selection_section} />
       <FeaturedModelsSection {...pageData.featured_models_section} />

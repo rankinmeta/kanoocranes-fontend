@@ -1,4 +1,4 @@
-import { StrapiImage } from "@/components/common/strapi-image";
+import { FooterCTACarousel } from "@/components/carousel/footer-cta-carousel";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { type MediaProps } from "@/type";
@@ -6,7 +6,7 @@ import Link from "next/link";
 
 type FooterCTASectionProps = {
   hide?: boolean;
-  image: MediaProps;
+  image: MediaProps[];
   title: string;
   description: string;
 };
@@ -35,13 +35,14 @@ const FooterCTASection = ({
           ))}
       </div>
 
-      <StrapiImage
+      {/* <StrapiImage
         src={image.url}
         alt={image.alternativeText || "crane"}
         width={200}
         height={150}
         className="size-full aspect-video md:aspect-auto object-cover"
-      />
+      /> */}
+      <FooterCTACarousel images={image} />
 
       <div className="px-4 md:px-8 py-6 md:py-8 flex flex-col justify-center gap-4 md:col-span-2 max-w-[85%] md:max-w-lg">
         <h2 className="font-manrope text-3xl tracking-wide">{title}</h2>

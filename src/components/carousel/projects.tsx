@@ -25,29 +25,31 @@ type ProjectProps = {
 export function ProjectsCarousel({ projects }: { projects: ProjectProps[] }) {
   if (!projects) return null;
   return (
-    <Carousel
-      opts={{
-        align: "start",
-        loop: false,
-      }}
-      className="w-full mt-7"
-    >
-      <CarouselContent>
-        {projects.map((res, i) => (
-          <CarouselItem key={i} className="basis-1/1">
-            <Card {...res} />
-          </CarouselItem>
-        ))}
-      </CarouselContent>
-      <CarouselPrevious size="icon-lg" className="-top-14" />
-      <CarouselNext size="icon-lg" className="-top-14" />
-    </Carousel>
+    <div>
+      <Carousel
+        opts={{
+          align: "start",
+          loop: false,
+        }}
+        className="w-full mt-7"
+      >
+        <CarouselContent className="max-w-screen">
+          {projects.map((res, i) => (
+            <CarouselItem key={i}>
+              <Card {...res} />
+            </CarouselItem>
+          ))}
+        </CarouselContent>
+        <CarouselPrevious size="icon-lg" className="-top-14" />
+        <CarouselNext size="icon-lg" className="-top-14" />
+      </Carousel>
+    </div>
   );
 }
 
 function Card({ details, image, link, title }: ProjectProps) {
   return (
-    <div className="bg-[#F5F5F5] rounded-md p-3 md:p-6 pe-0 w-full">
+    <div className="bg-[#F5F5F5] shrink-0 rounded-md p-3 md:p-6 w-full max-w-screen">
       <div className="flex items-center gap-3">
         <StrapiImage
           src={image.url}
@@ -56,7 +58,7 @@ function Card({ details, image, link, title }: ProjectProps) {
           height={100}
           className="rounded-md aspect-[2/1.3] object-cover"
         />
-        <div className="space-y-2">
+        <div className="space-y-2 w-fit">
           <h3 className="max-w-48 font-medium">{title}</h3>
           {link && (
             <Link

@@ -34,9 +34,7 @@ const ResourcesSection = ({ tag_title, resources }: ResourcesSectionProps) => {
             <Tag>{tag_title.tag}</Tag>
             <HighlightedTitle
               title={tag_title.title}
-              highlights={extractHighlightText(
-                tag_title.title,
-              )}
+              highlights={extractHighlightText(tag_title.title)}
               className="max-w-lg"
             />
           </div>

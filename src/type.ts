@@ -1,227 +1,227 @@
 export interface MediaProps {
-    id: number;
-    documentId: string;
-    url: string;
-    alternativeText: string | null;
+  id: number;
+  documentId: string;
+  url: string;
+  alternativeText: string | null;
 }
 
 export interface LinkProps {
-    id: number;
-    label: string;
-    href: string;
-    isExternal: boolean;
+  id: number;
+  label: string;
+  href: string;
+  isExternal: boolean;
 }
 
 export interface TagTitleProps {
-    id: number;
-    tag: string;
-    title: string;
+  id: number;
+  tag: string;
+  title: string;
 }
 
 export type SeoMetadata = {
-    metaTitle: string;
-    metaDescription: string;
-    metaKeywords: string;
-    metaRobots: string;
-    canonicalUrl: string;
-    openGraph: {
-        ogTitle: string;
-        ogDescription: string;
-        ogUrl: string;
-        ogType: string;
-        ogImage: {
-            url: string;
-            alternativeText: string;
-        };
+  metaTitle: string;
+  metaDescription: string;
+  metaKeywords: string;
+  metaRobots: string;
+  canonicalUrl: string;
+  openGraph: {
+    ogTitle: string;
+    ogDescription: string;
+    ogUrl: string;
+    ogType: string;
+    ogImage: {
+      url: string;
+      alternativeText: string;
     };
+  };
 };
 
 export interface HomeHeroProps {
+  id: number;
+  title: string;
+  description: string;
+  background: {
     id: number;
-    title: string;
-    description: string;
-    background: {
-        id: number;
-        type: "image" | "video";
-        background: MediaProps;
-        responsive_image: MediaProps | null;
-    }[];
-    highlights: HighlightCardProps[];
+    type: "image" | "video";
+    background: MediaProps;
+    responsive_image: MediaProps | null;
+  }[];
+  highlights: HighlightCardProps[];
 }
 
 export type HighlightCardProps = {
-    id: number;
-    image: MediaProps;
-    title: string;
-    link: LinkProps;
+  id: number;
+  image: MediaProps;
+  title: string;
+  link: LinkProps;
 };
 
 export type LogoMarqueeProps = {
-    id: number;
-    logo: MediaProps[];
+  id: number;
+  logo: MediaProps[];
 };
 
 export type EngineeringSolutionsSectionProps = {
+  id: number;
+  tag_title: TagTitleProps;
+  details: {
     id: number;
-    tag_title: TagTitleProps;
-    details: {
-        id: number;
-        value: string;
-        label: string;
-        description: string;
+    value: string;
+    label: string;
+    description: string;
+  }[];
+  background: MediaProps;
+  engineering_solution_info: {
+    button: LinkProps;
+    infos: {
+      id: number;
+      label: string;
     }[];
-    background: MediaProps;
-    engineering_solution_info: {
-        button: LinkProps;
-        infos: {
-            id: number;
-            label: string;
-        }[];
-    };
+  };
 };
 
 export type AboutUsSectionProps = {
-    id: number;
-    tag_title: TagTitleProps;
-    images: MediaProps[];
-    description: string;
-    button: LinkProps | null;
+  id: number;
+  tag_title: TagTitleProps;
+  images: MediaProps[];
+  description: string;
+  button: LinkProps | null;
 };
 
 export type AboutKanooGroupProps = {
-    id: number;
-    tag_title: TagTitleProps;
-    image: MediaProps;
-    description: string;
+  id: number;
+  tag_title: TagTitleProps;
+  image: MediaProps;
+  description: string;
 };
 
 export type BusinessUnitSectionProps = {
+  id: number;
+  tag_title: TagTitleProps;
+  details: {
     id: number;
-    tag_title: TagTitleProps;
-    details: {
-        id: number;
-        title: string;
-        description: string;
-        image: MediaProps;
-    }[];
-}
+    title: string;
+    description: string;
+    image: MediaProps;
+  }[];
+};
 
 export type BrandSectionProps = {
+  id: number;
+  tag_title: TagTitleProps;
+  description: string;
+  brands: {
     id: number;
-    tag_title: TagTitleProps;
+    title: string;
     description: string;
-    brands: {
-        id: number;
-        title: string;
-        description: string;
-        logo: MediaProps;
-    }[];
-}
+    logo: MediaProps;
+  }[];
+};
 
 export type SimpleSectionProps = {
-    id: number;
-    tag_title: TagTitleProps;
-    description: string;
-    image: MediaProps;
-}
+  id: number;
+  tag_title: TagTitleProps;
+  description: string;
+  image: MediaProps;
+};
 
 export type SectionWithGridProps = {
+  id: number;
+  tag_title: TagTitleProps;
+  description: string;
+  cards: {
     id: number;
-    tag_title: TagTitleProps;
+    icon: MediaProps;
+    label: string;
     description: string;
-    cards: {
-        id: number;
-        icon: MediaProps;
-        label: string;
-        description: string;
-    }[];
-}
+  }[];
+};
 
 export type BuyingGuideSectionProps = {
+  id: number;
+  tag_title: TagTitleProps;
+  details: {
     id: number;
-    tag_title: TagTitleProps;
-    details: {
-        id: number;
-        label: string;
-        description: string;
-        icon: MediaProps;
-    }[];
-}
+    label: string;
+    description: string;
+    icon: MediaProps;
+  }[];
+};
 
 export type EngineeringSupportSectionProps = {
+  id: number;
+  tag_title: TagTitleProps;
+  description: string;
+  details: {
     id: number;
-    tag_title: TagTitleProps;
-    description: string;
-    details: {
-        id: number;
-        label: string;
-    }[];
-    image: MediaProps;
-}
+    label: string;
+  }[];
+  image: MediaProps;
+};
 
 export type SectionWithStickyCardsProps = {
+  id: number;
+  tag_title: TagTitleProps;
+  description: string;
+  cards: {
     id: number;
-    tag_title: TagTitleProps;
+    icon: MediaProps;
+    label: string;
     description: string;
-    cards: {
-        id: number;
-        icon: MediaProps;
-        label: string;
-        description: string;
-    }[];
-}
+  }[];
+};
 
 export type ResourceCardProps = {
+  id: number;
+  documentId: string;
+  image: MediaProps;
+  title: string;
+  slug: string;
+  date: string;
+  resource_type: {
     id: number;
-    documentId: string;
-    image: MediaProps;
-    title: string;
+    type: string;
     slug: string;
-    date: string;
-    resource_type: {
-        id: number;
-        type: string;
-        slug: string;
-    };
-}
+  };
+};
 
 export type OwnershipBenefitsWithPointsSectionProps = {
+  id: number;
+  tag_title: TagTitleProps;
+  description: string;
+  points: {
     id: number;
-    tag_title: TagTitleProps;
-    description: string;
-    points: {
-        id: number;
-        label: string;
-    }[];
-    image: MediaProps | null;
-}
+    label: string;
+  }[];
+  image: MediaProps | null;
+};
 
 export type SiteSelectionSectionProps = {
+  id: number;
+  tag_title: TagTitleProps;
+  description: string;
+  site_selection_details: {
     id: number;
-    tag_title: TagTitleProps;
+    title: string;
     description: string;
-    site_selection_details: {
-        id: number;
-        title: string;
-        description: string;
-        image: MediaProps;
-    }[];
-}
+    image: MediaProps;
+  }[];
+};
 
 export type CraneTypeProps = {
-    id: number;
-    type: string;
-    slug: string;
-}
+  id: number;
+  type: string;
+  slug: string;
+};
 
 export type ProjectTypeProps = {
-    id: number;
-    type: string;
-    slug: string;
-}
+  id: number;
+  type: string;
+  slug: string;
+};
 
 export type ManufacturerProps = {
-    id: number;
-    name: string;
-    slug: string;
-}
+  id: number;
+  name: string;
+  slug: string;
+};

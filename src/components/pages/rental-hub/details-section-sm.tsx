@@ -59,7 +59,10 @@ export default function DetailsSectionSM({
                     <div className="pt-5">
                       <div className="relative h-[240px] md:h-[360px] overflow-hidden rounded-xl">
                         <img
-                          src={process.env.NEXT_PUBLIC_STRAPI_API_URL + item.image.url}
+                          src={
+                            process.env.NEXT_PUBLIC_STRAPI_API_URL +
+                            item.image.url
+                          }
                           alt={item.image.alternativeText || item.title}
                           //   fill
                           className="object-cover"

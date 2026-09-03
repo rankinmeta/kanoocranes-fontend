@@ -1,5 +1,5 @@
 import { revalidatePath, revalidateTag } from "next/cache";
-import { NextRequest, NextResponse } from "next/server";
+import { type NextRequest, NextResponse } from "next/server";
 
 export const dynamic = "force-dynamic";
 
@@ -11,6 +11,7 @@ const StaticModelMap = {
   "rental-hub-page": "/rental-hub",
   "sales-hub": "/sales-hub",
   "resource-hub-page": "/resource-hub",
+  "gallery-page": "/gallery",
 };
 
 const DynamicModelMap = {
@@ -57,7 +58,7 @@ export async function POST(request: NextRequest) {
         console.log("Revalidated /resource-hub");
       }
       revalidateTag("sitemap", "max"); // Revalidate sitemap after every resource/model/category update or creation
-      console.log("Revalidated " + path);
+      console.log(`Revalidated ${path}`);
     } else {
       console.log("Not Revalidated any path");
     }

@@ -49,7 +49,13 @@ const DownloadsSection = ({ resources, tag_title }: Props) => {
                 {resource.description}
               </p>
 
-              <Link href={process.env.NEXT_PUBLIC_STRAPI_API_URL + resource.resource.url} download={"Kanoo Crane.pdf"} target="_blank">
+              <Link
+                href={
+                  process.env.NEXT_PUBLIC_STRAPI_API_URL + resource.resource.url
+                }
+                download={"Kanoo Crane.pdf"}
+                target="_blank"
+              >
                 <Button className="bg-white text-primary w-fit mt-16 hover:text-white">
                   Download
                 </Button>
