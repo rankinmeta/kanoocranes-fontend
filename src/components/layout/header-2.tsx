@@ -1,14 +1,13 @@
-"use client";
-
 import Link from "next/link";
 import { StrapiImage } from "../common/strapi-image";
 import { ChevronRight } from "lucide-react";
 import { Button } from "../ui/button";
-import { type ReactNode, useState } from "react";
+import type { ReactNode } from "react";
 import { cn } from "@/lib/utils";
 import MenuSheet from "../sheets/menu-sheet";
 import type { MediaProps } from "@/type";
 import { ContactDialog } from "../dialog/contact-dialog";
+import NestedNavMenu from "./nested-nav-menu";
 
 type SubItem = {
   id: number;
@@ -21,19 +20,21 @@ type HeaderProps = {
   id: number;
   logo_color: MediaProps;
   button: string;
-  rentCranes: SubItem[];
-  buyCranes: SubItem[];
+  menu_links: {
+    rent_cranes_menu: {
+      id: number;
+      menu: SubItem;
+      sub_menus: SubItem[];
+    }[];
+    buy_cranes_menu: {
+      id: number;
+      menu: SubItem;
+      sub_menus: SubItem[];
+    }[];
+  };
 };
 
-const Header2 = ({
-  button,
-  logo_color,
-  buyCranes,
-  rentCranes,
-}: HeaderProps) => {
-  const [buyOpen, setBuyOpen] = useState(false);
-  const [rentOpen, setRentOpen] = useState(false);
-
+const Header2 = ({ button, logo_color, menu_links }: HeaderProps) => {
   return (
     <header className="sticky bg-white top-0 left-0 right-0 z-50">
       <div className="container container-padding-x flex justify-between items-center gap-10 w-full py-7">
@@ -55,7 +56,21 @@ const Header2 = ({
           <li className="flex-1">
             <GlassLink href="/eng-solutions">Solutions</GlassLink>
           </li>
-          <li
+          <NestedNavMenu
+            label="Rent cranes"
+            href="/rental-hub"
+            parentSlug="rent-cranes"
+            buttonColor="white"
+            data={menu_links.rent_cranes_menu}
+          />
+          <NestedNavMenu
+            label="Buy cranes"
+            href="/sales-hub"
+            parentSlug="buy-cranes"
+            buttonColor="white"
+            data={menu_links.buy_cranes_menu}
+          />
+          {/* <li
             onMouseEnter={() => setRentOpen(true)}
             onMouseLeave={() => setRentOpen(false)}
             className="relative group"
@@ -100,7 +115,7 @@ const Header2 = ({
                 ))}
               </div>
             )}
-          </li>
+          </li> */}
           {/* <li className="flex-1">
             <GlassLink href="/rental">Rental</GlassLink>
           </li> */}
@@ -119,7 +134,10 @@ const Header2 = ({
           </li>
         </ul>
 
-        <MenuSheet />
+        <MenuSheet
+          rentCranesMenu={menu_links.rent_cranes_menu}
+          buyCranesMenu={menu_links.buy_cranes_menu}
+        />
       </div>
     </header>
   );

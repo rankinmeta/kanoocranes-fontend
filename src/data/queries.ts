@@ -10,6 +10,30 @@ export const globalSettingQuery = qs.stringify({
         logo_color: {
           fields: ["url", "alternativeText"],
         },
+        menu_links: {
+          populate: {
+            rent_cranes_menu: {
+              populate: {
+                menu: {
+                  fields: ["category", "slug"],
+                },
+                sub_menus: {
+                  fields: ["category", "slug"],
+                },
+              },
+            },
+            buy_cranes_menu: {
+              populate: {
+                menu: {
+                  fields: ["category", "slug"],
+                },
+                sub_menus: {
+                  fields: ["category", "slug"],
+                },
+              },
+            },
+          },
+        },
       },
     },
     footer: {

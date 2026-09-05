@@ -19,8 +19,6 @@ import {
   resourceTypesQuery,
   salesHubPageQuery,
 } from "./queries";
-import { contactUsSchema, subscribeSchema } from "@/lib/zod";
-import z from "zod";
 
 const BASE_URL = getStrapiURL();
 

@@ -4,12 +4,13 @@ import Link from "next/link";
 import { StrapiImage } from "../common/strapi-image";
 import { ChevronRight } from "lucide-react";
 import { Button } from "../ui/button";
-import { ReactNode, useState } from "react";
+import type { ReactNode } from "react";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
 import MenuSheet from "../sheets/menu-sheet";
 import type { MediaProps } from "@/type";
 import { ContactDialog } from "../dialog/contact-dialog";
+import NestedNavMenu from "./nested-nav-menu";
 
 type SubItem = {
   id: number;
@@ -22,15 +23,22 @@ type HeaderProps = {
   id: number;
   logo: MediaProps;
   button: string;
-  rentCranes: SubItem[];
-  buyCranes: SubItem[];
+  menu_links: {
+    rent_cranes_menu: {
+      id: number;
+      menu: SubItem;
+      sub_menus: SubItem[];
+    }[];
+    buy_cranes_menu: {
+      id: number;
+      menu: SubItem;
+      sub_menus: SubItem[];
+    }[];
+  };
 };
 
-const Header = ({ button, logo, rentCranes, buyCranes }: HeaderProps) => {
+const Header = ({ button, logo, menu_links }: HeaderProps) => {
   const pathname = usePathname();
-  const [buyOpen, setBuyOpen] = useState(false);
-  const [rentOpen, setRentOpen] = useState(false);
-
   const hide = pathname.includes("/models") || pathname.includes("/gallery");
 
   return (
@@ -56,7 +64,19 @@ const Header = ({ button, logo, rentCranes, buyCranes }: HeaderProps) => {
           <li className="flex-1">
             <GlassLink href="/eng-solutions">Solutions</GlassLink>
           </li>
-          <li
+          <NestedNavMenu
+            label="Rent cranes"
+            href="/rental-hub"
+            parentSlug="rent-cranes"
+            data={menu_links.rent_cranes_menu}
+          />
+          <NestedNavMenu
+            label="Buy cranes"
+            href="/sales-hub"
+            parentSlug="buy-cranes"
+            data={menu_links.buy_cranes_menu}
+          />
+          {/* <li
             onMouseEnter={() => setRentOpen(true)}
             onMouseLeave={() => setRentOpen(false)}
             className="relative group"
@@ -101,7 +121,7 @@ const Header = ({ button, logo, rentCranes, buyCranes }: HeaderProps) => {
                 ))}
               </div>
             )}
-          </li>
+          </li> */}
           {/* <li className="flex-1">
             <GlassLink href="/rental">
               Rental
@@ -122,7 +142,10 @@ const Header = ({ button, logo, rentCranes, buyCranes }: HeaderProps) => {
           </li>
         </ul>
 
-        <MenuSheet />
+        <MenuSheet
+          rentCranesMenu={menu_links.rent_cranes_menu}
+          buyCranesMenu={menu_links.buy_cranes_menu}
+        />
       </div>
     </header>
   );
