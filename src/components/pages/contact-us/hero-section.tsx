@@ -44,34 +44,48 @@ const HeroSection = ({
                       {button1.label}
                     </Button>
                   </ContactDialog>
-                ) : (
+                ) : button1.href.startsWith("#") ? (
                   <Button
                     onClick={() => {
-                      gsap.to(window, { duration: 1, scrollTo: "#form" });
+                      gsap.to(window, { duration: 1, scrollTo: button1.href });
                     }}
                     className="w-full md:w-auto"
                   >
                     {button1.label}
                   </Button>
+                ) : (
+                  <Link
+                    href={button1.href}
+                    target={button1.isExternal ? "_blank" : "_self"}
+                  >
+                    <Button className="w-full md:w-auto">
+                      {button1.label}
+                    </Button>
+                  </Link>
                 ))}
-              {button2 && (
-                // <Link
-                //     href={button2.href}
-                //     target={button2.isExternal ? "_blank" : "_self"}
-                // >
-                <Button
-                  onClick={() => {
-                    gsap.to(window, {
-                      duration: 1,
-                      scrollTo: "#experts-section",
-                    });
-                  }}
-                  className="bg-white text-primary hover:text-white w-full md:w-auto"
-                >
-                  {button2.label}
-                </Button>
-                // </Link>
-              )}
+              {button2 &&
+                (button2.href.startsWith("#") ? (
+                  <Button
+                    onClick={() => {
+                      gsap.to(window, {
+                        duration: 1,
+                        scrollTo: button2.href,
+                      });
+                    }}
+                    className="bg-white text-primary hover:text-white w-full md:w-auto"
+                  >
+                    {button2.label}
+                  </Button>
+                ) : (
+                  <Link
+                    href={button2.href}
+                    target={button2.isExternal ? "_blank" : "_self"}
+                  >
+                    <Button className="bg-white text-primary hover:text-white w-full md:w-auto">
+                      {button2.label}
+                    </Button>
+                  </Link>
+                ))}
             </div>
           )}
         </div>
