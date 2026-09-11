@@ -2,6 +2,7 @@ import HighlightedTitle from "@/components/common/highlight-title";
 import Tag from "@/components/common/tag";
 import { extractHighlightText } from "@/lib/utils";
 import type { MediaProps, TagTitleProps } from "@/type";
+import Image from "next/image";
 
 type EngineeringServicesSectionProps = {
   id: number;
@@ -43,7 +44,7 @@ const EngineeringServicesSection = ({
           <p className="max-w-xl">{description}</p>
         </div>
 
-        <div className="flex w-full lg:grid grid-cols-4 gap-4 mt-6 lg:mt-10 overflow-x-scroll scrollbar-none">
+        <div className="flex w-full gap-4 mt-6 lg:mt-10 overflow-x-scroll scrollbar-none">
           {details.map((detail) => (
             <Card key={detail.id} {...detail} />
           ))}
@@ -58,11 +59,22 @@ export default EngineeringServicesSection;
 function Card({
   description,
   label,
+  icon,
 }: EngineeringServicesSectionProps["details"][0]) {
   return (
-    <div className="w-[80%] md:w-1/2 lg:w-auto shrink-0 border border-white/10 p-6 flex flex-col gap-10 rounded-md text-left hover:bg-[#041D54]">
-      <h4 className="font-manrope font-medium text-lg">{label}</h4>
-      <p className="font-light">{description}</p>
+    <div className="w-[80%] md:w-1/2 lg:w-1/4 shrink-0 border border-white/10 p-6 flex flex-col gap-10 rounded-md text-left hover:bg-[#041D54]">
+      <div className="space-y-3">
+        {icon && (
+          <Image
+            src={icon.url}
+            alt={icon.alternativeText || ""}
+            width={50}
+            height={50}
+          />
+        )}
+        <h4 className="font-manrope font-medium text-lg">{label}</h4>
+      </div>
+      <p className="font-light text-sm">{description}</p>
     </div>
   );
 }

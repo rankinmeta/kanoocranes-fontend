@@ -70,7 +70,7 @@ const CategorySalesPage = async ({
   );
   return (
     <main>
-      <HeroSection {...pageData.hero} className="max-w-2xl" />
+      <HeroSection {...pageData.hero} className="max-w-2xl" showModal />
       <FilterListSection
         {...pageData.filter_section}
         crane_types={craneTypes}

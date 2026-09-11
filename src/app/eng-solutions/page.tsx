@@ -42,6 +42,7 @@ const EngSolutionsPage = async () => {
         button1={pageData.hero.button1}
         button2={pageData.hero.button2}
         className="max-w-2xl"
+        showModal
       />
       <Section2 {...pageData.crane_engineering_section} />
       <EngineeringServicesSection {...pageData.engineering_services} />

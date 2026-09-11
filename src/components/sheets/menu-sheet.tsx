@@ -57,14 +57,15 @@ function mapLeafToNavItem(leaf: MenuLeaf, parentSlug: string): NavItem {
 }
 
 /** Maps the server payload into NavItem[] — same mapping used on desktop. */
-function mapApiMenuToNavItems(data: MenuApiItem[]): NavItem[] {
+function mapApiMenuToNavItems(
+  data: MenuApiItem[],
+  parentSlug: string,
+): NavItem[] {
   return data.map((entry) => ({
     id: String(entry.menu.id),
     label: entry.menu.category,
-    href: buildHref(entry.menu),
-    children: entry.sub_menus.map((sub) =>
-      mapLeafToNavItem(sub, entry.menu.slug),
-    ),
+    href: buildHref(entry.menu, parentSlug),
+    children: entry.sub_menus.map((sub) => mapLeafToNavItem(sub, parentSlug)),
   }));
 }
 
@@ -82,13 +83,13 @@ function buildNavItems(
       id: "rental-hub",
       label: "Rent cranes",
       href: "/rental-hub",
-      children: mapApiMenuToNavItems(rentCranesMenu),
+      children: mapApiMenuToNavItems(rentCranesMenu, "rent-cranes"),
     },
     {
       id: "sales-hub",
       label: "Buy cranes",
       href: "/sales-hub",
-      children: mapApiMenuToNavItems(buyCranesMenu),
+      children: mapApiMenuToNavItems(buyCranesMenu, "buy-cranes"),
     },
     { id: "resource-hub", label: "Resource hub", href: "/resource-hub" },
     { id: "contact-us", label: "Contact us", href: "/contact-us" },

@@ -6,6 +6,7 @@ import { LinkProps } from "@/type";
 import Link from "next/link";
 import gsap from "gsap";
 import { ScrollToPlugin } from "gsap/ScrollToPlugin";
+import { ContactDialog } from "@/components/dialog/contact-dialog";
 
 type HeroSectionProps = {
   title: string;
@@ -14,6 +15,7 @@ type HeroSectionProps = {
   button1?: LinkProps;
   button2?: LinkProps;
   className?: string;
+  showModal?: boolean;
 };
 
 gsap.registerPlugin(ScrollToPlugin);
@@ -24,6 +26,7 @@ const HeroSection = ({
   button1,
   button2,
   className,
+  showModal = false,
 }: HeroSectionProps) => {
   return (
     <section className="bg-secondary relative z-60 -mt-26">
@@ -34,21 +37,23 @@ const HeroSection = ({
 
           {(button1 || button2) && (
             <div className="flex flex-col md:flex-row gap-3 mt-10 md:mt-6">
-              {button1 && (
-                // <Link
-                //     href={button1.href}
-                //     target={button1.isExternal ? "_blank" : "_self"}
-                // >
-                <Button
-                  onClick={() => {
-                    gsap.to(window, { duration: 1, scrollTo: "#form" });
-                  }}
-                  className="w-full md:w-auto"
-                >
-                  {button1.label}
-                </Button>
-                // </Link>
-              )}
+              {button1 &&
+                (showModal ? (
+                  <ContactDialog>
+                    <Button className="w-full md:w-auto">
+                      {button1.label}
+                    </Button>
+                  </ContactDialog>
+                ) : (
+                  <Button
+                    onClick={() => {
+                      gsap.to(window, { duration: 1, scrollTo: "#form" });
+                    }}
+                    className="w-full md:w-auto"
+                  >
+                    {button1.label}
+                  </Button>
+                ))}
               {button2 && (
                 // <Link
                 //     href={button2.href}

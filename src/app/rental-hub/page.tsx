@@ -38,7 +38,7 @@ const RentalHubPage = async () => {
 
   return (
     <main>
-      <HeroSection {...pageData.hero} className="max-w-2xl" />
+      <HeroSection {...pageData.hero} showModal className="max-w-2xl" />
       <section className="container container-padding-x py-10 md:py-20 lg:py-20">
         <RecommendedCraneSection {...pageData.recommended_cranes} />
       </section>
