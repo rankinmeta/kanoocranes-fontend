@@ -1,7 +1,8 @@
 import HighlightedTitle from "@/components/common/highlight-title";
 import { StrapiImage } from "@/components/common/strapi-image";
 import Tag from "@/components/common/tag";
-import { extractHighlightText } from "@/lib/utils";
+import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
+import { cn, extractHighlightText } from "@/lib/utils";
 import type { MediaProps, TagTitleProps } from "@/type";
 
 type Props = {
@@ -50,11 +51,24 @@ const SelectionGuideSection = ({
           className="md:hidden my-5 aspect-square rounded-md object-cover"
         />
 
-        <div className="flex w-full gap-3 overflow-x-scroll scrollbar-none mt-10">
+        {/* <ScrollArea
+          className={cn(
+            "rounded-2xl w-full border",
+            "**:data-[slot=scroll-area-thumb]:bg-foreground/15 **:data-[slot=scroll-area-thumb]:rounded-full",
+            "**:data-[slot=scroll-area-viewport]:mask-t-from-[calc(100%-min(20px,var(--scroll-area-overflow-y-start)))]",
+            "**:data-[slot=scroll-area-viewport]:mask-r-from-[calc(100%-min(20px,var(--scroll-area-overflow-x-end)))]",
+            "**:data-[slot=scroll-area-viewport]:mask-b-from-[calc(100%-min(20px,var(--scroll-area-overflow-y-end)))]",
+            "**:data-[slot=scroll-area-viewport]:mask-l-from-[calc(100%-min(20px,var(--scroll-area-overflow-x-start)))]",
+            "**:data-[slot=scroll-area-viewport]:[--fade-size:1.5rem]",
+          )}
+        > */}
+        <div className="flex w-full gap-3 overflow-x-auto scrollbar-thin scroll-fade-x mt-10">
           {details.map((detail, i) => (
             <Card key={detail.id} {...detail} index={i} />
           ))}
         </div>
+        {/* <ScrollBar orientation="horizontal" />
+        </ScrollArea> */}
       </div>
     </section>
   );
