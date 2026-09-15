@@ -9,7 +9,7 @@ import OurIndustriesSection from "@/components/pages/home/our-industries-section
 import RecommendedCraneSection from "@/components/pages/home/recommended-crane-section";
 import ResourcesSection from "@/components/pages/home/resources-section";
 import TestimonialSection from "@/components/pages/home/testimonial-section";
-import { TableSection } from "@/components/pages/rental-hub/table";
+import { TableSection } from "@/components/pages/rental-hub/table-section";
 import BuyingGuideSection from "@/components/pages/sales-hub/buying-guide-section";
 import EngineeringSupportSection from "@/components/pages/sales-hub/engineering-support-section";
 import OwnershipBenefitsSection from "@/components/pages/sales-hub/ownership-benefits-section";
@@ -40,9 +40,11 @@ const SalesHubPage = async () => {
   return (
     <main>
       <HeroSection {...pageData.hero} className="max-w-2xl" />
-      <section className="container container-padding-x py-10 md:py-20 lg:py-20">
-        <RecommendedCraneSection {...pageData.recommended_cranes} />
-      </section>
+      {pageData.recommended_cranes && (
+        <section className="container container-padding-x py-10 md:py-20 lg:py-20">
+          <RecommendedCraneSection {...pageData.recommended_cranes} />
+        </section>
+      )}
       <Section2 {...pageData.why_buy_from_us_section} />
       <TableSection table_section={pageData.table_section} />
       <SalesCategorySection {...pageData.sales_category_section} />

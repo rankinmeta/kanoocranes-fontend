@@ -225,3 +225,42 @@ export type ManufacturerProps = {
   name: string;
   slug: string;
 };
+
+export type TableSectionProps = {
+  id: number;
+  documentId: string;
+  model: string;
+  reach: string;
+  maximum_load: string;
+  tip_load: string;
+  fem_1001: MediaProps;
+  en_14439_c25: MediaProps;
+};
+
+export type CraneSeriesSectionProps = {
+  crane_series: {
+    id: number;
+    title: string;
+    description: string;
+    img_placement: "left" | "right";
+    image: MediaProps;
+  };
+  table: TableSectionProps[];
+};
+
+export type CraneModelsSectionProps = {
+  tag_title: TagTitleProps;
+  models: {
+    id: number;
+    model_slug: string;
+    crane_type: {
+      type: string;
+      slug: string;
+    };
+    main_section: {
+      model_short_name: string;
+      best_for: string;
+      images: MediaProps[];
+    };
+  }[];
+};

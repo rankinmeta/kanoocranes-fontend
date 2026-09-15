@@ -11,7 +11,7 @@ import GallerySection from "@/components/pages/home/gallery-section";
 import ResourcesSection from "@/components/pages/home/resources-section";
 import TestimonialSection from "@/components/pages/home/testimonial-section";
 import SiteSelectionSection from "@/components/pages/rental-hub/site-selection-section";
-import { TableSection } from "@/components/pages/rental-hub/table";
+import { TableSection } from "@/components/pages/rental-hub/table-section";
 import EngineeringSupportSection from "@/components/pages/sales-hub/engineering-support-section";
 import {
   getCraneTypes,
@@ -79,7 +79,10 @@ const CategoryRentalPage = async ({
       />
       <Section2 {...pageData.info_section} />
       <ProfessionalRentalSection {...pageData.rental_services_section} />
-      <TableSection {...pageData.table_section} className="bg-[#f5f5f5]" />
+      <TableSection
+        table_section={pageData.table_section}
+        className="bg-[#f5f5f5]"
+      />
       <CraneCategorySection theme="dark" {...pageData.crane_categories} />
       <SelectionGuideSection {...pageData.selection_guide} />
       <SiteSelectionSection {...pageData.industry_application} />

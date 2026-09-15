@@ -1,40 +1,22 @@
 import HighlightedTitle from "@/components/common/highlight-title";
 import { StrapiImage } from "@/components/common/strapi-image";
+import Tag from "@/components/common/tag";
 import { extractHighlightText } from "@/lib/utils";
-import type { MediaProps } from "@/type";
+import type { CraneModelsSectionProps } from "@/type";
 import Link from "next/link";
 
-type RecommendedCraneSectionProps = {
-  title: string;
-  models: {
-    id: number;
-    model_slug: string;
-    crane_type: {
-      type: string;
-      slug: string;
-    };
-    main_section: {
-      model_short_name: string;
-      best_for: string;
-      images: MediaProps[];
-    };
-  }[];
-};
-
-const RecommendedCraneSection = ({
-  title,
-  models,
-}: RecommendedCraneSectionProps) => {
-  if (!title || !models || models.length === 0) return null;
+const CraneModelsSection = ({ tag_title, models }: CraneModelsSectionProps) => {
+  if (!tag_title || !models || models.length === 0) return null;
   return (
-    <div>
+    <div className="container container-padding-x py-10 md:py-20">
+      <Tag>{tag_title.tag}</Tag>
       <HighlightedTitle
-        title={title}
-        highlights={extractHighlightText(title)}
+        title={tag_title.title}
+        highlights={extractHighlightText(tag_title.title)}
         className="md:text-3xl"
       />
 
-      <div className="flex w-full md:grid grid-cols-2 lg:grid-cols-4 gap-5 overflow-x-scroll scrollbar-none">
+      <div className="w-full grid grid-cols-2 lg:grid-cols-4 gap-5">
         {models.map((model) => (
           <Card {...model} key={model.id} />
         ))}
@@ -43,24 +25,26 @@ const RecommendedCraneSection = ({
   );
 };
 
-export default RecommendedCraneSection;
+export default CraneModelsSection;
 
 function Card({
   model_slug,
   main_section,
   crane_type,
-}: RecommendedCraneSectionProps["models"][number]) {
+}: CraneModelsSectionProps["models"][number]) {
   return (
     <div className="mt-7 md:mt-10 shrink-0 w-[80%] md:w-auto">
       <Link href={`/models/${model_slug}`} target="_blank">
         <div className="bg-[#F5F5F5] rounded-md flex items-center justify-center p-5 overflow-hidden">
-          <StrapiImage
-            src={main_section.images[0].url}
-            alt={main_section.images[0].alternativeText || "crane image"}
-            width={200}
-            height={200}
-            className="hover:scale-110 transition-transform duration-300"
-          />
+          {main_section.images[0] && (
+            <StrapiImage
+              src={main_section.images[0].url}
+              alt={main_section.images[0].alternativeText || "crane image"}
+              width={200}
+              height={200}
+              className="hover:scale-110 transition-transform duration-300"
+            />
+          )}
         </div>
 
         <h3 className="text-lg font-medium mt-5 mb-2">

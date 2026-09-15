@@ -1253,14 +1253,11 @@ export const categorySalesPageQuery = qs.stringify({
         tag_title: true,
         models: {
           populate: {
+            crane_type: {
+              fields: ["type", "slug"],
+            },
             main_section: {
-              fields: [
-                "model_short_name",
-                "crane_capacity",
-                "max_working_radius",
-                "max_lifting_height",
-                "listingType",
-              ],
+              fields: ["model_short_name", "best_for"],
               populate: {
                 images: {
                   fields: ["url", "alternativeText"],
@@ -1296,13 +1293,24 @@ export const categorySalesPageQuery = qs.stringify({
         tag_title: true,
       },
     },
-    table_section: {
+    crane_series_section: {
       populate: {
-        fem_1001: {
-          fields: ["url"],
+        crane_series: {
+          populate: {
+            image: {
+              fields: ["url", "alternativeText"],
+            },
+          },
         },
-        en_14439_c25: {
-          fields: ["url"],
+        table: {
+          populate: {
+            fem_1001: {
+              fields: ["url"],
+            },
+            en_14439_c25: {
+              fields: ["url"],
+            },
+          },
         },
       },
     },

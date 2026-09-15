@@ -11,8 +11,9 @@ import ResourcesSection from "@/components/pages/home/resources-section";
 import TestimonialSection from "@/components/pages/home/testimonial-section";
 import ProcurementSection from "@/components/pages/model/procurement-section";
 import SiteSelectionSection from "@/components/pages/rental-hub/site-selection-section";
-import { TableSection } from "@/components/pages/rental-hub/table";
 import BuyingGuideSection from "@/components/pages/sales-hub/buying-guide-section";
+import CraneModelsSection from "@/components/pages/sales-hub/crane-models-section";
+import CraneSeriesSection from "@/components/pages/sales-hub/crane-series-section";
 import EngineeringSupportSection from "@/components/pages/sales-hub/engineering-support-section";
 import {
   getCraneTypes,
@@ -21,6 +22,7 @@ import {
   getProjectTypes,
 } from "@/data/loader";
 import { returnMetadata } from "@/lib/utils";
+import type { CraneModelsSectionProps, CraneSeriesSectionProps } from "@/type";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 
@@ -68,6 +70,9 @@ const CategorySalesPage = async ({
   const { pageData, craneTypes, projectTypes, manufacturers } = await loader(
     category as string,
   );
+
+  // console.log(pageData.crane_series_section);
+
   return (
     <main>
       <HeroSection {...pageData.hero} className="max-w-2xl" showModal />
@@ -77,7 +82,18 @@ const CategorySalesPage = async ({
         project_types={projectTypes}
         manufacturers={manufacturers}
       />
-      <TableSection {...pageData.table_section} />
+      {pageData.cranes_section &&
+        pageData.cranes_section.map(
+          (crane: CraneModelsSectionProps, i: number) => (
+            <CraneModelsSection {...crane} key={i} />
+          ),
+        )}
+      {pageData.crane_series_section &&
+        pageData.crane_series_section.map(
+          (series: CraneSeriesSectionProps, i: number) => (
+            <CraneSeriesSection {...series} key={i} />
+          ),
+        )}
       <ProcurementSection {...pageData.info_section} />
       <OwnershipBenefitsSection2 {...pageData.benefits_section} />
       <BrandHighlightSection {...pageData.brand_highlight} />

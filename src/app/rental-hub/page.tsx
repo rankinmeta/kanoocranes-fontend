@@ -11,7 +11,7 @@ import TestimonialSection from "@/components/pages/home/testimonial-section";
 import AccordionSection from "@/components/pages/rental-hub/accordion-section";
 import Section2 from "@/components/pages/rental-hub/section2";
 import SiteSelectionSection from "@/components/pages/rental-hub/site-selection-section";
-import { TableSection } from "@/components/pages/rental-hub/table";
+import { TableSection } from "@/components/pages/rental-hub/table-section";
 import EngineeringSupportSection from "@/components/pages/sales-hub/engineering-support-section";
 import SalesCategorySection from "@/components/pages/sales-hub/sales-category-section";
 import { getRentalHubPage } from "@/data/loader";
@@ -39,9 +39,11 @@ const RentalHubPage = async () => {
   return (
     <main>
       <HeroSection {...pageData.hero} showModal className="max-w-2xl" />
-      <section className="container container-padding-x py-10 md:py-20 lg:py-20">
-        <RecommendedCraneSection {...pageData.recommended_cranes} />
-      </section>
+      {pageData.recommended_cranes && (
+        <section className="container container-padding-x py-10 md:py-20 lg:py-20">
+          <RecommendedCraneSection {...pageData.recommended_cranes} />
+        </section>
+      )}
       <Section2
         cards={pageData.why_rent_from_us_section.details}
         {...pageData.why_rent_from_us_section}
