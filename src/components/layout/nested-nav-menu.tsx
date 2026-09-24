@@ -176,7 +176,7 @@ export function TopItem({ item, buttonColor }: TopItemProps) {
 
   return (
     <div
-      className="relative"
+      className="relative flex-1"
       onMouseEnter={scheduleOpen}
       onMouseLeave={scheduleClose}
     >

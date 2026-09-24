@@ -157,7 +157,7 @@ const Header = ({ button, logo, menu_links }: HeaderProps) => {
           <li className="flex-1">
             <GlassLink href="/resource-hub">Resource hub</GlassLink>
           </li>
-          <li className="flex-[1.55] space-x-0.5">
+          <li className="flex-1 space-x-0.5">
             <Link href="/contact-us">
               <Button className="px-4 py-2 text-xs h-fit" variant={"white"}>
                 Contact Us
