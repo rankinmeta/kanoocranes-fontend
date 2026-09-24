@@ -10,7 +10,7 @@ import { cn } from "@/lib/utils";
 import MenuSheet from "../sheets/menu-sheet";
 import type { MediaProps } from "@/type";
 import { ContactDialog } from "../dialog/contact-dialog";
-import NestedNavMenu from "./nested-nav-menu";
+import { mapApiMenuToNavItems, TopItem } from "./nested-nav-menu";
 
 type SubItem = {
   id: number;
@@ -64,18 +64,45 @@ const Header = ({ button, logo, menu_links }: HeaderProps) => {
           <li className="flex-1">
             <GlassLink href="/eng-solutions">Solutions</GlassLink>
           </li>
-          <NestedNavMenu
+          <TopItem
+            item={{
+              id: "products",
+              href: "/models",
+              label: "Products",
+              children: [
+                {
+                  id: "rent-cranes",
+                  href: "/rental-hub",
+                  label: "Rent cranes",
+                  children: mapApiMenuToNavItems(
+                    menu_links.rent_cranes_menu,
+                    "rent-cranes",
+                  ),
+                },
+                {
+                  id: "buy-cranes",
+                  href: "/sales-hub",
+                  label: "Buy cranes",
+                  children: mapApiMenuToNavItems(
+                    menu_links.buy_cranes_menu,
+                    "buy-cranes",
+                  ),
+                },
+              ],
+            }}
+          />
+          {/* <NestedNavMenu
             label="Rent cranes"
             href="/rental-hub"
             parentSlug="rent-cranes"
             data={menu_links.rent_cranes_menu}
-          />
-          <NestedNavMenu
+          /> */}
+          {/* <NestedNavMenu
             label="Buy cranes"
             href="/sales-hub"
             parentSlug="buy-cranes"
             data={menu_links.buy_cranes_menu}
-          />
+          /> */}
           {/* <li
             onMouseEnter={() => setRentOpen(true)}
             onMouseLeave={() => setRentOpen(false)}

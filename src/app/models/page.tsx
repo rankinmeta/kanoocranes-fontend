@@ -1,7 +1,8 @@
 import { StrapiImage } from "@/components/common/strapi-image";
 import { Button } from "@/components/ui/button";
 import { getAllModels } from "@/data/loader";
-import { MediaProps } from "@/type";
+import { regroupModels } from "@/lib/utils";
+import { GroupedManufacturer, ModelListingTypeProps } from "@/type";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
@@ -16,12 +17,23 @@ async function loader() {
 const ModelPage = async () => {
   const { pageData } = await loader();
 
+  const grouped = regroupModels(pageData);
+
   return (
-    <section className="container container-padding-x pb-10 md:pb-20 grid md:grid-cols-3 lg:grid-cols-4 gap-3">
-      {pageData.map((model: Props) => (
-        <Link href={`/models/${model.model_slug}`} key={model.id}>
-          <Card {...model} />
-        </Link>
+    <section className="container container-padding-x pb-10 md:pb-20">
+      {grouped.map((manufacturer: GroupedManufacturer) => (
+        <div key={manufacturer.manufacturerSlug} className="mb-10 last:mb-0">
+          <h3 className="text-4xl font-manrope font-medium mt-3">
+            {manufacturer.manufacturer}
+          </h3>
+          <div className="grid md:grid-cols-3 lg:grid-cols-4 gap-3">
+            {manufacturer.items.map((model: ModelListingTypeProps) => (
+              <Link href={`/models/${model.model_slug}`} key={model.id}>
+                <Card {...model} />
+              </Link>
+            ))}
+          </div>
+        </div>
       ))}
     </section>
   );
@@ -29,25 +41,11 @@ const ModelPage = async () => {
 
 export default ModelPage;
 
-type Props = {
-  id: number;
-  main_section: {
-    crane_capacity: number;
-    images: MediaProps[];
-    max_lifting_height: number;
-    listingType: "sale" | "rent" | "both";
-    max_working_radius: number;
-    model_short_name: string;
-  };
-  model_name: string;
-  model_slug: string;
-};
-
-function Card({ main_section, model_name, model_slug }: Props) {
+function Card({ main_section, model_name, model_slug }: ModelListingTypeProps) {
   if (!main_section || !model_name || !model_slug) return null;
 
   return (
-    <div className="mt-10 pb-1">
+    <div className="mt-5 pb-1">
       <div className="bg-[#F5F5F5] aspect-[1/0.7] rounded-md flex items-center justify-center p-5 overflow-hidden">
         {main_section.images[0] && (
           <StrapiImage

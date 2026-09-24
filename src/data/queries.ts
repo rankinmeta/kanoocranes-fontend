@@ -1622,6 +1622,7 @@ export const getAllModelsQuery = qs.stringify({
     pageSize: 100,
   },
   populate: {
+    manufacturer: true,
     main_section: {
       fields: [
         "model_short_name",

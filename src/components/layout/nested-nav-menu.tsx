@@ -50,7 +50,7 @@ function mapLeafToNavItem(leaf: MenuLeaf, parentSlug: string): NavItem {
  * Each top-level entry's `menu` becomes the parent, and its `sub_menus`
  * become that parent's `children`.
  */
-function mapApiMenuToNavItems(
+export function mapApiMenuToNavItems(
   data: MenuApiItem[],
   parentSlug: string,
 ): NavItem[] {
@@ -160,7 +160,7 @@ function GlassLink({
 }
 
 /** Top-level header bar item; opens its first-level submenu directly below it. */
-function TopItem({ item, buttonColor }: TopItemProps) {
+export function TopItem({ item, buttonColor }: TopItemProps) {
   const [open, setOpen] = useState(false);
   const timers = useHoverTimers();
   const hasChildren = Array.isArray(item.children) && item.children.length > 0;

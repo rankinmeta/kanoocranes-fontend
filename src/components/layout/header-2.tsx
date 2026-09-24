@@ -1,3 +1,5 @@
+"use client";
+
 import Link from "next/link";
 import { StrapiImage } from "../common/strapi-image";
 import { ChevronRight } from "lucide-react";
@@ -7,7 +9,7 @@ import { cn } from "@/lib/utils";
 import MenuSheet from "../sheets/menu-sheet";
 import type { MediaProps } from "@/type";
 import { ContactDialog } from "../dialog/contact-dialog";
-import NestedNavMenu from "./nested-nav-menu";
+import { mapApiMenuToNavItems, TopItem } from "./nested-nav-menu";
 
 type SubItem = {
   id: number;
@@ -56,7 +58,35 @@ const Header2 = ({ button, logo_color, menu_links }: HeaderProps) => {
           <li className="flex-1">
             <GlassLink href="/eng-solutions">Solutions</GlassLink>
           </li>
-          <NestedNavMenu
+          <TopItem
+            buttonColor="white"
+            item={{
+              id: "products",
+              href: "/models",
+              label: "Products",
+              children: [
+                {
+                  id: "rent-cranes",
+                  href: "/rental-hub",
+                  label: "Rent cranes",
+                  children: mapApiMenuToNavItems(
+                    menu_links.rent_cranes_menu,
+                    "rent-cranes",
+                  ),
+                },
+                {
+                  id: "buy-cranes",
+                  href: "/sales-hub",
+                  label: "Buy cranes",
+                  children: mapApiMenuToNavItems(
+                    menu_links.buy_cranes_menu,
+                    "buy-cranes",
+                  ),
+                },
+              ],
+            }}
+          />
+          {/* <NestedNavMenu
             label="Rent cranes"
             href="/rental-hub"
             parentSlug="rent-cranes"
@@ -69,7 +99,7 @@ const Header2 = ({ button, logo_color, menu_links }: HeaderProps) => {
             parentSlug="buy-cranes"
             buttonColor="white"
             data={menu_links.buy_cranes_menu}
-          />
+          /> */}
           {/* <li
             onMouseEnter={() => setRentOpen(true)}
             onMouseLeave={() => setRentOpen(false)}

@@ -1,4 +1,8 @@
-import { SeoMetadata } from "@/type";
+import {
+  GroupedManufacturer,
+  ModelListingTypeProps,
+  SeoMetadata,
+} from "@/type";
 import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
 
@@ -58,4 +62,26 @@ export function chunk(arr: any[], size = 7) {
   }
 
   return result;
+}
+
+export function regroupModels(data: ModelListingTypeProps[]) {
+  const grouped: GroupedManufacturer[] = Object.values(
+    data.reduce<Record<string, GroupedManufacturer>>((acc, item) => {
+      const { slug, name } = item.manufacturer;
+
+      if (!acc[slug]) {
+        acc[slug] = {
+          manufacturer: name,
+          manufacturerSlug: slug,
+          items: [],
+        };
+      }
+
+      acc[slug].items.push(item);
+
+      return acc;
+    }, {}),
+  );
+
+  return grouped;
 }

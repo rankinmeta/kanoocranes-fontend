@@ -264,3 +264,24 @@ export type CraneModelsSectionProps = {
     };
   }[];
 };
+
+export type ModelListingTypeProps = {
+  id: number;
+  manufacturer: ManufacturerProps;
+  main_section: {
+    crane_capacity: number;
+    images: MediaProps[];
+    max_lifting_height: number;
+    listingType: "sale" | "rent" | "both";
+    max_working_radius: number;
+    model_short_name: string;
+  };
+  model_name: string;
+  model_slug: string;
+};
+
+export type GroupedManufacturer = {
+  manufacturer: string;
+  manufacturerSlug: string;
+  items: ModelListingTypeProps[];
+};
