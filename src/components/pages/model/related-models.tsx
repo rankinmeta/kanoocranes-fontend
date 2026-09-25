@@ -24,6 +24,7 @@ type RelatedModelsProps = {
 };
 
 const RelatedModels = ({ tag_title, models }: RelatedModelsProps) => {
+  if (!tag_title || !models) return null;
   return (
     <section className="container container-padding-x py-10 md:py-16 lg:py-20">
       <div className="space-y-2">
