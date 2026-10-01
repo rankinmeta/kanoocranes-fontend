@@ -67,12 +67,16 @@ function Card({
           {main_section.model_short_name}
         </h3>
         <div>
-          <div className="flex items-center gap-2 py-3">
-            <div className="size-2 bg-primary rounded-xs shrink-0" />
-            <span className="text-sm font-semibold">Type</span>
-            <span className="text-sm text-gray-600">{crane_type.type}</span>
-          </div>
-          <hr />
+          {crane_type && (
+            <>
+              <div className="flex items-center gap-2 py-3">
+                <div className="size-2 bg-primary rounded-xs shrink-0" />
+                <span className="text-sm font-semibold">Type</span>
+                <span className="text-sm text-gray-600">{crane_type.type}</span>
+              </div>
+              <hr />
+            </>
+          )}
           <div className="flex items-center gap-2 py-3">
             <div className="size-2 bg-primary rounded-xs shrink-0" />
             <span className="text-sm font-semibold whitespace-nowrap">
