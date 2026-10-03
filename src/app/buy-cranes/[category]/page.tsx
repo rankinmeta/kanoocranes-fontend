@@ -71,11 +71,9 @@ const CategorySalesPage = async ({
     category as string,
   );
 
-  // console.log(pageData.crane_series_section);
-
   return (
     <main>
-      <HeroSection {...pageData.hero} className="max-w-2xl" showModal />
+      <HeroSection {...pageData.hero} className="max-w-2xl" />
       <FilterListSection
         {...pageData.filter_section}
         crane_types={craneTypes}

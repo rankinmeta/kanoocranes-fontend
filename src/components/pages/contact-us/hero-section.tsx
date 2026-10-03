@@ -38,13 +38,13 @@ const HeroSection = ({
           {(button1 || button2) && (
             <div className="flex flex-col md:flex-row gap-3 mt-10 md:mt-6">
               {button1 &&
-                (showModal ? (
+                (showModal || button1.href === "#" ? (
                   <ContactDialog>
                     <Button className="w-full md:w-auto">
                       {button1.label}
                     </Button>
                   </ContactDialog>
-                ) : button1.href.startsWith("#") ? (
+                ) : button1.href.startsWith("#") && button1.href !== "#" ? (
                   <Button
                     onClick={() => {
                       gsap.to(window, { duration: 1, scrollTo: button1.href });
@@ -64,7 +64,13 @@ const HeroSection = ({
                   </Link>
                 ))}
               {button2 &&
-                (button2.href.startsWith("#") ? (
+                (button2.href === "#" ? (
+                  <ContactDialog>
+                    <Button className="bg-white text-primary hover:text-white w-full md:w-auto">
+                      {button2.label}
+                    </Button>
+                  </ContactDialog>
+                ) : button2.href.startsWith("#") && button2.href !== "#" ? (
                   <Button
                     onClick={() => {
                       gsap.to(window, {

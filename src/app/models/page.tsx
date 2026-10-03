@@ -5,6 +5,7 @@ import { regroupModels } from "@/lib/utils";
 import { GroupedManufacturer, ModelListingTypeProps } from "@/type";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import ScrollToSection from "./scroll-to-section";
 
 async function loader() {
   const pageData = await getAllModels();
@@ -21,8 +22,13 @@ const ModelPage = async () => {
 
   return (
     <section className="container container-padding-x pb-10 md:pb-20">
+      <ScrollToSection />
       {grouped.map((manufacturer: GroupedManufacturer) => (
-        <div key={manufacturer.manufacturerSlug} className="mb-10 last:mb-0">
+        <div
+          key={manufacturer.manufacturerSlug}
+          className="mb-10 last:mb-0"
+          id={manufacturer.manufacturerSlug}
+        >
           <h3 className="text-4xl font-manrope font-medium mt-3">
             {manufacturer.manufacturer}
           </h3>

@@ -77,7 +77,7 @@ const Footer = ({
   socials,
 }: FooterProps) => {
   const pathname = usePathname();
-  const padding = pathname.includes("/models");
+  const padding = pathname.includes("/models") && pathname !== "/models";
 
   return (
     <footer className={cn("grid lg:grid-cols-3", padding && "md:mb-18")}>
