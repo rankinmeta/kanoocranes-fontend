@@ -6,6 +6,7 @@ import { GroupedManufacturer, ModelListingTypeProps } from "@/type";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import ScrollToSection from "./scroll-to-section";
+import { Suspense } from "react";
 
 async function loader() {
   const pageData = await getAllModels();
@@ -22,7 +23,9 @@ const ModelPage = async () => {
 
   return (
     <section className="container container-padding-x pb-10 md:pb-20">
-      <ScrollToSection />
+      <Suspense fallback={<></>}>
+        <ScrollToSection />
+      </Suspense>
       {grouped.map((manufacturer: GroupedManufacturer) => (
         <div
           key={manufacturer.manufacturerSlug}
