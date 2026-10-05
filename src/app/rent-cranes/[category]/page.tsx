@@ -54,6 +54,7 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { category } = await params;
   const { data } = await getRSPage(category);
+  if (!data || !data.data) return notFound();
 
   return returnMetadata(data);
 }
@@ -79,12 +80,7 @@ const CategoryRentalPage = async ({
         project_types={projectTypes}
         manufacturers={manufacturers}
       />
-      {pageData.cranes_section &&
-        pageData.cranes_section.map(
-          (crane: CraneModelsSectionProps, i: number) => (
-            <CraneModelsSection {...crane} key={i} />
-          ),
-        )}
+      <CraneModelsSection {...pageData.cranes_section} />
       <Section2 {...pageData.info_section} />
       <ProfessionalRentalSection {...pageData.rental_services_section} />
       <TableSection

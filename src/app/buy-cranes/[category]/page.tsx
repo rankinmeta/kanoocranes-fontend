@@ -55,6 +55,7 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { category } = await params;
   const { data } = await getCSPage(category);
+  if (!data || !data.data) return notFound();
 
   return returnMetadata(data);
 }
