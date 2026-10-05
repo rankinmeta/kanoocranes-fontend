@@ -53,7 +53,7 @@ function Card({
   return (
     <div className="mt-7 md:mt-10 shrink-0 w-[80%] md:w-auto">
       <Link href={`/models/${model_slug}`} target="_blank">
-        <div className="bg-[#F5F5F5] rounded-md flex items-center justify-center p-5 overflow-hidden">
+        <div className="bg-[#F5F5F5] rounded-md flex aspect-[1/0.7] items-center justify-center p-5 overflow-hidden">
           <StrapiImage
             src={main_section.images[0].url}
             alt={main_section.images[0].alternativeText || "crane image"}
@@ -77,12 +77,14 @@ function Card({
               <hr />
             </>
           )}
-          <div className="flex items-center gap-2 py-3">
-            <div className="size-2 bg-primary rounded-xs shrink-0" />
-            <span className="text-sm font-semibold whitespace-nowrap">
-              Best for
-            </span>
-            <span className="text-sm text-gray-600">
+          <div className="flex flex-col items-start gap-1 py-3">
+            <div className="flex items-center gap-2">
+              <div className="size-2 bg-primary rounded-xs shrink-0" />
+              <span className="text-sm font-semibold whitespace-nowrap">
+                Best for
+              </span>
+            </div>
+            <span className="text-sm text-gray-600 ms-3.5">
               {main_section.best_for}
             </span>
           </div>

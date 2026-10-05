@@ -119,7 +119,7 @@ function Card({
       </div>
 
       <Link
-        href="/contact-us"
+        href={`tel:${props.phone.replaceAll(" ", "")}`}
         className={cn(
           "text-primary flex items-center gap-2 text-sm",
           theme === "light" && "text-secondary",

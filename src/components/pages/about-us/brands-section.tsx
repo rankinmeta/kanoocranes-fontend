@@ -3,6 +3,7 @@ import { StrapiImage } from "@/components/common/strapi-image";
 import Tag from "@/components/common/tag";
 import { extractHighlightText } from "@/lib/utils";
 import { BrandSectionProps } from "@/type";
+import Link from "next/link";
 
 const BrandsSection = ({
   brands,
@@ -38,21 +39,40 @@ function BrandCard({
   title,
   description,
   logo,
+  link,
 }: BrandSectionProps["brands"][0]) {
   if (!title || !logo) return null;
 
   return (
     <div className="lg:sticky top-28 bg-white rounded-md px-8 py-10 flex flex-col md:flex-row md:items-center gap-5">
-      <StrapiImage
-        src={logo.url}
-        alt={logo.alternativeText || "logo"}
-        width={200}
-        height={200}
-        className="shrink-0"
-      />
+      {link ? (
+        <Link className="shrink-0" href={link}>
+          <StrapiImage
+            src={logo.url}
+            alt={logo.alternativeText || "logo"}
+            width={200}
+            height={200}
+            className="shrink-0"
+          />
+        </Link>
+      ) : (
+        <StrapiImage
+          src={logo.url}
+          alt={logo.alternativeText || "logo"}
+          width={200}
+          height={200}
+          className="shrink-0"
+        />
+      )}
 
       <div className="space-y-2">
-        <h4 className="text-lg font-semibold font-manrope">{title}</h4>
+        {link ? (
+          <Link href={link}>
+            <h4 className="text-lg font-semibold font-manrope">{title}</h4>
+          </Link>
+        ) : (
+          <h4 className="text-lg font-semibold font-manrope">{title}</h4>
+        )}
         <p className="text-sm">{description}</p>
       </div>
     </div>

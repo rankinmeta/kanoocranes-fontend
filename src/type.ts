@@ -115,6 +115,7 @@ export type BrandSectionProps = {
     title: string;
     description: string;
     logo: MediaProps;
+    link: string;
   }[];
 };
 

@@ -12,6 +12,7 @@ import ResourcesSection from "@/components/pages/home/resources-section";
 import TestimonialSection from "@/components/pages/home/testimonial-section";
 import SiteSelectionSection from "@/components/pages/rental-hub/site-selection-section";
 import { TableSection } from "@/components/pages/rental-hub/table-section";
+import CraneModelsSection from "@/components/pages/sales-hub/crane-models-section";
 import EngineeringSupportSection from "@/components/pages/sales-hub/engineering-support-section";
 import {
   getCraneTypes,
@@ -20,6 +21,7 @@ import {
   getRSPage,
 } from "@/data/loader";
 import { returnMetadata } from "@/lib/utils";
+import { CraneModelsSectionProps } from "@/type";
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
 
@@ -77,6 +79,12 @@ const CategoryRentalPage = async ({
         project_types={projectTypes}
         manufacturers={manufacturers}
       />
+      {pageData.cranes_section &&
+        pageData.cranes_section.map(
+          (crane: CraneModelsSectionProps, i: number) => (
+            <CraneModelsSection {...crane} key={i} />
+          ),
+        )}
       <Section2 {...pageData.info_section} />
       <ProfessionalRentalSection {...pageData.rental_services_section} />
       <TableSection

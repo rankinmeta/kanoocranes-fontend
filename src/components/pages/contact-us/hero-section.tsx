@@ -74,7 +74,7 @@ const HeroSection = ({
                   <Button
                     onClick={() => {
                       gsap.to(window, {
-                        duration: 1,
+                        duration: 4,
                         scrollTo: button2.href,
                       });
                     }}

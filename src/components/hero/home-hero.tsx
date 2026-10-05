@@ -14,6 +14,7 @@ import Autoplay from "embla-carousel-autoplay";
 import { Button } from "../ui/button";
 import HighlightCard from "../pages/home/highlight-card";
 import Link from "next/link";
+import { ContactDialog } from "../dialog/contact-dialog";
 
 const HomeHero = ({ hero }: Readonly<{ hero: HomeHeroProps }>) => {
   const [api, setApi] = useState<CarouselApi>();
@@ -149,10 +150,10 @@ const HomeHero = ({ hero }: Readonly<{ hero: HomeHeroProps }>) => {
           </p>
 
           <div className="space-x-3 mt-8">
-            <Link href="/contact-us" target="_blank">
+            <ContactDialog>
               <Button>Get quote</Button>
-            </Link>
-            <Link href="/rental-hub" target="_blank">
+            </ContactDialog>
+            <Link href="/models">
               <Button variant={"white"}>Find Your Crane</Button>
             </Link>
           </div>
