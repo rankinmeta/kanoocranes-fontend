@@ -47,9 +47,12 @@ const CustomModelTable = ({
         {table_section.map((item, index) => (
           <div
             key={item.id}
-            className={`grid grid-cols-6 gap-2 px-4 py-2.5 text-sm mx-1 ${
-              index % 2 === 0 ? "bg-gray-100" : "bg-white rounded-md"
-            }`}
+            className={cn(
+              `grid gap-2 px-4 py-2.5 text-sm mx-1 ${
+                index % 2 === 0 ? "bg-gray-100" : "bg-white rounded-md"
+              }`,
+              gridCols[columnCount],
+            )}
           >
             {item.model && (
               <span className="font-medium whitespace-nowrap text-blue-500">
