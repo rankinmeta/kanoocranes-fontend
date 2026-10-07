@@ -38,6 +38,7 @@ async function loader() {
   return {
     header: data.data?.header,
     footer: data.data?.footer,
+    whatsapp_number: data.data?.whatsapp_number,
   };
 }
 
@@ -46,7 +47,7 @@ export default async function RootLayout({
 }: Readonly<{
   children: ReactNode;
 }>) {
-  const { header, footer } = await loader();
+  const { header, footer, whatsapp_number } = await loader();
 
   return (
     <html
@@ -65,7 +66,7 @@ export default async function RootLayout({
         <Providers>{children}</Providers>
         <Footer {...footer} />
         <Toaster richColors position="top-right" />
-        <Widget />
+        <Widget whatsapp_number={whatsapp_number} />
       </body>
     </html>
   );

@@ -84,14 +84,19 @@ export function ProductInfo({
           { label: "Hook Height", value: hook_height },
           { label: "Maximum Radius", value: max_working_radius },
           { label: "Crane Configuration", value: crane_configuration },
-        ].map((item) => (
-          <div key={item.label} className="flex items-center gap-2">
-            <span className="h-2 w-2 bg-red-500" />
-            <span className="text-sm font-medium">{item.label}</span>
+        ].map((item) => {
+          if (item.value && item.value !== "") {
+            return (
+              <div key={item.label} className="flex items-center gap-2">
+                <span className="h-2 w-2 bg-red-500" />
+                <span className="text-sm font-medium">{item.label}</span>
 
-            <span className="text-sm text-[#414651]">{item.value}</span>
-          </div>
-        ))}
+                <span className="text-sm text-[#414651]">{item.value}</span>
+              </div>
+            );
+          }
+          return null;
+        })}
       </div>
 
       <div>

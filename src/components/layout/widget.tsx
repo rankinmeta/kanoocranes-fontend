@@ -1,12 +1,13 @@
 import Image from "next/image";
 import Link from "next/link";
 
-const Widget = () => {
+const Widget = ({ whatsapp_number }: { whatsapp_number: string }) => {
+  if (!whatsapp_number) return null;
   return (
     <Link
-      href="/"
+      href={`https://wa.me/${whatsapp_number.replaceAll(" ", "")}`}
       target="_blank"
-      className="fixed bottom-24 right-4 md:bottom-10 md:right-6 z-50"
+      className="fixed bottom-24 right-4 md:bottom-10 md:right-6 z-90"
     >
       <button
         aria-label="WhatsApp"
