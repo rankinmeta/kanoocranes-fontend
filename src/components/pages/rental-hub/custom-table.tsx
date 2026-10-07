@@ -1,6 +1,14 @@
 import { cn } from "@/lib/utils";
-import type { CustomTableSectionProps, TableSectionProps } from "@/type";
+import type { CustomTableSectionProps } from "@/type";
 import Link from "next/link";
+
+const gridCols = {
+  6: "grid-cols-6",
+  7: "grid-cols-7",
+  8: "grid-cols-8",
+  9: "grid-cols-9",
+  10: "grid-cols-10",
+};
 
 const CustomModelTable = ({
   table_section,
@@ -10,12 +18,19 @@ const CustomModelTable = ({
   className?: string;
 }) => {
   if (!table_section || table_section.length === 0) return null;
+  const columnCount = Object.keys(table_section[0])
+    .length as keyof typeof gridCols;
   return (
     <div
       className={cn("overflow-x-auto rounded-md bg-[#f5f5f5] pb-1", className)}
     >
       <div className="min-w-180">
-        <div className="bg-secondary px-5 py-2.5 text-white grid grid-cols-6 text-xs gap-2">
+        <div
+          className={cn(
+            "bg-secondary px-5 py-2.5 text-white grid text-xs gap-2",
+            gridCols[columnCount],
+          )}
+        >
           {table_section[0].model && <span>MODEL</span>}
           {table_section[0].max_lifting_height && (
             <span>MAX. LIFTING HEIGHT</span>
