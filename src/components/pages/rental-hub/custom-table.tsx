@@ -18,8 +18,10 @@ const CustomModelTable = ({
   className?: string;
 }) => {
   if (!table_section || table_section.length === 0) return null;
-  const columnCount = Object.keys(table_section[0])
-    .length as keyof typeof gridCols;
+  const columnCount = (Object.entries(table_section[0]).filter(
+    ([_, value]) => value !== null && value !== undefined,
+  ).length - 1) as keyof typeof gridCols;
+
   return (
     <div
       className={cn("overflow-x-auto rounded-md bg-[#f5f5f5] pb-1", className)}
