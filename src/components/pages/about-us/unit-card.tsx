@@ -22,12 +22,12 @@ const UnitCard = ({
         className="object-cover"
       />
 
-      <div className="absolute m-6 grid md:grid-cols-3 gap-2 bottom-0 left-0 right-0 text-white">
+      <div className="absolute m-6 grid md:grid-cols-3 gap-2 bottom-0 left-0 right-0 text-black">
         <div
           onClick={() => setCurrent(units[0].image)}
           className={cn(
-            "rounded-md bg-white/10 md:bg-white/20 backdrop-blur-3xl p-3.5 space-y-2 border-b-2 border-transparent cursor-pointer",
-            current.id === units[0].image.id && "border-white",
+            "rounded-md bg-white/70 backdrop-blur-2xl p-3.5 space-y-2 border-b-2 border-transparent cursor-pointer",
+            current.id === units[0].image.id && "border-primary",
           )}
         >
           <h4 className="font-medium font-manrope text-lg">{units[0].title}</h4>
@@ -43,8 +43,8 @@ const UnitCard = ({
         <div
           onClick={() => setCurrent(units[1].image)}
           className={cn(
-            "rounded-md bg-white/10 md:bg-white/20 backdrop-blur-3xl p-3.5 space-y-2 border-b-2 border-transparent cursor-pointer",
-            current.id === units[1].image.id && "border-white",
+            "rounded-md bg-white/70 backdrop-blur-2xl p-3.5 space-y-2 border-b-2 border-transparent cursor-pointer",
+            current.id === units[1].image.id && "border-primary",
           )}
         >
           <h4 className="font-medium font-manrope text-lg">{units[1].title}</h4>
@@ -60,8 +60,8 @@ const UnitCard = ({
         <div
           onClick={() => setCurrent(units[2].image)}
           className={cn(
-            "rounded-md bg-white/10 md:bg-white/20 backdrop-blur-3xl p-3.5 space-y-2 border-b-2 border-transparent cursor-pointer",
-            current.id === units[2].image.id && "border-white",
+            "rounded-md bg-white/70 backdrop-blur-2xl p-3.5 space-y-2 border-b-2 border-transparent cursor-pointer",
+            current.id === units[2].image.id && "border-primary",
           )}
         >
           <h4 className="font-medium font-manrope text-lg">{units[2].title}</h4>

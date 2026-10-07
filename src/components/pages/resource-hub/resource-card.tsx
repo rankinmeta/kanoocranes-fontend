@@ -29,9 +29,9 @@ const ResourceCard = ({
     <Link
       href={`/resource-hub/${resource.slug}`}
       target="_blank"
-      className={cn("shrink-0 w-[90%] md:w-1/2 lg:w-auto", className)}
+      className={cn("shrink-0 w-[90%] md:w-1/2 lg:w-auto h-full", className)}
     >
-      <div className="group bg-white md:bg-transparent p-3 pb-5 hover:bg-white transition-colors duration-300">
+      <div className="group flex flex-col h-full bg-white md:bg-transparent p-3 pb-5 hover:bg-white transition-colors duration-300">
         <div className="overflow-hidden">
           <StrapiImage
             src={resource.image.url}
@@ -55,7 +55,7 @@ const ResourceCard = ({
           </span>
         </div>
         <h4 className="font-medium mb-3">{resource.title}</h4>
-        <button className="flex items-center gap-2 text-primary text-sm">
+        <button className="flex mt-auto items-center gap-2 text-primary text-sm">
           Read more <ArrowRight size={16} />
         </button>
       </div>

@@ -3,10 +3,12 @@ import { StrapiImage } from "@/components/common/strapi-image";
 import { cn, extractHighlightText } from "@/lib/utils";
 import type { CraneSeriesSectionProps } from "@/type";
 import ModelTable from "../rental-hub/table";
+import CustomModelTable from "../rental-hub/custom-table";
 
 const CraneSeriesSection = ({
   crane_series,
   table,
+  custom_table,
 }: CraneSeriesSectionProps) => {
   return (
     <section className="bg-[#f0efef]">
@@ -42,10 +44,19 @@ const CraneSeriesSection = ({
           </div>
         </div>
 
-        <ModelTable
-          table_section={table}
-          className="mt-5 md:col-span-5 md:mt-10"
-        />
+        {table && (
+          <ModelTable
+            table_section={table}
+            className="mt-5 md:col-span-5 md:mt-10"
+          />
+        )}
+
+        {custom_table && (
+          <CustomModelTable
+            table_section={custom_table}
+            className="mt-5 md:col-span-5 md:mt-10"
+          />
+        )}
       </div>
     </section>
   );

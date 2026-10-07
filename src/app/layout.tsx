@@ -9,6 +9,7 @@ import { getGlobalSettings } from "@/data/loader";
 import Providers from "./providers";
 import { Toaster } from "sonner";
 import type { ReactNode } from "react";
+import Widget from "@/components/layout/widget";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-sans" });
 
@@ -64,6 +65,7 @@ export default async function RootLayout({
         <Providers>{children}</Providers>
         <Footer {...footer} />
         <Toaster richColors position="top-right" />
+        <Widget />
       </body>
     </html>
   );

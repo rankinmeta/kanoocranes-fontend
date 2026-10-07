@@ -238,6 +238,21 @@ export type TableSectionProps = {
   en_14439_c25: MediaProps;
 };
 
+export type CustomTableSectionProps = {
+  id: number;
+  documentId: string;
+  model?: string;
+  max_lifting_height?: string;
+  max_load?: string;
+  tip_load?: string;
+  max_radius?: string;
+  lifting_height?: string;
+  lifting_capacity?: string;
+  tower_height?: string;
+  brochure?: MediaProps;
+  factsheet?: MediaProps;
+};
+
 export type CraneSeriesSectionProps = {
   crane_series: {
     id: number;
@@ -247,24 +262,43 @@ export type CraneSeriesSectionProps = {
     image: MediaProps;
   };
   table: TableSectionProps[];
+  custom_table: CustomTableSectionProps[];
 };
 
-export type CraneModelsSectionProps = {
+export type FeaturedModelsSectionProps = {
+  id: number;
   tag_title: TagTitleProps;
   models: {
     id: number;
+    model_name: string;
     model_slug: string;
-    crane_type: {
-      type: string;
-      slug: string;
-    };
     main_section: {
-      model_short_name: string;
-      best_for: string;
+      crane_capacity: number;
       images: MediaProps[];
+      max_lifting_height: number;
+      listingType: "sale" | "rent" | "both";
+      max_working_radius: number;
+      model_short_name: string;
     };
   }[];
 };
+
+// export type CraneModelsSectionProps = {
+//   tag_title: TagTitleProps;
+//   models: {
+//     id: number;
+//     model_slug: string;
+//     crane_type: {
+//       type: string;
+//       slug: string;
+//     };
+//     main_section: {
+//       model_short_name: string;
+//       best_for: string;
+//       images: MediaProps[];
+//     };
+//   }[];
+// };
 
 export type ModelListingTypeProps = {
   id: number;

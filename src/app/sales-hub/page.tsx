@@ -46,7 +46,10 @@ const SalesHubPage = async () => {
         </section>
       )}
       <Section2 {...pageData.why_buy_from_us_section} />
-      <TableSection table_section={pageData.table_section} />
+      <TableSection
+        title={pageData.table_section_heading}
+        table_section={pageData.table_section}
+      />
       <SalesCategorySection {...pageData.sales_category_section} />
       <BrandsSection {...pageData.brands_section} />
       <FeaturedModelsSection {...pageData.featured_models_section} />

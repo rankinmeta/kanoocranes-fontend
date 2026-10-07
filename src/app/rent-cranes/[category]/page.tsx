@@ -21,7 +21,6 @@ import {
   getRSPage,
 } from "@/data/loader";
 import { returnMetadata } from "@/lib/utils";
-import { CraneModelsSectionProps } from "@/type";
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
 

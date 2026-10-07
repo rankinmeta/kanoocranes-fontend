@@ -48,7 +48,10 @@ const RentalHubPage = async () => {
         cards={pageData.why_rent_from_us_section.details}
         {...pageData.why_rent_from_us_section}
       />
-      <TableSection table_section={pageData.table_section} />
+      <TableSection
+        className={pageData.table_section_heading}
+        table_section={pageData.table_section}
+      />
       <SalesCategorySection {...pageData.sales_category_section} />
       <SiteSelectionSection {...pageData.site_selection_section} />
       <FeaturedModelsSection {...pageData.featured_models_section} />

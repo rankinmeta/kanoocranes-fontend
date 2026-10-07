@@ -9,6 +9,7 @@ const ModelTable = ({
   table_section: TableSectionProps[];
   className?: string;
 }) => {
+  if (!table_section || table_section.length === 0) return null;
   return (
     <div
       className={cn("overflow-x-auto rounded-md bg-[#f5f5f5] pb-1", className)}

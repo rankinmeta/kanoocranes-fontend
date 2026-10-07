@@ -22,7 +22,10 @@ import {
   getProjectTypes,
 } from "@/data/loader";
 import { returnMetadata } from "@/lib/utils";
-import type { CraneModelsSectionProps, CraneSeriesSectionProps } from "@/type";
+import type {
+  CraneSeriesSectionProps,
+  FeaturedModelsSectionProps,
+} from "@/type";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 
@@ -82,7 +85,7 @@ const CategorySalesPage = async ({
       />
       {pageData.cranes_section &&
         pageData.cranes_section.map(
-          (crane: CraneModelsSectionProps, i: number) => (
+          (crane: FeaturedModelsSectionProps, i: number) => (
             <CraneModelsSection {...crane} key={i} />
           ),
         )}
