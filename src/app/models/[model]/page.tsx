@@ -103,6 +103,7 @@ const ModalPage = async ({
             manufacturer={pageData.manufacturer?.name}
             model_specifications={pageData.main_section.model_specifications}
             overview={pageData.main_section.overview}
+            power_requirement={pageData.main_section.power_requirement}
           />
         </div>
       </section>

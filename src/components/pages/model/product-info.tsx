@@ -1,6 +1,7 @@
 import HighlightedTitle from "@/components/common/highlight-title";
 import { SpecificationTable } from "./specification-table";
 import { extractHighlightText } from "@/lib/utils";
+import { PowerReqTable } from "./power-req-table";
 
 type ProductProps = {
   title: string;
@@ -17,6 +18,17 @@ type ProductProps = {
     col1: string;
     col2: string;
   }[];
+  power_requirement: {
+    id: number;
+    label: string;
+    values: {
+      id: number;
+      col1: string;
+      col2?: string;
+      col3: string;
+      col4?: string;
+    }[];
+  }[];
 };
 
 export function ProductInfo({
@@ -29,6 +41,7 @@ export function ProductInfo({
   manufacturer,
   crane_configuration,
   model_specifications,
+  power_requirement,
   overview,
 }: ProductProps) {
   return (
@@ -41,63 +54,82 @@ export function ProductInfo({
 
       <p className="mt-4">{short_description}</p>
 
-      <div className="mt-5 grid md:grid-cols-3">
-        <div className="py-3 md:py-5">
-          <div className="flex items-center gap-2">
-            <div className="size-2 bg-primary" />
-            <span className="text-sm">Crane Capacity</span>
-          </div>
-
-          <h3 className="mt-2 text-2xl md:text-3xl font-medium font-manrope">
-            {crane_capacity} Ton
-          </h3>
-        </div>
-
-        <div className="border-y md:border-y-0 md:border-x py-3 md:py-5 md:pl-6">
-          <div className="flex items-center gap-2">
-            <div className="size-2 bg-primary" />
-            <span className="text-sm">Max Radius</span>
-          </div>
-
-          <h3 className="mt-2 text-2xl md:text-3xl font-medium font-manrope">
-            {max_working_radius}m
-          </h3>
-        </div>
-
-        <div className="py-3 md:py-5 md:pl-6">
-          <div className="flex items-center gap-2">
-            <div className="size-2 bg-primary" />
-            <span className="text-sm">Lift Height</span>
-          </div>
-
-          <h3 className="mt-2 text-2xl md:text-3xl font-medium font-manrope">
-            {max_lifting_height}m+
-          </h3>
-        </div>
-      </div>
-
-      <h3 className="mt-5 mb-4 text-2xl font-manrope font-medium">Specs Bar</h3>
-
-      <div className="grid md:grid-cols-2 gap-4 bg-[#F5F5F5] p-3 md:p-5 rounded-sm">
-        {[
-          { label: "Maximum Capacity", value: crane_capacity },
-          { label: "Hook Height", value: hook_height },
-          { label: "Maximum Radius", value: max_working_radius },
-          { label: "Crane Configuration", value: crane_configuration },
-        ].map((item) => {
-          if (item.value && item.value !== "") {
-            return (
-              <div key={item.label} className="flex items-center gap-2">
-                <span className="h-2 w-2 bg-red-500" />
-                <span className="text-sm font-medium">{item.label}</span>
-
-                <span className="text-sm text-[#414651]">{item.value}</span>
+      {((crane_capacity && crane_capacity !== "") ||
+        (max_working_radius && max_working_radius !== "") ||
+        (max_lifting_height && max_lifting_height !== "")) && (
+        <div className="mt-5 grid md:grid-cols-3">
+          {crane_capacity && crane_capacity !== "" && (
+            <div className="py-3 md:py-5">
+              <div className="flex items-center gap-2">
+                <div className="size-2 bg-primary" />
+                <span className="text-sm">Crane Capacity</span>
               </div>
-            );
-          }
-          return null;
-        })}
-      </div>
+
+              <h3 className="mt-2 text-2xl md:text-3xl font-medium font-manrope">
+                {crane_capacity} Ton
+              </h3>
+            </div>
+          )}
+
+          {max_working_radius && max_working_radius !== "" && (
+            <div className="border-y md:border-y-0 md:border-x py-3 md:py-5 md:pl-6">
+              <div className="flex items-center gap-2">
+                <div className="size-2 bg-primary" />
+                <span className="text-sm">Max Radius</span>
+              </div>
+
+              <h3 className="mt-2 text-2xl md:text-3xl font-medium font-manrope">
+                {max_working_radius}m
+              </h3>
+            </div>
+          )}
+
+          {max_lifting_height && max_lifting_height !== "" && (
+            <div className="py-3 md:py-5 md:pl-6">
+              <div className="flex items-center gap-2">
+                <div className="size-2 bg-primary" />
+                <span className="text-sm">Lift Height</span>
+              </div>
+
+              <h3 className="mt-2 text-2xl md:text-3xl font-medium font-manrope">
+                {max_lifting_height}m+
+              </h3>
+            </div>
+          )}
+        </div>
+      )}
+
+      {((crane_capacity && crane_capacity !== "") ||
+        (hook_height && hook_height !== "") ||
+        (max_working_radius && max_working_radius !== "") ||
+        (crane_configuration && crane_configuration !== "")) && (
+        <>
+          <h3 className="mt-5 mb-4 text-2xl font-manrope font-medium">
+            Specs Bar
+          </h3>
+
+          <div className="grid md:grid-cols-2 gap-4 bg-[#F5F5F5] p-3 md:p-5 rounded-sm">
+            {[
+              { label: "Maximum Capacity", value: crane_capacity },
+              { label: "Hook Height", value: hook_height },
+              { label: "Maximum Radius", value: max_working_radius },
+              { label: "Crane Configuration", value: crane_configuration },
+            ].map((item) => {
+              if (item.value && item.value !== "") {
+                return (
+                  <div key={item.label} className="flex items-center gap-2">
+                    <span className="h-2 w-2 bg-red-500" />
+                    <span className="text-sm font-medium">{item.label}</span>
+
+                    <span className="text-sm text-[#414651]">{item.value}</span>
+                  </div>
+                );
+              }
+              return null;
+            })}
+          </div>
+        </>
+      )}
 
       <div>
         <h3 className="mt-8 mb-4 text-2xl font-manrope font-medium">
@@ -111,6 +143,8 @@ export function ProductInfo({
         specifications={model_specifications}
         manufacturer={manufacturer}
       />
+
+      <PowerReqTable power_requirement={power_requirement} />
     </div>
   );
 }

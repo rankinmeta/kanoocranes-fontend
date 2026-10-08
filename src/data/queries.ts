@@ -1088,6 +1088,11 @@ export const modelPageQuery = qs.stringify({
     main_section: {
       populate: {
         model_specifications: true,
+        power_requirement: {
+          populate: {
+            values: true,
+          },
+        },
         images: {
           fields: ["url", "alternativeText"],
         },
@@ -1503,6 +1508,18 @@ export const categoryRentalPageQuery = qs.stringify({
         },
         en_14439_c25: {
           fields: ["url"],
+        },
+      },
+    },
+    crane_types_listing: {
+      populate: {
+        crane_models: {
+          fields: ["model_name", "model_slug"],
+          populate: {
+            main_section: {
+              fields: ["model_short_name"],
+            },
+          },
         },
       },
     },

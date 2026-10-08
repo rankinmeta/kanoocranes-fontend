@@ -1,3 +1,5 @@
+import HighlightedTitle from "@/components/common/highlight-title";
+import CraneTypesListingSection from "@/components/pages/category-rental/crane-types-listing-section";
 import ProfessionalRentalSection from "@/components/pages/category-rental/professional-rental-section";
 import Section2 from "@/components/pages/category-rental/section2";
 import SelectionGuideSection from "@/components/pages/category-rental/selection-guide-section";
@@ -20,8 +22,10 @@ import {
   getProjectTypes,
   getRSPage,
 } from "@/data/loader";
-import { returnMetadata } from "@/lib/utils";
+import { extractHighlightText, returnMetadata } from "@/lib/utils";
 import { Metadata } from "next";
+import Image from "next/image";
+import Link from "next/link";
 import { notFound } from "next/navigation";
 
 export async function generateStaticParams() {
@@ -84,6 +88,9 @@ const CategoryRentalPage = async ({
       <TableSection
         table_section={pageData.table_section}
         className="bg-[#f5f5f5]"
+      />
+      <CraneTypesListingSection
+        crane_types_listing={pageData.crane_types_listing}
       />
       <CraneCategorySection theme="dark" {...pageData.crane_categories} />
       <SelectionGuideSection {...pageData.selection_guide} />
