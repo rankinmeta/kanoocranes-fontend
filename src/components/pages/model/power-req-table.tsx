@@ -14,6 +14,7 @@ type Props = {
 
 export function PowerReqTable({ power_requirement }: Props) {
   if (!power_requirement || power_requirement.length === 0) return null;
+
   return (
     <div className="mt-8">
       <h3 className="mb-4 text-2xl font-manrope font-medium">
@@ -27,7 +28,10 @@ export function PowerReqTable({ power_requirement }: Props) {
               ...section.values.map(
                 (row) =>
                   Object.values(row).filter(
-                    (value) => value !== null && value !== undefined,
+                    (value) =>
+                      value !== null &&
+                      value !== undefined &&
+                      typeof value !== "number",
                   ).length,
               ),
             );
@@ -38,13 +42,13 @@ export function PowerReqTable({ power_requirement }: Props) {
                 <div
                   className="grid bg-[#fafafa] rounded-t-lg"
                   style={{
-                    gridTemplateColumns: `repeat(${columnCount}, minmax(0, 1fr))`,
+                    gridTemplateColumns: `repeat(${columnCount + 1}, minmax(0, 1fr))`,
                   }}
                 >
                   <div
                     className="px-4 py-3 text-sm font-medium uppercase tracking-[0.15em]"
                     style={{
-                      gridColumn: `span ${columnCount}`,
+                      gridColumn: `span ${columnCount + 1}`,
                     }}
                   >
                     {section.label}
@@ -57,14 +61,14 @@ export function PowerReqTable({ power_requirement }: Props) {
                     key={index}
                     className="grid bg-[#fafafa]"
                     style={{
-                      gridTemplateColumns: `repeat(${columnCount}, minmax(0, 1fr))`,
+                      gridTemplateColumns: `repeat(${columnCount + 1}, minmax(0, 1fr))`,
                     }}
                   >
                     <div className="border-t border-white px-4 py-3 text-sm col-span-2">
                       {row.col1}
                     </div>
 
-                    {row.col2 !== undefined && (
+                    {row.col2 !== null && row.col2 !== undefined && (
                       <div className="border-t border-white px-4 py-3 text-sm">
                         {row.col2}
                       </div>
@@ -74,7 +78,7 @@ export function PowerReqTable({ power_requirement }: Props) {
                       {row.col3}
                     </div>
 
-                    {row.col4 !== undefined && (
+                    {row.col4 !== null && row.col4 !== undefined && (
                       <div className="border-t border-white px-4 py-3 text-sm">
                         {row.col4}
                       </div>

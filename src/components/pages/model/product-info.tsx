@@ -6,9 +6,9 @@ import { PowerReqTable } from "./power-req-table";
 type ProductProps = {
   title: string;
   short_description: string;
-  crane_capacity: string;
-  max_working_radius: string;
-  max_lifting_height: string;
+  crane_capacity: number;
+  max_working_radius: number;
+  max_lifting_height: number;
   hook_height: string;
   crane_configuration: string;
   overview: string;
@@ -54,11 +54,11 @@ export function ProductInfo({
 
       <p className="mt-4">{short_description}</p>
 
-      {((crane_capacity && crane_capacity !== "") ||
-        (max_working_radius && max_working_radius !== "") ||
-        (max_lifting_height && max_lifting_height !== "")) && (
+      {((crane_capacity && crane_capacity !== 0) ||
+        (max_working_radius && max_working_radius !== 0) ||
+        (max_lifting_height && max_lifting_height !== 0)) && (
         <div className="mt-5 grid md:grid-cols-3">
-          {crane_capacity && crane_capacity !== "" && (
+          {crane_capacity && crane_capacity !== 0 ? (
             <div className="py-3 md:py-5">
               <div className="flex items-center gap-2">
                 <div className="size-2 bg-primary" />
@@ -69,9 +69,9 @@ export function ProductInfo({
                 {crane_capacity} Ton
               </h3>
             </div>
-          )}
+          ) : null}
 
-          {max_working_radius && max_working_radius !== "" && (
+          {max_working_radius && max_working_radius !== 0 ? (
             <div className="border-y md:border-y-0 md:border-x py-3 md:py-5 md:pl-6">
               <div className="flex items-center gap-2">
                 <div className="size-2 bg-primary" />
@@ -82,9 +82,9 @@ export function ProductInfo({
                 {max_working_radius}m
               </h3>
             </div>
-          )}
+          ) : null}
 
-          {max_lifting_height && max_lifting_height !== "" && (
+          {max_lifting_height && max_lifting_height !== 0 ? (
             <div className="py-3 md:py-5 md:pl-6">
               <div className="flex items-center gap-2">
                 <div className="size-2 bg-primary" />
@@ -95,13 +95,13 @@ export function ProductInfo({
                 {max_lifting_height}m+
               </h3>
             </div>
-          )}
+          ) : null}
         </div>
       )}
 
-      {((crane_capacity && crane_capacity !== "") ||
+      {((crane_capacity && crane_capacity !== 0) ||
         (hook_height && hook_height !== "") ||
-        (max_working_radius && max_working_radius !== "") ||
+        (max_working_radius && max_working_radius !== 0) ||
         (crane_configuration && crane_configuration !== "")) && (
         <>
           <h3 className="mt-5 mb-4 text-2xl font-manrope font-medium">
