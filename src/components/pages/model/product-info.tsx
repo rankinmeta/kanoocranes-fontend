@@ -54,7 +54,7 @@ export function ProductInfo({
 
       <p className="mt-4">{short_description}</p>
 
-      {((crane_capacity && crane_capacity !== 0) ||
+      {/* {((crane_capacity && crane_capacity !== 0) ||
         (max_working_radius && max_working_radius !== 0) ||
         (max_lifting_height && max_lifting_height !== 0)) && (
         <div className="mt-5 grid md:grid-cols-3">
@@ -97,7 +97,7 @@ export function ProductInfo({
             </div>
           ) : null}
         </div>
-      )}
+      )} */}
 
       {((crane_capacity && crane_capacity !== 0) ||
         (hook_height && hook_height !== "") ||
@@ -110,9 +110,17 @@ export function ProductInfo({
 
           <div className="grid md:grid-cols-2 gap-4 bg-[#F5F5F5] p-3 md:p-5 rounded-sm">
             {[
-              { label: "Maximum Capacity", value: crane_capacity },
+              {
+                label: "Maximum Capacity",
+                value: crane_capacity,
+                postfix: "Ton",
+              },
               { label: "Hook Height", value: hook_height },
-              { label: "Maximum Radius", value: max_working_radius },
+              {
+                label: "Maximum Radius",
+                value: max_working_radius,
+                postfix: "m",
+              },
               { label: "Crane Configuration", value: crane_configuration },
             ].map((item) => {
               if (item.value && item.value !== "") {
@@ -121,7 +129,9 @@ export function ProductInfo({
                     <span className="h-2 w-2 bg-red-500" />
                     <span className="text-sm font-medium">{item.label}</span>
 
-                    <span className="text-sm text-[#414651]">{item.value}</span>
+                    <span className="text-sm text-[#414651]">
+                      {item.value} {item.postfix}
+                    </span>
                   </div>
                 );
               }
