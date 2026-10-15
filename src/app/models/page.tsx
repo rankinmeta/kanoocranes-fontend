@@ -7,6 +7,11 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import ScrollToSection from "./scroll-to-section";
 import { Suspense } from "react";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 
 async function loader() {
   const pageData = await getAllModels();
@@ -67,9 +72,12 @@ function Card({ main_section, model_name, model_slug }: ModelListingTypeProps) {
         )}
       </div>
 
-      <h3 className="text-lg font-medium mt-5 mb-2">
-        {main_section.model_short_name}
-      </h3>
+      <Tooltip>
+        <TooltipTrigger className="text-lg font-medium mt-5 mb-2 [display:-webkit-box] [-webkit-line-clamp:1] [-webkit-box-orient:vertical] overflow-hidden text-left">
+          {main_section.model_short_name}
+        </TooltipTrigger>
+        <TooltipContent>{main_section.model_short_name}</TooltipContent>
+      </Tooltip>
       <div>
         <div className="flex items-center gap-2 py-3">
           <div className="size-2 bg-primary rounded-xs shrink-0" />

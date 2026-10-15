@@ -146,7 +146,10 @@ export function ProductInfo({
           Overview
         </h3>
 
-        <p className="text-[#414651]">{overview}</p>
+        <p
+          className="prose text-[#414651]"
+          dangerouslySetInnerHTML={{ __html: overview }}
+        />
       </div>
 
       <SpecificationTable
