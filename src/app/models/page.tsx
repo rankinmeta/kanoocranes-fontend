@@ -42,7 +42,11 @@ const ModelPage = async () => {
           </h3>
           <div className="grid md:grid-cols-3 lg:grid-cols-4 gap-3">
             {manufacturer.items.map((model: ModelListingTypeProps) => (
-              <Link href={`/models/${model.model_slug}`} key={model.id}>
+              <Link
+                href={`/models/${model.model_slug}`}
+                key={model.id}
+                className="flex"
+              >
                 <Card {...model} />
               </Link>
             ))}
@@ -59,7 +63,7 @@ function Card({ main_section, model_name, model_slug }: ModelListingTypeProps) {
   if (!main_section || !model_name || !model_slug) return null;
 
   return (
-    <div className="mt-5 pb-1">
+    <div className="mt-5 pb-1 flex flex-col flex-1">
       <div className="bg-[#F5F5F5] aspect-[1/0.7] rounded-md flex items-center justify-center p-5 overflow-hidden">
         {main_section.images[0] && (
           <StrapiImage
@@ -78,7 +82,7 @@ function Card({ main_section, model_name, model_slug }: ModelListingTypeProps) {
         </TooltipTrigger>
         <TooltipContent>{main_section.model_short_name}</TooltipContent>
       </Tooltip>
-      <div>
+      <div className="flex-1 flex flex-col">
         <div className="flex items-center gap-2 py-3">
           <div className="size-2 bg-primary rounded-xs shrink-0" />
           <span className="text-sm font-semibold">Crane capacity</span>
@@ -94,16 +98,22 @@ function Card({ main_section, model_name, model_slug }: ModelListingTypeProps) {
             {main_section.max_working_radius}m
           </span>
         </div>
-        <hr />
-        <div className="flex items-center gap-2 py-3">
-          <div className="size-2 bg-primary rounded-xs shrink-0" />
-          <span className="text-sm font-semibold">Max. lifting height</span>
-          <span className="text-sm text-gray-600">
-            {main_section.max_lifting_height}m
-          </span>
-        </div>
+        {main_section.max_lifting_height ? (
+          <>
+            <hr />
+            <div className="flex items-center gap-2 py-3">
+              <div className="size-2 bg-primary rounded-xs shrink-0" />
+              <span className="text-sm font-semibold">Max. lifting height</span>
+              <span className="text-sm text-gray-600">
+                {main_section.max_lifting_height}m
+              </span>
+            </div>
+          </>
+        ) : (
+          <></>
+        )}
 
-        <div className="space-x-3 mt-2">
+        <div className="space-x-3 mt-2 flex-1 flex items-end">
           {(main_section.listingType === "sale" ||
             main_section.listingType === "both") && <Button>Buy crane</Button>}
           {(main_section.listingType === "rent" ||
