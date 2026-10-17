@@ -224,7 +224,7 @@ const Footer = ({
               <AccordionTrigger
                 hideBullet
                 iconColor="text-black!"
-                className="px-0"
+                className="px-0 text-base md:text-xl"
               >
                 {quick_links?.title}
               </AccordionTrigger>
@@ -247,7 +247,7 @@ const Footer = ({
               <AccordionTrigger
                 hideBullet
                 iconColor="text-black!"
-                className="px-0"
+                className="px-0 text-base md:text-xl"
               >
                 {our_services?.title}
               </AccordionTrigger>
@@ -270,7 +270,7 @@ const Footer = ({
               <AccordionTrigger
                 hideBullet
                 iconColor="text-black!"
-                className="px-0"
+                className="px-0 text-base md:text-xl"
               >
                 {industries?.title}
               </AccordionTrigger>
@@ -292,10 +292,10 @@ const Footer = ({
           </Accordion>
 
           <dl className="shrink-0 space-y-2 mt-3">
-            <dt className="font-manrope font-medium mb-4 text-xl">
+            <dt className="font-manrope font-medium mb-4 text-base md:text-xl">
               Contact us
             </dt>
-            <dl className="mb-3">
+            <dl className="mb-3 text-sm md:text-base">
               <dt>Phone</dt>
               <dd>
                 <Link
@@ -306,7 +306,7 @@ const Footer = ({
                 </Link>
               </dd>
             </dl>
-            <dl className="mb-3">
+            <dl className="mb-3 text-sm md:text-base">
               <dt>Email</dt>
               <dd>
                 <Link
@@ -317,7 +317,7 @@ const Footer = ({
                 </Link>
               </dd>
             </dl>
-            <dl className="mb-3">
+            <dl className="mb-3 text-sm md:text-base">
               <dt>Address</dt>
               <dd>
                 <Link
