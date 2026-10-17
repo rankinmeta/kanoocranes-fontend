@@ -8,6 +8,7 @@ import { Button } from "../ui/button";
 import {
   Sheet,
   SheetContent,
+  SheetDescription,
   SheetHeader,
   SheetTitle,
   SheetTrigger,
@@ -117,7 +118,7 @@ function AccordionRow({ item, depth, onNavigate }: AccordionRowProps) {
         <Link
           href={item.href}
           onClick={onNavigate}
-          className="flex-1 py-2 text-left"
+          className="flex-1 py-2 text-left text-base"
         >
           {item.label}
         </Link>
@@ -180,14 +181,15 @@ const MenuSheet = ({ rentCranesMenu, buyCranesMenu }: MenuSheetProps) => {
   return (
     <Sheet open={open} onOpenChange={setOpen}>
       <SheetTrigger asChild>
-        <Button size="icon" variant="white" className="lg:hidden">
+        <Button size="icon-lg" variant="white" className="lg:hidden">
           <Menu />
         </Button>
       </SheetTrigger>
 
       <SheetContent className="z-999">
         <SheetHeader>
-          <SheetTitle>Menu</SheetTitle>
+          <SheetTitle className="text-lg">Menu</SheetTitle>
+          <SheetDescription className="sr-only">Menu</SheetDescription>
         </SheetHeader>
 
         <ul className="space-y-5 px-6">
