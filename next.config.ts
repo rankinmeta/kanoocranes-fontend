@@ -19,7 +19,7 @@ const nextConfig: NextConfig = {
     ],
     // dangerouslyAllowLocalIP: true,
   },
-  allowedDevOrigins: ["192.168.1.3"],
+  // allowedDevOrigins: ["192.168.1.3"],
 };
 
 export default nextConfig;
