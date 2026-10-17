@@ -68,9 +68,11 @@ function Card({
   return (
     <div className="sticky top-[15%] border-t border-[#F5F5F5]/30 py-12 grid md:grid-cols-3 gap-2 bg-secondary">
       <div className="md:col-span-2 flex flex-col md:flex-row justify-between">
-        <h4 className="text-2xl font-manrope flex-1">{title}</h4>
+        <h4 className="text-xl md:text-2xl font-manrope flex-1">{title}</h4>
         <div className="space-y-5 md:mx-auto mt-3 md:mt-0 flex-[1.3]">
-          <p className="tracking-wide max-w-sm">{description}</p>
+          <p className="tracking-wide max-w-sm text-sm md:text-base">
+            {description}
+          </p>
           {link && (
             <Link
               href={link.href}

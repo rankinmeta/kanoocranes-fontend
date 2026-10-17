@@ -83,7 +83,9 @@ const Footer = ({
     <footer className={cn("grid lg:grid-cols-3", padding && "md:mb-18")}>
       <div className="bg-primary m-4 lg:m-0 rounded-xl lg:rounded-none flex justify-center md:justify-center">
         <div className="text-white rounded-xl lg:rounded-none space-y-1 pt-10 lg:pt-20 pb-10 ps-4 lg:ps-0 pe-4 lg:pe-6 bg-primary max-w-md">
-          <h6 className="text-3xl font-manrope">Subscribe to our emails</h6>
+          <h6 className="text-2xl md:text-3xl font-manrope">
+            Subscribe to our emails
+          </h6>
           <p className="text-[15px]">
             Get our latest offers and news straight in your inbox
           </p>
@@ -332,7 +334,7 @@ const Footer = ({
         <hr className="my-7 lg:my-10" />
 
         <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-3 lg:gap-0 mb-7">
-          <span className="text-base lg:text-xs text-[#414651]">
+          <span className="text-sm lg:text-xs text-[#414651]">
             &copy; {new Date().getFullYear()} Kanoo Cranes. All Rights Reserved
           </span>
           <span className="text-base lg:text-xs text-[#414651]">

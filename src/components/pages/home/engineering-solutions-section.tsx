@@ -65,7 +65,7 @@ const EngineeringSolutionsSection = ({
           </div>
 
           <div className="space-y-4 max-w-lg mt-4 lg:mt-0">
-            <ul className="space-y-2">
+            <ul className="space-y-2 text-sm md:text-base">
               {engineering_solution_info?.infos.map((item) => (
                 <List key={item.id}>{item.label}</List>
               ))}
@@ -82,6 +82,7 @@ const EngineeringSolutionsSection = ({
               >
                 <Button
                   variant="outline"
+                  size="default"
                   className="border-secondary text-secondary"
                 >
                   {engineering_solution_info.button.label}
@@ -100,12 +101,12 @@ const EngineeringSolutionsSection = ({
             className="shrink-0 bg-[#F5F5F5] w-[80%] md:w-1/2 p-6 flex flex-col gap-16 justify-between rounded-sm"
           >
             <div>
-              <h3 className="text-primary font-medium font-manrope text-4xl">
+              <h3 className="text-primary font-medium font-manrope text-3xl md:text-4xl">
                 {item.value}
               </h3>
               <span className="font-inter text-sm">{item.label}</span>
             </div>
-            <p>{item.description}</p>
+            <p className="text-sm md:text-base">{item.description}</p>
           </div>
         ))}
       </div>

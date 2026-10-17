@@ -45,7 +45,9 @@ const FooterCTASection = ({
       <FooterCTACarousel images={image} />
 
       <div className="px-4 md:px-8 py-6 md:py-8 flex flex-col justify-center gap-4 md:col-span-2 max-w-[85%] md:max-w-lg">
-        <h2 className="font-manrope text-3xl tracking-wide">{title}</h2>
+        <h2 className="font-manrope text-2xl md:text-3xl tracking-wide">
+          {title}
+        </h2>
         <p className="text-sm">{description}</p>
 
         <Link href={"/contact-us"}>

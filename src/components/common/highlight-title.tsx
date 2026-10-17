@@ -14,7 +14,10 @@ function HighlightedTitle({
 
   return (
     <h1
-      className={cn("text-3xl lg:text-4xl font-manrope font-medium", className)}
+      className={cn(
+        "text-2xl md:text-3xl lg:text-4xl font-manrope font-medium",
+        className,
+      )}
     >
       {parts.map((part, i) =>
         highlights.some((h) => h.toLowerCase() === part.toLowerCase()) ? (

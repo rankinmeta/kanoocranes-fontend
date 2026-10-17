@@ -59,7 +59,7 @@ function Card({
         height={45}
       />
 
-      <h4 className="text-lg font-medium mt-4 mb-1">{title}</h4>
+      <h4 className="md:text-lg font-medium mt-4 mb-1">{title}</h4>
 
       <p className="text-[#717680] text-sm">{description}</p>
     </div>

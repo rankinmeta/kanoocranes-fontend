@@ -23,7 +23,7 @@ const AboutUsSection = ({
           highlights={extractHighlightText(tag_title.title)}
           className="max-w-lg"
         />
-        <p className="text-[#414651]">{description}</p>
+        <p className="text-[#414651] text-sm md:text-base">{description}</p>
 
         {button && (
           <Link

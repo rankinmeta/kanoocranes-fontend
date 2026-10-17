@@ -38,7 +38,7 @@ const FeaturedProjectsSection = ({
             highlights={extractHighlightText(tag_title.title)}
             className="max-w-md"
           />
-          <p className="mt-7">{description}</p>
+          <p className="mt-5 text-sm md:text-base">{description}</p>
         </div>
       </div>
       <div>

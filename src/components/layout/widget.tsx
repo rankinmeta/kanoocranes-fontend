@@ -7,7 +7,7 @@ const Widget = ({ whatsapp_number }: { whatsapp_number: string }) => {
     <Link
       href={`https://wa.me/${whatsapp_number.replaceAll(" ", "")}`}
       target="_blank"
-      className="fixed bottom-24 right-4 md:bottom-10 md:right-6 z-90"
+      className="fixed bottom-10 right-4 md:right-6 z-90"
     >
       <button
         aria-label="WhatsApp"

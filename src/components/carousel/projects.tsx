@@ -59,7 +59,7 @@ function Card({ details, image, link, title }: ProjectProps) {
           className="rounded-md aspect-[2/1.3] object-cover"
         />
         <div className="space-y-2 w-fit">
-          <h3 className="max-w-48 font-medium">{title}</h3>
+          <h3 className="max-w-48 font-medium text-sm md:text-base">{title}</h3>
           {link && (
             <Link
               href={link.href || "#"}
@@ -83,7 +83,9 @@ function Card({ details, image, link, title }: ProjectProps) {
                 <div className="size-2 bg-primary" />
                 <span className="font-medium">{data.label}</span>
               </div>
-              <span className="text-[#414651]">{data.description}</span>
+              <span className="text-[#414651] text-sm md:text-base">
+                {data.description}
+              </span>
             </li>
           ))}
         </ul>
