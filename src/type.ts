@@ -316,7 +316,7 @@ export type ModelListingTypeProps = {
 };
 
 export type GroupedManufacturer = {
-  manufacturer: string;
+  manufacturer: string | null;
   manufacturerSlug: string;
   items: ModelListingTypeProps[];
 };

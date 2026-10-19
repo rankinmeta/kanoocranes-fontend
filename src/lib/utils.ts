@@ -67,6 +67,7 @@ export function chunk(arr: any[], size = 7) {
 export function regroupModels(data: ModelListingTypeProps[]) {
   const grouped: GroupedManufacturer[] = Object.values(
     data.reduce<Record<string, GroupedManufacturer>>((acc, item) => {
+      if (!item.manufacturer) return acc;
       const { slug, name } = item.manufacturer;
 
       if (!acc[slug]) {
