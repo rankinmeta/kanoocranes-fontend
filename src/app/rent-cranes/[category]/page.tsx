@@ -75,7 +75,7 @@ const CategoryRentalPage = async ({
 
   return (
     <main>
-      <HeroSection {...pageData.hero} showModal className="max-w-2xl" />
+      <HeroSection {...pageData.hero} className="max-w-2xl" />
       <FilterListSection
         {...pageData.filter_section}
         crane_types={craneTypes}

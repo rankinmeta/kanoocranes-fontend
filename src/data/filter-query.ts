@@ -19,7 +19,11 @@ export function buildCraneQuery(filters: FilterState) {
         main_section: {
           fields: [
             "model_short_name",
-            "crane_capacity",
+            "max_load",
+            "reach",
+            "tip_load",
+            "jib_length",
+            "max_jib_radius",
             "max_working_radius",
             "max_lifting_height",
             "listingType",

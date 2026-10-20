@@ -273,11 +273,15 @@ export type FeaturedModelsSectionProps = {
     model_name: string;
     model_slug: string;
     main_section: {
-      crane_capacity: number;
+      max_load?: number;
+      reach?: string;
+      tip_load?: string;
+      jib_length?: string;
+      max_jib_radius?: string;
       images: MediaProps[];
-      max_lifting_height: number;
+      max_lifting_height?: number;
       listingType: "sale" | "rent" | "both";
-      max_working_radius: number;
+      max_working_radius?: number;
       model_short_name: string;
     };
   }[];
@@ -304,7 +308,11 @@ export type ModelListingTypeProps = {
   id: number;
   manufacturer: ManufacturerProps;
   main_section: {
-    crane_capacity: number;
+    max_load?: number;
+    reach?: string;
+    tip_load?: string;
+    jib_length?: string;
+    max_jib_radius?: string;
     images: MediaProps[];
     max_lifting_height: number;
     listingType: "sale" | "rent" | "both";

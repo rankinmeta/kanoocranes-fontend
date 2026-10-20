@@ -14,7 +14,11 @@ type FeaturedModelsSectionProps = {
     model_name: string;
     model_slug: string;
     main_section: {
-      crane_capacity: number;
+      max_load?: number;
+      reach?: string;
+      tip_load?: string;
+      jib_length?: string;
+      max_jib_radius?: string;
       images: MediaProps[];
       max_lifting_height: number;
       listingType: "sale" | "rent" | "both";
@@ -94,29 +98,90 @@ function Card({
         {main_section.model_short_name}
       </h3>
       <div>
-        <div className="flex items-center gap-2 py-3">
-          <div className="size-2 bg-primary rounded-xs shrink-0" />
-          <span className="text-sm font-semibold">Crane capacity</span>
-          <span className="text-sm text-gray-600">
-            {main_section.crane_capacity} Ton
-          </span>
-        </div>
-        <hr />
-        <div className="flex items-center gap-2 py-3">
-          <div className="size-2 bg-primary rounded-xs shrink-0" />
-          <span className="text-sm font-semibold">Max. working radius</span>
-          <span className="text-sm text-gray-600">
-            {main_section.max_working_radius}m
-          </span>
-        </div>
-        <hr />
-        <div className="flex items-center gap-2 py-3">
-          <div className="size-2 bg-primary rounded-xs shrink-0" />
-          <span className="text-sm font-semibold">Max. lifting height</span>
-          <span className="text-sm text-gray-600">
-            {main_section.max_lifting_height}m
-          </span>
-        </div>
+        {main_section.max_load && (
+          <>
+            <div className="flex items-center gap-2 py-3">
+              <div className="size-2 bg-primary rounded-xs shrink-0" />
+              <span className="text-sm font-semibold">Max Load</span>
+              <span className="text-sm text-gray-600">
+                {main_section.max_load} Ton
+              </span>
+            </div>
+            <hr />
+          </>
+        )}
+        {main_section.max_working_radius && (
+          <>
+            <div className="flex items-center gap-2 py-3">
+              <div className="size-2 bg-primary rounded-xs shrink-0" />
+              <span className="text-sm font-semibold">Max. working radius</span>
+              <span className="text-sm text-gray-600">
+                {main_section.max_working_radius}m
+              </span>
+            </div>
+            <hr />
+          </>
+        )}
+        {main_section.max_lifting_height && (
+          <>
+            <div className="flex items-center gap-2 py-3">
+              <div className="size-2 bg-primary rounded-xs shrink-0" />
+              <span className="text-sm font-semibold">Max. lifting height</span>
+              <span className="text-sm text-gray-600">
+                {main_section.max_lifting_height}m
+              </span>
+            </div>
+            <hr />
+          </>
+        )}
+        {main_section.reach && (
+          <>
+            <div className="flex items-center gap-2 py-3">
+              <div className="size-2 bg-primary rounded-xs shrink-0" />
+              <span className="text-sm font-semibold">Reach</span>
+              <span className="text-sm text-gray-600">
+                {main_section.reach}
+              </span>
+            </div>
+            <hr />
+          </>
+        )}
+        {main_section.jib_length && (
+          <>
+            <div className="flex items-center gap-2 py-3">
+              <div className="size-2 bg-primary rounded-xs shrink-0" />
+              <span className="text-sm font-semibold">Jib Length</span>
+              <span className="text-sm text-gray-600">
+                {main_section.jib_length}
+              </span>
+            </div>
+            <hr />
+          </>
+        )}
+        {main_section.max_jib_radius && (
+          <>
+            <div className="flex items-center gap-2 py-3">
+              <div className="size-2 bg-primary rounded-xs shrink-0" />
+              <span className="text-sm font-semibold">Max. Jib Radius</span>
+              <span className="text-sm text-gray-600">
+                {main_section.max_jib_radius}
+              </span>
+            </div>
+            <hr />
+          </>
+        )}
+        {main_section.tip_load && (
+          <>
+            <div className="flex items-center gap-2 py-3">
+              <div className="size-2 bg-primary rounded-xs shrink-0" />
+              <span className="text-sm font-semibold">Tip Load</span>
+              <span className="text-sm text-gray-600">
+                {main_section.tip_load}
+              </span>
+            </div>
+            <hr />
+          </>
+        )}
 
         <div className="space-x-3 mt-2">
           {(main_section.listingType === "sale" ||

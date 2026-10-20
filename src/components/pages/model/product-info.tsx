@@ -6,10 +6,14 @@ import { PowerReqTable } from "./power-req-table";
 type ProductProps = {
   title: string;
   short_description: string;
-  crane_capacity: number;
-  max_working_radius: number;
-  max_lifting_height: number;
-  hook_height: string;
+  // max_load?: number;
+  // reach?: string;
+  // tip_load?: string;
+  // jib_length?: string;
+  // max_jib_radius?: string;
+  // max_working_radius: number;
+  // max_lifting_height: number;
+  // hook_height: string;
   crane_configuration: string;
   overview: string;
   manufacturer: string;
@@ -34,12 +38,7 @@ type ProductProps = {
 export function ProductInfo({
   title,
   short_description,
-  crane_capacity,
-  max_working_radius,
-  max_lifting_height,
-  hook_height,
   manufacturer,
-  crane_configuration,
   model_specifications,
   power_requirement,
   overview,
@@ -99,7 +98,7 @@ export function ProductInfo({
         </div>
       )} */}
 
-      {((crane_capacity && crane_capacity !== 0) ||
+      {/* {((max_load && max_load !== 0) ||
         (hook_height && hook_height !== "") ||
         (max_working_radius && max_working_radius !== 0) ||
         (crane_configuration && crane_configuration !== "")) && (
@@ -139,7 +138,7 @@ export function ProductInfo({
             })}
           </div>
         </>
-      )}
+      )} */}
 
       <div>
         <h3 className="mt-8 mb-4 text-2xl font-manrope font-medium">

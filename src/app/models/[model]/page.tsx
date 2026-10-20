@@ -95,10 +95,10 @@ const ModalPage = async ({
           <ProductInfo
             title={pageData.main_section.title}
             short_description={pageData.main_section.short_description}
-            crane_capacity={pageData.main_section.crane_capacity}
-            max_working_radius={pageData.main_section.max_working_radius}
-            max_lifting_height={pageData.main_section.max_lifting_height}
-            hook_height={pageData.main_section.hook_height}
+            // crane_capacity={pageData.main_section.max_load}
+            // max_working_radius={pageData.main_section.max_working_radius}
+            // max_lifting_height={pageData.main_section.max_lifting_height}
+            // hook_height={pageData.main_section.hook_height}
             crane_configuration={pageData.main_section.crane_configuration}
             manufacturer={pageData.manufacturer?.name}
             model_specifications={pageData.main_section.model_specifications}

@@ -83,24 +83,36 @@ function Card({ main_section, model_name, model_slug }: ModelListingTypeProps) {
         <TooltipContent>{main_section.model_short_name}</TooltipContent>
       </Tooltip>
       <div className="flex-1 flex flex-col">
-        <div className="flex items-center gap-2 py-3">
-          <div className="size-2 bg-primary rounded-xs shrink-0" />
-          <span className="text-sm font-semibold">Crane capacity</span>
-          <span className="text-sm text-gray-600">
-            {main_section.crane_capacity} Ton
-          </span>
-        </div>
-        <hr />
-        <div className="flex items-center gap-2 py-3">
-          <div className="size-2 bg-primary rounded-xs shrink-0" />
-          <span className="text-sm font-semibold">Max. working radius</span>
-          <span className="text-sm text-gray-600">
-            {main_section.max_working_radius}m
-          </span>
-        </div>
+        {main_section.max_load ? (
+          <>
+            <div className="flex items-center gap-2 py-3">
+              <div className="size-2 bg-primary rounded-xs shrink-0" />
+              <span className="text-sm font-semibold">Max Load</span>
+              <span className="text-sm text-gray-600">
+                {main_section.max_load} Ton
+              </span>
+            </div>
+            <hr />
+          </>
+        ) : (
+          <></>
+        )}
+        {main_section.max_working_radius ? (
+          <>
+            <div className="flex items-center gap-2 py-3">
+              <div className="size-2 bg-primary rounded-xs shrink-0" />
+              <span className="text-sm font-semibold">Max. working radius</span>
+              <span className="text-sm text-gray-600">
+                {main_section.max_working_radius}m
+              </span>
+            </div>
+            <hr />
+          </>
+        ) : (
+          <></>
+        )}
         {main_section.max_lifting_height ? (
           <>
-            <hr />
             <div className="flex items-center gap-2 py-3">
               <div className="size-2 bg-primary rounded-xs shrink-0" />
               <span className="text-sm font-semibold">Max. lifting height</span>
@@ -108,9 +120,58 @@ function Card({ main_section, model_name, model_slug }: ModelListingTypeProps) {
                 {main_section.max_lifting_height}m
               </span>
             </div>
+            <hr />
           </>
         ) : (
           <></>
+        )}
+        {main_section.reach && (
+          <>
+            <div className="flex items-center gap-2 py-3">
+              <div className="size-2 bg-primary rounded-xs shrink-0" />
+              <span className="text-sm font-semibold">Reach</span>
+              <span className="text-sm text-gray-600">
+                {main_section.reach}
+              </span>
+            </div>
+            <hr />
+          </>
+        )}
+        {main_section.jib_length && (
+          <>
+            <div className="flex items-center gap-2 py-3">
+              <div className="size-2 bg-primary rounded-xs shrink-0" />
+              <span className="text-sm font-semibold">Jib Length</span>
+              <span className="text-sm text-gray-600">
+                {main_section.jib_length}
+              </span>
+            </div>
+            <hr />
+          </>
+        )}
+        {main_section.max_jib_radius && (
+          <>
+            <div className="flex items-center gap-2 py-3">
+              <div className="size-2 bg-primary rounded-xs shrink-0" />
+              <span className="text-sm font-semibold">Max. Jib Radius</span>
+              <span className="text-sm text-gray-600">
+                {main_section.max_jib_radius}
+              </span>
+            </div>
+            <hr />
+          </>
+        )}
+        {main_section.tip_load && (
+          <>
+            <div className="flex items-center gap-2 py-3">
+              <div className="size-2 bg-primary rounded-xs shrink-0" />
+              <span className="text-sm font-semibold">Tip Load</span>
+              <span className="text-sm text-gray-600">
+                {main_section.tip_load}
+              </span>
+            </div>
+            <hr />
+          </>
         )}
 
         <div className="space-x-3 mt-2 flex-1 flex items-end">
