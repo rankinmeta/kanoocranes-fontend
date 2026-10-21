@@ -42,10 +42,10 @@ const BrandHighlightSection = ({
           alt={logo.alternativeText || ""}
           width={400}
           height={400}
-          className="size-[80%] md:size-auto md:w-[400px]"
+          className="size-[80%] md:size-auto md:w-50"
         />
 
-        <div className="mt-8 md:mt-14 space-y-2.5 flex flex-col md:items-center justify-center md:text-center max-w-4xl">
+        <div className="mt-8 md:mt-12 space-y-2.5 flex flex-col md:items-center justify-center md:text-center max-w-4xl">
           <Tag className="bg-white">{tag_title.tag}</Tag>
           <HighlightedTitle
             title={tag_title.title}

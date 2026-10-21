@@ -84,5 +84,9 @@ export function regroupModels(data: ModelListingTypeProps[]) {
     }, {}),
   );
 
-  return grouped;
+  return grouped.sort((a, b) => {
+    if (a.manufacturerSlug === "wolff-cranes") return 1;
+    if (b.manufacturerSlug === "wolff-cranes") return -1;
+    return 0;
+  });
 }

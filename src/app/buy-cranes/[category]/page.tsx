@@ -15,6 +15,7 @@ import BuyingGuideSection from "@/components/pages/sales-hub/buying-guide-sectio
 import CraneModelsSection from "@/components/pages/sales-hub/crane-models-section";
 import CraneSeriesSection from "@/components/pages/sales-hub/crane-series-section";
 import EngineeringSupportSection from "@/components/pages/sales-hub/engineering-support-section";
+import SalesCategorySection from "@/components/pages/sales-hub/sales-category-section";
 import {
   getCraneTypes,
   getCSPage,
@@ -98,7 +99,8 @@ const CategorySalesPage = async ({
       <ProcurementSection {...pageData.info_section} />
       <OwnershipBenefitsSection2 {...pageData.benefits_section} />
       <BrandHighlightSection {...pageData.brand_highlight} />
-      <CraneCategorySection {...pageData.crane_categories} />
+      {/* <CraneCategorySection {...pageData.crane_categories} /> */}
+      <SalesCategorySection {...pageData.crane_categories} />
       <BuyingGuideSection {...pageData.buying_guide} />
       <SiteSelectionSection {...pageData.industry_application} />
       <GallerySection {...pageData.gallery_section} />
